@@ -1,8 +1,7 @@
 import json
-import os 
-import requests
 import re
 from json import JSONDecodeError
+import yaml
 
 
 
@@ -44,3 +43,8 @@ def count_words_between_quotes(request):
         # Splitting each phrase by space to count words
         word_count += len(phrase.split())
     return word_count
+
+def load_config(path:str) -> dict:
+    with open(path, "r") as stream:
+        config = yaml.safe_load(stream)
+    return config
