@@ -3,6 +3,7 @@ import pandas as pd
 from collections import Counter
 import yaml
 import json
+from datetime import datetime
 
 with open("config.yaml", "r") as stream:
         config = yaml.safe_load(stream)
@@ -63,7 +64,7 @@ def get_keywords(config:dict)->dict:
     # return dictionaries mapped by Section and Division
     return keywords, industry_keywords, Div_Ind_dict
 
-def construct_query(config:dict)->dict:
+def construct_query(config:dict, save_to_path: str | bool='data/' )->dict:
     """
         construct query for each country and industry
         Returns a dictionary of dictionaries with structure {country:{industry:query}}
@@ -114,6 +115,12 @@ def construct_query(config:dict)->dict:
                         tmp_query = industry_keyword_strings[Div_Ind_dict[division]] + ' AND (' + string + ' ) ' + 'AND cpc any ' +'\"' + q_cpc_schemes +'\"' + ' AND AP=' + '\"' + country + '\"'
                         query_list.append(tmp_query)
                 query_dict[country][industry][division] = query_list
+    # save query dictionary to file
+    if save_to_path != False:
+        filename = datetime.today().strftime('%Y-%m-%d') + "_ops_search_queries.json"
+        save_to_path = save_to_path + filename
+        with open(save_to_path, "w") as f:
+            json.dump(query_dict, f, indent=4)
     return query_dict
 
 # creates keyword string to identify activities (NACE Lv 4) for each Division
@@ -176,8 +183,7 @@ def reverse_dict(dictionary):
     return new_dictionary
 
 # return all constructed queries in a single list
-def return_all_queries(config)->list:
-    queries = construct_query(config=config)
+def return_all_queries(queries)->list:
     all_queries = []
     for h in queries.keys():
         for i in queries[h].keys():
