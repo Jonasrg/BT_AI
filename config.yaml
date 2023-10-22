@@ -64,6 +64,6 @@ EU_COUNTRY_CODES: {
   }
 # Paths
 paths: {
-  retrieved_data_content: "data/ops_search_response_content.json",
+  retrieved_data_path: "data/retrieved_data/",
   nace_codes_csv: "data/NACE_CODES.csv"
 }
