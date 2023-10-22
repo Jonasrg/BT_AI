@@ -2,10 +2,11 @@ import json
 import os 
 import requests
 import re
+from json import JSONDecodeError
 
 
 
-def write_to_file(retrieved_data_path, ls)-> None:
+def write_to_file(path, ls)-> None:
     """
     Write retrieved data to file.
     Parameters
@@ -17,14 +18,16 @@ def write_to_file(retrieved_data_path, ls)-> None:
     """
     if ls != None:
         try:
-            with open(retrieved_data_path, 'r') as f:
+            with open(path, 'r') as f:
                     json_file = json.load(f)
         except FileNotFoundError as e:
             json_file = []
+        except JSONDecodeError:
+            json_file = []
 
-        json_file.extend(ls)
+        json_file.append(ls)
 
-        with open(retrieved_data_path, 'w') as f:
+        with open(path, 'w') as f:
             json.dump(json_file, f, indent=4)
     else:
         pass
@@ -32,7 +35,7 @@ def write_to_file(retrieved_data_path, ls)-> None:
 
 # Function to count the number of words between quotation marks
 # This is used to count the number of words in the query
-# This is necessary because the OPS API has a limit of 20 words per query
+# This is necessary because the OPS API has a limit of 20 words (terms) per query
 def count_words_between_quotes(request):
     word_count = 0
     # Regex to find all phrases between quotation marks
