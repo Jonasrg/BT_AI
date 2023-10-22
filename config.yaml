@@ -65,5 +65,7 @@ EU_COUNTRY_CODES: {
 # Paths
 paths: {
   retrieved_data_path: "data/retrieved_data/",
-  nace_codes_csv: "data/NACE_CODES.csv"
+  nace_codes_csv: "data/NACE_CODES.csv",
+  eurostat_sbs_data : "data/EUROSTAT_Data/estat_sbs_na_sca_r2_filtered_eu27_eu28_nace_lv1_lv2.csv",
+  eurostat_indic_sb_codes : "data/EUROSTAT_Data/ESTAT_INDIC_SB_2.0_EN.tsv"
 }
