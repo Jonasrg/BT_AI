@@ -1,0 +1,156 @@
+---
+title: "socioeconomic disruption by artificial intelligence"
+subtitle: "A comparative analysis between industries in the European Union"
+bibliography: references.bib
+csl: elsevier-harvard.csl
+execute:
+  echo: false
+  freeze: false
+format:
+  pdf:
+    toc: false
+    link-citations: true
+    number-sections: true
+    colorlinks: true
+    linestretch: 1.5
+    lang: en
+    mainfont: "Arial"
+    fontsize: "11"
+    geometry:
+      - top=25mm
+      - left=25mm
+      - right=25mm
+      - bottom=20mm
+      - heightrounded
+---
+
+```{=latex}
+\pagenumbering{Roman}
+```
+{{< pagebreak >}}
+
+```{=latex}
+\tableofcontents
+```
+{{< pagebreak >}}
+
+```{=latex}
+\listoffigures
+```
+{{< pagebreak >}}
+
+```{=latex}
+\listoftables
+```
+{{< pagebreak >}}
+
+```{=latex}
+\pagenumbering{arabic}
+```
+# Abstract
+
+# Introduction
+
+@mokyr_history_2015 [p. 32] identifies two forms of technological anxiety, the fear of labor displacement through technology and and the fear of morally negative applications resulting in declining welfare. The majority of the US population has been found to assess the potential impact of automation as unfavorable rather than beneficial [@anderson_automation_2017].
+
+Since AI is a still fairly new topic in the literature and has only seen real increase in dominance and interest in recent years [@acemoglu_ai_2020, p. 23f.], is is worth noting the effects of previous technologies as the adoption of machines (specifically often industrial robots [see for example @graetz_robots_2015; @acemoglu_robots_2020]) and software (also referred to as computerization[see for example @pajarinen_computerization_2015; @frey_future_2017; @autor_growth_2013]) have been seen as previous stages in the evolution of automation with AI composing the next stage [@acemoglu_harms_2021, p. 19]. Furthermore, these technologies have been summarized under the umbrella term "automation" [@mann_benign_2018, p. 40] indicating common characteristics and thereby - possibly - common effects.
+
+## Effects of Automation on labor
+
+In a 2018 study, the introduction of automation technology was found to have positive effects on employment gains, but only within the same commuting zone [@mann_benign_2018, p. 26]. These findings contradict the results from @autor_untangling_2015 \[p. 632\], that found no relation between exposure to automation and employment as a whole but found a significant decline in employment related to routine tasks in the non-manufacturing sector (p. 641). @graetz_robots_2015 [p. 766] found no relationship between the usage of industrial robots and net employment. However, usage of industrial robots was found to lower employment of low-skilled workers. However, a later study also looking at employment effects induced by usage of industrial robots found a significant decline of employment as well as a reduction in wages related to robot exposure within a commuting zone [@acemoglu_robots_2020, p. 2215f, 2218]. @dauth_german_2017 \[p. 25\] found no relation between robot exposure and employment in the German market. A few years later, @dauth_adjustment_2021 [p. 3126ff] found robot exposure to lead to within-firm and between-firm job displacement, with displaced workers having difficulties reallocating their jobs within the same industry, leading to a migration of workers from manufacturing (where robot exposure is most present) to the service sector. They also exhibited that a lack of worker protections (for example unionization or tenure) is related to greater displacement. These results were also confirmed by @boustan_automation_2022 \[p. 21, 23\] who observed that displaced workers acquire new skills and concluded job displacement by automation to be less discernible amongst unionized and high-skilled workers. Similarily, @acemoglu_robots_2020 [p. 2215f., 2218] provided evidence showing automation (adoption of industrial robots) within a commuting zone (local labor market) relating to significant declines in employment as well as wages. By studying 53 developing countries, @cirera_effects_2019 [p. 172] did not find a relationship between exposure to automation and firm level employment. Hoewever, while a net effect on employment was absent, in line with the aforementioned literature, they did find automation to alter the composition of tasks and skills within firms (p. 172).
+
+In a purely theoretical approach to the effects of automation on labor, @acemoglu_low-skill_2017 \[p. 12, 15\] concluded that automation leads to labor displacement and the displacement of low skilled-labor leading to an increase in the wage gap (pay gap between low-skilled and high-skilled workers) while the displacement of high-skilled labor is followed by a reduction in the wage gap as high-skill labor reallocates into medium- and low-skilled occupations. This reallocation from displaced high-skill labor into lower skilled occupations has also been shown by @beaudry_great_2016 [p. 21] who studied the effects on labor when prices for specific types of labor fall - as is induced when substitution (through technology) becomes economically viable. While labor displacement induced by the introduction of automation is followed by increased inequality between low-skill and high-skilled labor in the short run [@acemoglu_race_2018, p. 1519], the creation of new tasks - that is followed by increased productivity gains from automation - is seen to reduce this gap in the long run (p. 1521). However, this positive outlook of a net positive on employment only holds true as long as the productivity effects which accompany the adoption of automation technologies offset the displacement effects incurred in the first place - and should the offset be insufficient, automation is found to negatively impact the demand for labor and its wages [@acemoglu_artificial_2018, p. 227]. There is also growing evidence suggesting automation to cause a decline in real wages of low-skilled workers, for example @acemoglu_unpacking_2020 \[p. 360f.\] found strong relationships between the adoption of automation technology and wages. @acemoglu_tasks_2022 [p. 1993] found a relationship between labor displacement and a decrease in relative wages, concluding automation to cause an increase in wage inequality (p. 1998). Automation is also attributed to the decline in the demand for labor in the US over recent decades [@acemoglu_automation_2019, p. 21].
+
+Furthermore, @arntz_risk_2016 \[p. 14f.\] studying 21 OECD countries found 9% in the US, and over all countries studies a 6-12% high risk of employment to be substitutable for automation, while @acemoglu_chapter_2011 [p. 61] came to the conclusion that labor displacement by machines mostly affects routine tasks.
+
+## Effects of computerization
+
+In a study from Finland, @pajarinen_computerization_2015 found that computerization is likely to place high risk of displacement on 35% of the Finish labor market [p. 5], 33% of Norwegian labor (p. 5) as well as 49% in the US [p. 5]. @frey_future_2017 [p. 41] found 47% of US employment to have a a high risk suitability for substitution by computerization. They further classify the process of automation into two "waves" with the first wave affecting routine tasks (transportation, logistics, office, and administration) \[p. 41\] followed by a second wave that, once technological obstacles are overcome, will effect the jobs involving creative or abstract tasks \[p. 43\]. Evidence also suggests computerization to significantly induce labor displacement from occupations relying on routine tasks into higher-skilled occupations as well as low-skilled service occupations [@autor_growth_2013, p. 1573]
+
+## Effects of AI
+
+@brynjolfsson_what_2018 \[p. 46\] found that machine learning affects different types of tasks than earlier forms of automation. A year later, in a study comparing the impact of AI on the job market between industries, @webb_impact_2019 [p. 46] shows that AI affects mostly the highly educated workforce and that this group is affected significantly more by AI than the presence of software or robots. Under the assumption that the current trend in technological evolution is set to continue, the speed of labor displacement through technological innovation is found likely to outpace the speed at which labor can be relocated [@mokyr_history_2015, p. 43f.]. By constructing impact scores of Artificial Intelligence on occupations, @felten_effect_2019 found low-income occupations to experience a decline in wage growth that is attributed to the increased presence of AI and middle and high-income occupations to experience an increase in wage growth \[p. 6\]. Furthermore, the authors found found that occupations with a medium and high degree of automation (degree of automation being the presence of automation technologies - not just AI) positively correlate with employment when exposed to Artificial Intelligence, while they did not find any relationship for occupations already exhibiting a low degree of automation \[p. 5\].
+
+It has also been noted that the presence of Artificial Intelligence does not have a linear impact on labor but depends on influencing factors, such as price elasticity, complementarities, or elasticity of labor that govern the implementation of these technologies [@brynjolfsson_what_2017, p. 1533f.]. Additionally, the adoption of AI technology is found to significantly alter the skill-demand distribution of firms, with the number of previously highly demanded skills declining while simultaneously creating demand for new skills [@acemoglu_ai_2020, p. 19].
+
+## Changes of Occupational composition (no net displacement but need to re-skill)
+
+Furthermore, it is important to note that previous research on the effects of robots, software and AI - that have been summarized under the umbrella term "automation" [@mann_benign_2018, p. 40] - in general may not have found net negative effects on employment but a restructuring of composition of occupations. The aforementioned study from @autor_untangling_2015 \[p. 644\] found automation, while having no aggregate effects on employment, lead to a decline in occupations involving routine tasks and and an increase in non-routine (abstract) tasks. The same effect was found in @graetz_robots_2015 [p. 766] studying the introduction of industrial robots.\
+These effects remain only harmless as long as the assumption holds true that displaced labor can in fact always reallocate itself to new tasks. Should this assumption be contradicted, and the the negative effects of automation on employment are no longer offset by the positive effects of reallocation, the phenomenon of occupational migration would turn into an observation of job destruction.
+
+## Changes in labor share
+
+The introduction of capital, whether to complement or substitute labor, intuitively leads to a decline of a firms profits paid to labor as the share of labors input relative to the output value decreases. And in fact @karabarbounis_global_2014 \[p. 99\] show that the observed decline in capital prices explains almost half the decline in global labor share, that has been observed in recent decades. This might seem problematic as an increasing portion of a firms revenue remains as corporate profits and savings (given that the capital invested leads to a decrease in marginal costs - through substitution of labor and/ or increased production) rather than being redistributed to labor. @karabarbounis_global_2014 [p. 102] further show that the observed decline in labor share is accompanied by an increase in corporate revenue and savings. This is also brought forward from @acemoglu_automation_2019 \[p. 27\] who conclude that "\[...\] automation always reduces the labor share and may reduce labor demand \[...\]" but also mention that the creation of new tasks necessarily increases the labor share. These results where further solidified by @acemoglu_competing_2020 [p. 387] who investigated the French manufacturing market and found firms exposed to automation (in this study measured by the introduction of robots) to experience significant declines in their labor share.
+
+## Summary of the different findings -\> why findings differ
+
+The net impact assessment of automation on socioeconomic factors widely differs in the aforementioned literature [see also @frank_toward_2019, p. 6532]. Some research has focused on local labor markets (commuting zones) [see @acemoglu_robots_2020; @autor_untangling_2015; @autor_growth_2013], while other research has researched national effects [see xxx] and international effects [see @graetz_robots_2018]. While one would expect to see the same relationship between the chosen variables on all levels and apart from differences in research design, it may be difficult to assess effects on a greater aggregate level as the number of variables that would need to be included to account for differences between and within groups becomes unfeasible.
+
+## Definitions of AI
+
+The classification if Artificial Intelligence remains also difficult due to the fact that there is yet no widespread agreement on the definition of intelligence itself [@legg_collection_2007].
+
+# Methodology
+
+## Data
+
+Data about patent publications is obtained from the European Patent Office's Open Patent Services (OPS) API [@european_patent_office_open_2023] as well as the Annual Structural Business Statistics (SBS) by Eurostat [@eurostat_annual_2023]. Furthermore, Eurostats code lists of Statistical classification of economic activities in the European Community (NACE Revision 2) [@eurostat_statistical_2023] (henceforth "NACE") and Economic Indicators for Eurostat's SBS [@eurostat_economical_2023]. While there are a variety of possible technologies that may fall under the umbrella term "Artificial Intelligence", as this research aims to assess AI's socioeconomic impact - which, if negative, falls into the governmental realm - a legal definition of AI is preferable as a classifier. Furthermore, it is arguable that the political definition is likely to have the greatest (socio)economic impact in the near future due to possible (and probable) regulation. As there is no legal definition yet - at least in the EU - technologies listed in the European Commisions latest proposal for the "Artificial Intelligence Act\['s\]" [@european_commission_proposal_2021] annex [@european_commission_annexes_202] will be used.[^1]
+
+[^1]: While this proposal is not yet in effect, it is likely to be adopted in the near future and is therefore used as a proxy for a legal definition of AI.
+
+Additionally Coopoerative Patent Classification (CPC) codes are used to retrieve patents that utilize artificial intelligence technology. As there is no clear mapping between the Europoean Commission's definition and CPC codes, classifications are chosen to the author's best knowledge.
+
+```{python}
+# show cpc codes as table
+import yaml
+import pandas as pd
+import source.visuals as vis
+
+with open("source/config.yaml", "r") as f:
+  config = f.read()
+config = yaml.safe_load(config)
+cpc = dict()
+for key in config["CPC"].keys():
+  cpc[key] = ", ".join(config["CPC"][key])
+cpc = pd.DataFrame.from_dict(cpc, orient="index", columns=["CPC"]).reset_index().rename(columns={"index": "Class"})
+```
+
+```{python}
+#| label: tbl-cpc-codes
+#| tbl-cap: Selected CPC Codes
+
+cpc.style.hide()
+    # .set_table_styles([
+    #     {'selector': 'th.col_heading', 'props': 'text-align: left;'},
+    #     {'selector': 'th.col_heading.level0', 'props': 'font-size: 1.3em;'}
+    # ]) \
+
+```
+
+The meththodological approach has similarities to @mann_benign_2018 [p.13] who used patent counts as a proxy for estimating the level of automation present within a US commuting zone. However, the method of selecting patents differs. While @mann_benign_2018 classified texts based on the tasks they may effect within occupations, the presented approach here uses API query composition to preselect patents whose title or abstract match keywords reserved to an industry.
+
+## Hypothesis
+
+1.  Patents do not affect wage adjusted labor productivity
+2.  Patents do not affect share of personnel costs in production (percentage)
+3.  Patents do not affect number of people employed
+4.  Patents do not affect gross value added per employee
+
+In order to determine the effects of
+
+# Results
+
+# Discussion
+
+# Limitations
+
+As pointed out by @trajtenberg_penny_1990, the plain number of patent counts disregard the fact that patents to not carry equal economical weight, i.e., the effect a patent might have on a market or industry cannot be inferred by the presence of a patent without incorporating weights.
+
+# Conclusion
+
+{{< pagebreak >}}
+
+# References
+
+::: {#refs}
+:::

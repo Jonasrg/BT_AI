@@ -1,4 +1,4 @@
-CPC_Schemes: {
+CPC: {
   # Dict of CPC Symbols relating to Artificial Intelligence
   'Machine Learning': ['G06N20/00', 'G06N20/10', 'G06N20/20'],
   'Supervised Learning': ['G06N3/09'],
