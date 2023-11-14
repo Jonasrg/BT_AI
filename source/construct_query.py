@@ -5,8 +5,8 @@ import yaml
 import json
 from datetime import datetime
 
-with open("config.yaml", "r") as stream:
-        config = yaml.safe_load(stream)
+# with open("config.yaml", "r") as stream:
+#         config = yaml.safe_load(stream)
 
 
 def get_keywords(config:dict)->dict:
