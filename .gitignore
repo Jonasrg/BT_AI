@@ -4,3 +4,4 @@ __pycache__
 *.log
 *.ipynb
 notes.md
+test*
