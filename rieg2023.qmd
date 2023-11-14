@@ -6,8 +6,13 @@ csl: elsevier-harvard.csl
 execute:
   echo: false
   freeze: false
+keep-tex: true
 format:
   pdf:
+    fig-cap-location: top
+    tbl-cap-location: top
+    papersize: a4paper
+    documentclass: article
     toc: false
     link-citations: true
     number-sections: true
@@ -51,6 +56,19 @@ format:
 
 # Introduction
 
+```{python}
+# setup
+import yaml
+import pandas as pd
+from IPython.display import Markdown
+import json
+
+with open("source/config.yaml", "r") as f:
+  config = f.read()
+config = yaml.safe_load(config)
+
+```
+
 @mokyr_history_2015 [p. 32] identifies two forms of technological anxiety, the fear of labor displacement through technology and and the fear of morally negative applications resulting in declining welfare. The majority of the US population has been found to assess the potential impact of automation as unfavorable rather than beneficial [@anderson_automation_2017].
 
 Since AI is a still fairly new topic in the literature and has only seen real increase in dominance and interest in recent years [@acemoglu_ai_2020, p. 23f.], is is worth noting the effects of previous technologies as the adoption of machines (specifically often industrial robots [see for example @graetz_robots_2015; @acemoglu_robots_2020]) and software (also referred to as computerization[see for example @pajarinen_computerization_2015; @frey_future_2017; @autor_growth_2013]) have been seen as previous stages in the evolution of automation with AI composing the next stage [@acemoglu_harms_2021, p. 19]. Furthermore, these technologies have been summarized under the umbrella term "automation" [@mann_benign_2018, p. 40] indicating common characteristics and thereby - possibly - common effects.
@@ -92,42 +110,40 @@ The classification if Artificial Intelligence remains also difficult due to the 
 
 # Methodology
 
-## Data
+The methodological approach has similarities to @mann_benign_2018 [p.13] who used patent counts as a proxy for estimating the level of automation present within a US commuting zone. However, the method of selecting patents differs. While @mann_benign_2018 classified texts based on the tasks they may effect within occupations, the presented approach here uses API query composition to preselect patents whose title or abstract match keywords reserved to an industry.
+
+## Data Sources
 
 Data about patent publications is obtained from the European Patent Office's Open Patent Services (OPS) API [@european_patent_office_open_2023] as well as the Annual Structural Business Statistics (SBS) by Eurostat [@eurostat_annual_2023]. Furthermore, Eurostats code lists of Statistical classification of economic activities in the European Community (NACE Revision 2) [@eurostat_statistical_2023] (henceforth "NACE") and Economic Indicators for Eurostat's SBS [@eurostat_economical_2023]. While there are a variety of possible technologies that may fall under the umbrella term "Artificial Intelligence", as this research aims to assess AI's socioeconomic impact - which, if negative, falls into the governmental realm - a legal definition of AI is preferable as a classifier. Furthermore, it is arguable that the political definition is likely to have the greatest (socio)economic impact in the near future due to possible (and probable) regulation. As there is no legal definition yet - at least in the EU - technologies listed in the European Commisions latest proposal for the "Artificial Intelligence Act\['s\]" [@european_commission_proposal_2021] annex [@european_commission_annexes_202] will be used.[^1]
 
 [^1]: While this proposal is not yet in effect, it is likely to be adopted in the near future and is therefore used as a proxy for a legal definition of AI.
 
-Additionally Coopoerative Patent Classification (CPC) codes are used to retrieve patents that utilize artificial intelligence technology. As there is no clear mapping between the Europoean Commission's definition and CPC codes, classifications are chosen to the author's best knowledge.
-
-```{python}
-# show cpc codes as table
-import yaml
-import pandas as pd
-import source.visuals as vis
-
-with open("source/config.yaml", "r") as f:
-  config = f.read()
-config = yaml.safe_load(config)
-cpc = dict()
-for key in config["CPC"].keys():
-  cpc[key] = ", ".join(config["CPC"][key])
-cpc = pd.DataFrame.from_dict(cpc, orient="index", columns=["CPC"]).reset_index().rename(columns={"index": "Class"})
-```
+Additionally Cooperative Patent Classification (CPC) codes are used to retrieve patents that utilize artificial intelligence technology. As there is no clear mapping between the European Commission's definition and CPC codes, classifications are chosen to the author's best knowledge.
 
 ```{python}
 #| label: tbl-cpc-codes
 #| tbl-cap: Selected CPC Codes
+#| tbl-pos: H
 
-cpc.style.hide()
-    # .set_table_styles([
-    #     {'selector': 'th.col_heading', 'props': 'text-align: left;'},
-    #     {'selector': 'th.col_heading.level0', 'props': 'font-size: 1.3em;'}
-    # ]) \
+# show cpc codes as table
+cpc = dict()
+for key in config["CPC"].keys():
+  cpc[key] = ", ".join(config["CPC"][key])
+cpc = pd.DataFrame.from_dict(cpc, orient="index", columns=["CPC"]).reset_index().rename(columns={"index": "Class"})
 
+Markdown(cpc.to_markdown(index=False))
 ```
 
-The meththodological approach has similarities to @mann_benign_2018 [p.13] who used patent counts as a proxy for estimating the level of automation present within a US commuting zone. However, the method of selecting patents differs. While @mann_benign_2018 classified texts based on the tasks they may effect within occupations, the presented approach here uses API query composition to preselect patents whose title or abstract match keywords reserved to an industry.
+## Data Acquisition
+
+In order to retrieve data from the European Patent Office's Open Patent Services (OPS) API, queries were composed to link retrieved patents to their respective industry. The query composition is based on the selected CPC codes displayed in @tbl-cpc-codes as well as keywords from the list of NACE codes that have been retrieved from Eurostat. Each NACE code is composed of section (alphabetical), division (numerical), group (numerical) and class (numerical) of a particular economic activity. Sections relate to the overall indsutry, while divisions, groups and classes relate to more specific activities within the industry [@nacebac]. For each industry, keywords are extracted from the NACE code's description. To ensure only relevant keywords are used, each description is cleaned of common characters and unrelated words (e.g., ",", "and", "or", "to"). Descriptions for each industry are then split into lists of single keywords that will be used in the API query.
+
+Because some industries contain a variety of different activities (e.g., NACE industry (section) "A" relates to "Agriculture, forestry and fishing" [@eurostat_economical_2023]), main keywords that relate to the section as a whole are manually selected (see @tbl-nacemainkeywords in the \nameref{sec-appendix}). For each industry and main keyword, queries are then build using the (manuallly selected) main keyword, the description keywords, as well as the chosen CPC codes. The resulting query is then used to retrieve patents from the OPS API. To limit query results to the relevant market, only patents filed with the European Patent Office (EP) will be retrieved. This approach disregards patents filed with national patent offices. However, since the query language is english, and many national patents are only filed in their native language, retrieving patents for all EU markets was unfeasible. The query is composed of the following elements:
+
+> **(ta = Main Keyword) AND (ta = ANY Description Keywords) AND (cpc ANY CPC Codes) AND (ap = "EP")**\
+> *Note: ta = title or abstract; ap = Application Number, referring to the Patent Office the patent was filed at. In this case, "EP" refers to the European Patent Office. See @tbl-queryexample for example queries*
+
+The queries are then posted to the OPS API's Published Data Keywords Search with Variable Constituents endpoint [@european_patent_office_published_nodate] and data from the responses - which are provided in JSON format - extracted.
 
 ## Hypothesis
 
@@ -150,7 +166,42 @@ As pointed out by @trajtenberg_penny_1990, the plain number of patent counts dis
 
 {{< pagebreak >}}
 
-# References
+# References {#sec-references .unnumbered}
 
 ::: {#refs}
 :::
+
+{{< pagebreak >}} \# Appendix {#sec-appendix .unnumbered}
+
+```{python}
+#| label: tbl-nacemainkeywords
+#| tbl-cap: Selected main keywords for NACE industries
+#| tbl-pos: H
+
+# show nace keywords as table
+nace = dict()
+for key in config["NACE_INDSUTRIES_LV_1"].keys():
+  nace[key] = ", ".join(config["NACE_INDSUTRIES_LV_1"][key])
+nace = pd.DataFrame.from_dict(nace, orient="index", columns=["Keywords"]).reset_index().rename(columns={"index": "NACE Section"})
+
+nace["Keywords"] = nace["Keywords"].str.wrap(50)
+
+Markdown(nace.to_markdown(index=False))
+```
+
+```{python}
+#| label: tbl-queryexample
+#| tbl-cap: Example queries posted to the OPS API
+#| tbl-pos: H
+
+import source.construct_query as cq
+import json
+import pandas as pd
+
+with open("data/queries/2023-10-21_ops_search_queries.json", "r") as f:
+  queries = f.read()
+queries = json.loads(queries)
+ls = cq.return_all_queries(queries)
+df = pd.DataFrame(ls[:10], columns=["Query examples"])
+display(Markdown(df.to_markdown(index=True)))
+```
