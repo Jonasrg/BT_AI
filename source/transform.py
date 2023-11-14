@@ -13,7 +13,7 @@ def tf_search_biblio(ls:list)->pd.DataFrame:
     return df
 
 def prep_eurostat_data(data_path:str, code_path:str)->pd.DataFrame:
-    codes = pd.read_csv(code_path, sep="\t", header=None, names=["indic_sb", "name"])
+    codes = pd.read_csv(code_path, sep='\t', header=None, names=["indic_sb", "indic_sb_name"])
     sbs_stats = pd.read_csv(data_path)
     df =  sbs_stats.merge(codes, on="indic_sb", how="left")
     df.drop(columns=["STRUCTURE","STRUCTURE_ID", "freq" ], inplace=True)
