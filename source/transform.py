@@ -67,9 +67,12 @@ def prep_data(prepped_patents_df, prepped_eurostat_df) -> pd.DataFrame:
     # year 2017 is now NaN but actually 0 patents were retrieved for that year
     # fill missing years with zeros, but keep only data from the first year on where a patent was retrieved
     # i.e., where the cumulative sum of patents per industry and indicator is not 0 anymore
-    df["document_date_year"] = df["TIME_PERIOD"] #fill years column
-    df["query_industry"] = df["nace_r2"] # fill indsutry column
-    df["sum_patents"] = df["sum_patents"].fillna(0) # assign 0 patent retrievals to NaN values
+    # fill years column
+    df["document_date_year"] = df["TIME_PERIOD"]
+    # fill indsutry column
+    df["query_industry"] = df["nace_r2"]
+    # assign 0 patent retrievals to NaN values
+    df["sum_patents"] = df["sum_patents"].fillna(0)
     # get cumulative sum of patents per industry and indicator
     df["cumsum_patents"] = df.groupby(["nace_r2", "indic_sb"])["sum_patents"].cumsum()
     # only keep values for each industry and indicator after the first patent was recorded
