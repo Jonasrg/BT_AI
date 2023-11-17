@@ -33,7 +33,7 @@ def run_regressions(data, industries, indicators, x_cols, successive=True):
 
 
 # summarize results saved in dict returned from run_regression()
-def summarize_results(results, indicators, industries, x_cols, by="indicator"):
+def summarize_results(results, indicators, industries, by="indicator"):
     len_results_sublists = len(results[list(results.keys())[0]][list(results[list(results.keys())[0]].keys())[0]])
     summarized = dict()
     if by == "indicator":
