@@ -43,7 +43,7 @@ def summarize_results(results, indicators, industries, by="indicator"):
             for industry in industries:
                 result_list += results[industry][indicator]
             summarized[indicator] = summary_col(result_list, regressor_order=result_list[-1].params.index.tolist(),
-                                                stars=True, model_names=model_names)
+                                                stars=True, model_names=model_names, float_format='%.1f')
         return summarized
     if by == "industry":
         for industry in industries:
@@ -52,7 +52,7 @@ def summarize_results(results, indicators, industries, by="indicator"):
             for indicator in indicators:
                 result_list += results[industry][indicator]
             summarized[industry] = summary_col(result_list, regressor_order=result_list[-1].params.index.tolist(),
-                                               stars=True, model_names=model_names)
+                                               stars=True, model_names=model_names, float_format='%.1f')
         return summarized
     else:
         raise ValueError("Argument by either industry or indicator")
