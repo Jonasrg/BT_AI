@@ -17,12 +17,20 @@ def tf_search_biblio(ls: list) -> pd.DataFrame:
 
 
 def prep_eurostat_data(data_path: str, code_path: str) -> pd.DataFrame:
+    rename = {
+        "Enterprises - number": "Enterprises",
+        "Persons employed - number": "Employees",
+        "Wage adjusted labour productivity (Apparent labour productivity by average personnel costs) - percentage": "Labor prod.",
+        "Gross value added per employee - thousand euro": "GVA/employee",
+        "Share of personnel costs in production - percentage": "Personnel costs (%)",
+    }
     codes = pd.read_csv(
         code_path, sep="\t", header=None, names=["indic_sb", "indic_sb_name"]
     )
     sbs_stats = pd.read_csv(data_path)
     df = sbs_stats.merge(codes, on="indic_sb", how="left")
     df.drop(columns=["STRUCTURE", "STRUCTURE_ID", "freq"], inplace=True)
+    df["indic_sb_name"] = df["indic_sb_name"].apply(lambda x: rename[x])
     return df
 
 
@@ -43,9 +51,9 @@ def prep_patents(patents_df) -> pd.DataFrame:
     # sort patents
     patents_gr_industry_year.sort_values(by="sum_patents", ascending=False)
     # keep only patents that have at least four years of data
-    prepped_patents = patents_gr_industry_year.groupby(
-        by=["query_industry"]
-    ).filter(lambda x: len(x) >= 4)
+    prepped_patents = patents_gr_industry_year.groupby(by=["query_industry"]).filter(
+        lambda x: len(x) >= 4
+    )
     return prepped_patents
 
 
@@ -86,5 +94,10 @@ def prep_data(prepped_patents_df, prepped_eurostat_df) -> pd.DataFrame:
     )
     # Merge the minimum year back to the original dataframe
     prepped_df = df.merge(years_min_max, on="nace_r2")
-    # TODO: Drop N/As in OBS_VALUE column??
+    # Drop N/As in OBS_VALUE column
+    # Cannot have N/A for regression. Replacing with 0 would be misleading
+    prepped_df = prepped_df.dropna(subset="OBS_VALUE")
+    prepped_df.rename(
+        columns={"sum_patents": "Sum patents", "document_date_year": "Year"}, inplace=True
+    )
     return prepped_df
