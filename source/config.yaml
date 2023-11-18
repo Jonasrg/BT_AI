@@ -67,5 +67,6 @@ paths: {
   retrieved_data_path: "data/retrieved_data/",
   nace_codes_csv: "data/NACE_CODES.csv",
   eurostat_sbs_data : "data/EUROSTAT_Data/estat_sbs_na_sca_r2_filtered_eu27_lv1_2020.csv",
-  eurostat_indic_sb_codes : "data/EUROSTAT_Data/ESTAT_INDIC_SB_2.0_EN.tsv"
+  eurostat_indic_sb_codes : "data/EUROSTAT_Data/ESTAT_INDIC_SB_2.0_EN.tsv",
+  eurostat_nace_codes : "data/EUROSTAT_Data/ESTAT_NACE_R2_13.2_EN.tsv"
 }
