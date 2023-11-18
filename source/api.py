@@ -4,6 +4,7 @@ import os
 import requests
 import logging
 from time import sleep
+
 # Set up logging
 logger = logging.getLogger(__name__)
 
@@ -12,7 +13,7 @@ logger = logging.getLogger(__name__)
 #     # Check if the response is empty
 #     if "<code>SERVER.EntityNotFound</code>" in response.text:
 #         return None
-    
+
 #     # Extract the content from the response
 #     results = response.json()["ops:world-patent-data"]["ops:biblio-search"]["ops:search-result"]["ops:publication-reference"]
 #     ls = []
@@ -87,9 +88,10 @@ logger = logging.getLogger(__name__)
 #             "references_cited": element["bibliographic-data"]["references-cited"]["citation"],
 #             "abstract": element["abstract"]["p"]["$"],
 #         }
-        
+
 #         ls.append(data)
 #     return ls
+
 
 # Function to check the response for errors
 # If the response is an error, the function will return False
@@ -97,44 +99,52 @@ def check_response(response, Sleeper, Access_token) -> bool:
     # check if access token has expired
     if "Access token has expired" in response.text:
         access_token = Access_token.renew_token()
-        logger.debug(f"Access token expired. New token acquired.")
+        logger.debug("Access token expired. New token acquired.")
         sleep(2)
         return False
     # wait if robot was detected
     if response.status_code == 403:
-        logger.warning(f"CLIENT.RobotDetected: sleep for {Sleeper.get_sleep()} seconds.")
+        logger.warning(
+            f"CLIENT.RobotDetected: sleep for {Sleeper.get_sleep()} seconds."
+        )
         sleep(Sleeper.get_sleep())
         Sleeper.increase_sleep()
         return False
     else:
         Sleeper.default_sleep()
         return True
-    
-def make_request(query, range_begin, range_end, AccessToken, Sleeper, endpoint="biblio-search"):
+
+
+def make_request(
+    query, range_begin, range_end, AccessToken, Sleeper, endpoint="biblio-search"
+):
     # use global access_token to be able to replace when expired
     ep = {
-        "search" : "https://ops.epo.org/3.2/rest-services/published-data/search",
-        "biblio-search" : "https://ops.epo.org/3.2/rest-services/published-data/search/biblio"
-
+        "search": "https://ops.epo.org/3.2/rest-services/published-data/search",
+        "biblio-search": "https://ops.epo.org/3.2/rest-services/published-data/search/biblio",
     }
     url = ep[endpoint]
-     # define header
+    # define header
     headers = {
-    "Accept": "application/json",
-    "Content-Type": "text/plain",
-    "Authorization": f'Bearer {AccessToken.access_token}',
+        "Accept": "application/json",
+        "Content-Type": "text/plain",
+        "Authorization": f"Bearer {AccessToken.access_token}",
     }
-    params = {
-        "Range" : f"{range_begin}-{range_end}",
-        "q": query
-        }
+    params = {"Range": f"{range_begin}-{range_end}", "q": query}
     response = requests.get(url, params=params, headers=headers, timeout=20)
-    
+
     # check if access token has expired
     if check_response(response=response, Sleeper=Sleeper, Access_token=AccessToken):
         return response
     else:
-        return make_request(query=query, range_begin=range_begin, range_end=range_end, AccessToken=AccessToken, Sleeper=Sleeper)
+        return make_request(
+            query=query,
+            range_begin=range_begin,
+            range_end=range_end,
+            AccessToken=AccessToken,
+            Sleeper=Sleeper,
+        )
+
 
 # class to handle sleep
 class Sleeper:
@@ -144,31 +154,42 @@ class Sleeper:
         self.steps = steps
         self.sleep_array = np.linspace(self.start, self.end, self.steps)
         self.sleep_counter = 0
+
     def increase_sleep(self):
         self.sleep_counter += 1
+
     def default_sleep(self):
         self.sleep_counter = 0
+
     def get_sleep(self):
         return self.sleep_array[self.sleep_counter]
+
 
 # class to handle access token
 class AccessToken:
     def __init__(self):
         self.access_token = self.acquire_token()
+
     def acquire_token(self):
         headers = {
             "Authorization": "Basic {0}".format(
                 b64encode(
-                    "{0}:{1}".format(os.getenv("ConsumerKey"), os.getenv('ConsumerSecretKey')).encode("ascii")
+                    "{0}:{1}".format(
+                        os.getenv("ConsumerKey"), os.getenv("ConsumerSecretKey")
+                    ).encode("ascii")
                 ).decode("ascii")
             ),
             "Content-Type": "application/x-www-form-urlencoded",
         }
         payload = {"grant_type": "client_credentials"}
         response = requests.post(
-            'https://ops.epo.org/3.2/auth/accesstoken', headers=headers, data=payload, timeout=10.0
+            "https://ops.epo.org/3.2/auth/accesstoken",
+            headers=headers,
+            data=payload,
+            timeout=10.0,
         )
         response.raise_for_status()
         return response.json()["access_token"]
+
     def renew_token(self):
         self.access_token = self.acquire_token()
