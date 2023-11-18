@@ -16,7 +16,7 @@ def tf_search_biblio(ls: list) -> pd.DataFrame:
     return df
 
 
-def prep_eurostat_data(data_path: str, code_path: str) -> pd.DataFrame:
+def prep_eurostat_data(data_path: str, indic_sb_codes: str, nace_codes: str) -> pd.DataFrame:
     rename = {
         "Enterprises - number": "Enterprises",
         "Persons employed - number": "Employees",
@@ -24,11 +24,15 @@ def prep_eurostat_data(data_path: str, code_path: str) -> pd.DataFrame:
         "Gross value added per employee - thousand euro": "GVA/employee",
         "Share of personnel costs in production - percentage": "Personnel costs (%)",
     }
-    codes = pd.read_csv(
-        code_path, sep="\t", header=None, names=["indic_sb", "indic_sb_name"]
+    indic_sb_codes = pd.read_csv(
+        indic_sb_codes, sep="\t", header=None, names=["indic_sb", "indic_sb_name"]
+    )
+    nace_codes = pd.read_csv(
+        nace_codes, sep="\t", header=None, names=["nace_r2", "Industry"]
     )
     sbs_stats = pd.read_csv(data_path)
-    df = sbs_stats.merge(codes, on="indic_sb", how="left")
+    df = sbs_stats.merge(indic_sb_codes, on="indic_sb", how="left")
+    df = df.merge(nace_codes, on="nace_r2", how="left")
     df.drop(columns=["STRUCTURE", "STRUCTURE_ID", "freq"], inplace=True)
     df["indic_sb_name"] = df["indic_sb_name"].apply(lambda x: rename[x])
     return df
@@ -98,6 +102,7 @@ def prep_data(prepped_patents_df, prepped_eurostat_df) -> pd.DataFrame:
     # Cannot have N/A for regression. Replacing with 0 would be misleading
     prepped_df = prepped_df.dropna(subset="OBS_VALUE")
     prepped_df.rename(
-        columns={"sum_patents": "Sum patents", "document_date_year": "Year"}, inplace=True
+        columns={"sum_patents": "Sum patents", "document_date_year": "Year", "nace_r2": "NACE",
+                 "indic_sb_name": "Indicator"}, inplace=True
     )
     return prepped_df
