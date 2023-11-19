@@ -16,7 +16,9 @@ def tf_search_biblio(ls: list) -> pd.DataFrame:
     return df
 
 
-def prep_eurostat_data(data_path: str, indic_sb_codes: str, nace_codes: str) -> pd.DataFrame:
+def prep_eurostat_data(
+    data_path: str, indic_sb_codes: str, nace_codes: str
+) -> pd.DataFrame:
     rename = {
         "Enterprises - number": "Enterprises",
         "Persons employed - number": "Employees",
@@ -61,7 +63,11 @@ def prep_patents(patents_df) -> pd.DataFrame:
     return prepped_patents
 
 
-def prep_data(prepped_patents_df: pd.DataFrame, prepped_eurostat_df: pd.DataFrame, time_all: bool = False) -> pd.DataFrame:
+def prep_data(
+    prepped_patents_df: pd.DataFrame,
+    prepped_eurostat_df: pd.DataFrame,
+    time_all: bool = False,
+) -> pd.DataFrame:
     # merge eurostat data with patent data
     df = pd.merge(
         prepped_eurostat_df,
@@ -88,20 +94,32 @@ def prep_data(prepped_patents_df: pd.DataFrame, prepped_eurostat_df: pd.DataFram
     # get cumulative sum of patents per industry and indicator
     df["cumsum_patents"] = df.groupby(["nace_r2", "indic_sb"])["sum_patents"].cumsum()
     # Calculate the min and max year for each industry
-    years_min_max = df[df["sum_patents"] != 0].groupby("nace_r2").agg(
-        min_year=("document_date_year", "min"), max_year=("document_date_year", "max")
+    years_min_max = (
+        df[df["sum_patents"] != 0]
+        .groupby("nace_r2")
+        .agg(
+            min_year=("document_date_year", "min"),
+            max_year=("document_date_year", "max"),
+        )
     )
     # Merge the minimum year back to the original dataframe
     prepped_df = df.merge(years_min_max, on="nace_r2")
     if time_all is False:
         # Keep only values in min_max time span for each industry
-        prepped_df = prepped_df[(prepped_df["TIME_PERIOD"] >= prepped_df["min_year"]) &
-                                (prepped_df["TIME_PERIOD"] <= prepped_df["max_year"])]
+        prepped_df = prepped_df[
+            (prepped_df["TIME_PERIOD"] >= prepped_df["min_year"])
+            & (prepped_df["TIME_PERIOD"] <= prepped_df["max_year"])
+        ]
     # Drop N/As in OBS_VALUE column
     # Cannot have N/A for regression. Replacing with 0 would be misleading
     prepped_df = prepped_df.dropna(subset="OBS_VALUE")
     prepped_df.rename(
-        columns={"sum_patents": "Sum patents", "document_date_year": "Year", "nace_r2": "NACE",
-                 "indic_sb_name": "Indicator"}, inplace=True
+        columns={
+            "sum_patents": "Sum patents",
+            "document_date_year": "Year",
+            "nace_r2": "NACE",
+            "indic_sb_name": "Indicator",
+        },
+        inplace=True,
     )
     return prepped_df
