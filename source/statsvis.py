@@ -4,6 +4,7 @@ from statsmodels.iolib.summary2 import summary_col
 from plotly.subplots import make_subplots
 import plotly.graph_objects as go
 import pandas as pd
+import numpy as np
 
 
 # run regressions and save results in dict
@@ -74,11 +75,29 @@ def summarize_results(results, indicators, industries, by="indicator"):
                 regressor_order=result_list[-1].params.index.tolist(),
                 stars=True,
                 model_names=model_names,
-                float_format="%.1f",
+                float_format="%.3f",
             )
         return summarized
     else:
         raise ValueError("Argument by either industry or indicator")
+
+
+# descriptives
+def descriptives(df):
+    data = {
+        "len_df": len(df),
+        "num_industries": len(df["Industry"].unique()),
+        "industries": list(df["Industry"].unique()),
+        "num_indicators": len(df["Indicator"].unique()),
+        "indicators": list(df["Indicator"].unique()),
+        "max_years": np.max(df.groupby(by=["NACE", "Indicator"]).size()),
+        "min_years": np.min(df.groupby(by=["NACE", "Indicator"]).size()),
+        "average_years": round(np.average(df.groupby(by=["NACE", "Indicator"]).size())),
+    }
+    for nace in df["NACE"].unique():
+        data[f"{nace}_n_patents"] = df[df["NACE"] == nace].drop_duplicates(subset="Year")["Sum patents"].sum()
+        data[f"{nace}_n_years"] = df[(df["NACE"] == nace) & (df["Year"] != 0)].drop_duplicates(subset="Year")["Year"].count()
+    return data
 
 
 PLOTLY_TEMPLATE = "plotly_white"
