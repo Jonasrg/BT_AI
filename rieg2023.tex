@@ -114,6 +114,9 @@
 \newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{\strut#1\strut}}
 \newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
 
+\let\oldsection\section
+\renewcommand\section{\clearpage\oldsection}
+\usepackage[font=it,labelfont=bf]{caption}
 \makeatletter
 \makeatother
 \makeatletter
@@ -239,8 +242,9 @@ real increase in dominance and interest in recent years
 is worth noting the effects of previous technologies as the adoption of
 machines (specifically often industrial robots
 (\citeproc{ref-acemoglu_robots_2020}{Acemoglu and Restrepo, 2020a}; see
-for example \citeproc{ref-graetz_robots_2015}{Graetz and Michaels,
-2015})) and software (also referred to as
+for example
+\citeproc{ref-graetz_robots_2015}{\textbf{graetz\_robots\_2015?}})) and
+software (also referred to as
 computerization(\citeproc{ref-autor_growth_2013}{Autor and Dorn, 2013};
 \citeproc{ref-frey_future_2017}{Frey and Osborne, 2017}; see for example
 \citeproc{ref-pajarinen_computerization_2015}{Pajarinen et al., 2015}))
@@ -262,25 +266,26 @@ p. 26}). These findings contradict the results from Autor et al.
 (\citeproc{ref-autor_untangling_2015}{2015}) {[}p.~632{]}, that found no
 relation between exposure to automation and employment as a whole but
 found a significant decline in employment related to routine tasks in
-the non-manufacturing sector (p.~641). Graetz and Michaels
-(\citeproc{ref-graetz_robots_2015}{2015, p. 766}) found no relationship
-between the usage of industrial robots and net employment. However,
-usage of industrial robots was found to lower employment of low-skilled
-workers. However, a later study also looking at employment effects
-induced by usage of industrial robots found a significant decline of
-employment as well as a reduction in wages related to robot exposure
-within a commuting zone (\citeproc{ref-acemoglu_robots_2020}{Acemoglu
-and Restrepo, 2020a, pp. 2215f, 2218}). Dauth et al.
-(\citeproc{ref-dauth_german_2017}{2017}) {[}p.~25{]} found no relation
-between robot exposure and employment in the German market. A few years
-later, Dauth et al. (\citeproc{ref-dauth_adjustment_2021}{2021, p.
-3126ff}) found robot exposure to lead to within-firm and between-firm
-job displacement, with displaced workers having difficulties
-reallocating their jobs within the same industry, leading to a migration
-of workers from manufacturing (where robot exposure is most present) to
-the service sector. They also exhibited that a lack of worker
-protections (for example unionization or tenure) is related to greater
-displacement. These results were also confirmed by Boustan et al.
+the non-manufacturing sector (p.~641).
+(\citeproc{ref-graetz_robots_2015}{\textbf{graetz\_robots\_2015?}})
+found no relationship between the usage of industrial robots and net
+employment. However, usage of industrial robots was found to lower
+employment of low-skilled workers. However, a later study also looking
+at employment effects induced by usage of industrial robots found a
+significant decline of employment as well as a reduction in wages
+related to robot exposure within a commuting zone
+(\citeproc{ref-acemoglu_robots_2020}{Acemoglu and Restrepo, 2020a, pp.
+2215f, 2218}). Dauth et al. (\citeproc{ref-dauth_german_2017}{2017})
+{[}p.~25{]} found no relation between robot exposure and employment in
+the German market. A few years later, Dauth et al.
+(\citeproc{ref-dauth_adjustment_2021}{2021, p. 3126ff}) found robot
+exposure to lead to within-firm and between-firm job displacement, with
+displaced workers having difficulties reallocating their jobs within the
+same industry, leading to a migration of workers from manufacturing
+(where robot exposure is most present) to the service sector. They also
+exhibited that a lack of worker protections (for example unionization or
+tenure) is related to greater displacement. These results were also
+confirmed by Boustan et al.
 (\citeproc{ref-boustan_automation_2022}{2022}) {[}p.~21, 23{]} who
 observed that displaced workers acquire new skills and concluded job
 displacement by automation to be less discernible amongst unionized and
@@ -334,10 +339,10 @@ Restrepo, 2019, p. 21}).
 Furthermore, Arntz et al. (\citeproc{ref-arntz_risk_2016}{2016})
 {[}p.~14f.{]} studying 21 OECD countries found 9\% in the US, and over
 all countries studies a 6-12\% high risk of employment to be
-substitutable for automation, while Acemoglu and Autor
-(\citeproc{ref-acemoglu_chapter_2011}{2011, p. 61}) came to the
-conclusion that labor displacement by machines mostly affects routine
-tasks.
+substitutable for automation, while
+(\citeproc{ref-acemoglu_chapter_2011}{\textbf{acemoglu\_chapter\_2011?}})
+came to the conclusion that labor displacement by machines mostly
+affects routine tasks.
 
 \subsection{Effects of
 computerization}\label{effects-of-computerization}
@@ -408,9 +413,9 @@ The aforementioned study from Autor et al.
 (\citeproc{ref-autor_untangling_2015}{2015}) {[}p.~644{]} found
 automation, while having no aggregate effects on employment, lead to a
 decline in occupations involving routine tasks and and an increase in
-non-routine (abstract) tasks. The same effect was found in Graetz and
-Michaels (\citeproc{ref-graetz_robots_2015}{2015, p. 766}) studying the
-introduction of industrial robots.\\
+non-routine (abstract) tasks. The same effect was found in
+(\citeproc{ref-graetz_robots_2015}{\textbf{graetz\_robots\_2015?}})
+studying the introduction of industrial robots.\\
 These effects remain only harmless as long as the assumption holds true
 that displaced labor can in fact always reallocate itself to new tasks.
 Should this assumption be contradicted, and the the negative effects of
@@ -515,6 +520,8 @@ there is no clear mapping between the European Commission's definition
 and CPC codes, classifications are chosen to the author's best
 knowledge.
 
+\setstretch{1}
+
 \phantomsection\label{tbl-cpc-codes}
 \begin{longtable}[]{@{}ll@{}}
 \caption{\label{tbl-cpc-codes}Selected CPC Codes}\tabularnewline
@@ -535,7 +542,9 @@ Reinforcement Learning & G06N3/092 \\
 Deep Learning & G06N3/08 \\
 \end{longtable}
 
-\subsection{Data Acquisition}\label{data-acquisition}
+\setstretch{1.5}
+
+\subsection{Data Acquisition}\label{sec-data-acquisition}
 
 In order to retrieve data from the European Patent Office's Open Patent
 Services (OPS) API, queries were composed to link retrieved patents to
@@ -544,7 +553,7 @@ selected CPC codes displayed in Table~\ref{tbl-cpc-codes} as well as
 keywords from the list of NACE codes that have been retrieved from
 Eurostat. Each NACE code is composed of section (alphabetical), division
 (numerical), group (numerical) and class (numerical) of a particular
-economic activity. Sections relate to the overall indsutry, while
+economic activity. Sections relate to the overall industry, while
 divisions, groups and classes relate to more specific activities within
 the industry (\citeproc{ref-nacebac}{\textbf{nacebac?}}). For each
 industry, keywords are extracted from the NACE code's description. To
@@ -584,25 +593,608 @@ Search with Variable Constituents endpoint
 Office, n.d.}) and data from the responses - which are provided in JSON
 format - extracted.
 
-\subsection{Hypothesis}\label{hypothesis}
+\subsection{Preprocessing}\label{sec-preprocessing}
+
+Since Eurostat's SBS data only includes codes to refer to given
+indicators as well as industries, data retrieved from Eurostat (SBS, and
+Code Lists about NACE and SBS codes) is merged. This is done by matching
+the NACE codes and SBS indicator codes to the respective NACE code and
+indicator in the SBS data. The economic indicators ``Enterprises'' and
+``Persons employed'' are reported as totals. ``Wage adjusted labour
+productivity (Apparent labour productivity by average personnel costs)''
+and ``Share of personnel costs in production'' are reported as
+percentages, and ``Gross value added per employee'' is reported in
+Euros. Because the number of employees is rather large for each
+industry, the number of employees is divided by 1000 to reduce the scale
+of the data. This increases readability of tables in the following
+regression results while also still large enough that it is unlikely for
+coefficients (coeff.) and standard errors (SE) to fall too far into the
+decimals.\footnote{Note that this is done to ensure readability and does
+  not affect the regression results. Defactoring data by more than a
+  thousand might lead to coefficients and standard errors falling into
+  the decimals, which in turn may show up - due to rounding - as zeros
+  despite having large scale effects (when rescaled with the original
+  factor).\label{note3}}
+
+Next, patent data retrieved from the OPS API, which returns data in JSON
+format, is converted into a pandas DataFrame
+(\citeproc{ref-the_pandas_development_team_pandas-devpandas_2023}{The
+pandas development team, 2023}) (i.e., a table). As multiple queries for
+the same industry - but with different keywords - have been posted to
+the API, duplicates in the patent data are removed. Specifically,
+duplicate patent data (indicated by the patent application number) are
+removed in each industry subset of the data. This ensures that each
+industry only contains unique patents while patents can still appear in
+more than one industry (as their applicable usage may not be restricted
+to only one industry). Furthermore, as the SBS data only spans from 2011
+to 2020, patents that have been filed before or after this period are
+removed from the data. As a next step, patents are grouped by their
+respective industry and year of application and the patent count for
+each subgroup is recorded. Furthermore, industries for which patents
+have been retrieved in less than four years within 2011-2020 are removed
+from the data to ensure a minimum sample size for the following
+statistics. The sum of patents for each industry and year composes the
+exogenous variable ``Sum patents'' that will be used in the regression
+analyses.
+
+Furthermore, the SBS data is merged with the patent data by matching the
+industry and year of application with the industry and year of the SBS
+data. This ensures that each industry and year combination in the SBS
+data has a corresponding patent count. Furthermore, the data is once
+more grouped for each industry to retrieve the earliest and latest year
+for which patent counts are available. For each industry, SBS data is
+removed for the years before and after the first and last patent
+retrieval for the respective industry. This is done to ensure that the
+regression analyses are only conducted for years in which patent counts
+are available.\footnote{There are valid arguments to be made for and
+  against excluding these data. For once, the lack of patent retrieval
+  for any given year implies no patent filing within that year, making
+  null values a good control instance to check for variation in SBS data
+  that is definitely not affected by patent filings. On the other hand,
+  for a few industries, this would result in many null values, giving
+  the data series of patent counts a definite trend. Furthermore, patent
+  counts have also been removed for years in which SBS data is
+  unavailable. To reduce potential bias produced by imputing and keeping
+  the data's integrity, removing the missing values has been chosen over
+  the data's accuracy.} However, in some cases, patents were
+discontinuously retrieved for industries. In other words, if patents are
+retrieved for an industry in 2016, 2018, 2019, and 2020, but not in
+2017, the SBS data for 2017 and the respective do not have a
+corresponding patent count. In order to account for missing values
+within a series of definite patent retrieval, the patent count for the
+missing year is set to zero. This is done for each industry and year
+combination in which patent counts are missing.
+
+Lastly, in some rare cases, SBS data is missing for a given year and
+industry. In these cases, rows of the respective year and industry are
+removed from the data. This is done to ensure that the regression
+analyses are only conducted for years in which SBS data is available.
+The resulting data is then used for the regression analyses. In summary,
+data for each year and industry will be used further if the following
+conditions are met.
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  Patents do not affect wage adjusted labor productivity
+  Patents have been retrieved for the industry in at least four years
+  within 2011-2020
 \item
-  Patents do not affect share of personnel costs in production
-  (percentage)
+  Patents have been retrieved for this or an earlier year
 \item
-  Patents do not affect number of people employed
+  Patents have been retrieved for this or a later year
 \item
-  Patents do not affect gross value added per employee
+  SBS data is available for this year and industry
 \end{enumerate}
 
-In order to determine the effects of
+The resulting data contains 211 data points across 6 Industries, each
+with 5 economic indicators. However, given the relatively short time
+period in which data could have been collected, paired with the fact
+that the retrieved patents are aggregated for each year, the resulting
+data size for each industry and economic indicator is relative small.
+The average number of years in which patent counts have been recorded
+-according to the methods above- is only 7 years, ranging from a minimum
+of 4 years up to 10 years. Since each year per industry and indicator
+will be used as a data point in the following regression analyses, it is
+neccesary to note that results may be biased due to the small sample
+size. Furthermore, given the small dataset -which makes diminishes the
+accuracy with which a regression can be fitted (i.e., fewer ``anchor
+points''), assumptions about the extend to which patent counts affect
+the chosen economic indicators will not be made. Instead, the regression
+analyses will be used to assess whether a relationship between the
+number of patents and the chosen economic indicators exists at all. That
+is, the interest lies whether AI patent counts yield any explanatory
+power over the chosen economic indicators.
+
+Because the collected data comrpises a time-series, as each industry's
+patent application counts as well as the SBS data have been retrieved
+for multiple years. As shown in
+Figure~\ref{fig-untransformed-data-example}, the collected data on SBS
+indicators (blue) as well as the number of patents retrieved each year
+(red) clearly does not exhibit stationarity. In order to account for any
+trends in the data, the collected data is transformed using linear
+detrending method. This is done by utilicing scipy's detrending method
+(\citeproc{ref-virtanen_scipy_2020}{Virtanen et al., 2020}), which fits
+a linear least-squares regression to the data and subtracts the
+resulting trend of the regression line from the data
+(\citeproc{ref-the_scipy_community_scipysignaldetrend_2023}{The SciPy
+community, 2023}). Note that other detrending options, such as
+logarithmic transformation or differencing have been considered but
+deemed insifficient. Logarithmic transformation is not applicable as the
+data contains zero values. While there are methods to circumvent this,
+for example taking the logarithm \(log(x+1)\), this would lead to
+non-null values where null values are expected to control for variance
+in the endogenous variable in the absence of patent counts. Furthermore,
+as seen in Figure~\ref{fig-untransformed-data-example}, many data series
+exhibit a continues positive or negative trend (a lack of fluctuation).
+In this case, differencing would merely reverse the trend, and
+logarithmic detrending would lead to a compression of the y-scale.
+Resulting data transformed by either of these methods, however, would
+still exhibit a definite trend. The resulting data, of which an example
+is shown in Figure~\ref{fig-transformed-data-example}, is then used for
+the regression analyses.
+
+\begin{figure}[H]
+
+{\centering \includegraphics{rieg2023_files/figure-pdf/fig-untransformed-data-example-output-1.jpeg}
+
+}
+
+\caption{\label{fig-untransformed-data-example}Example of untransformed
+data for all Industries and NACE Code `Number of Employees' plotted over
+years}
+
+\end{figure}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{rieg2023_files/figure-pdf/fig-transformed-data-example-output-1.jpeg}
+
+}
+
+\caption{\label{fig-transformed-data-example}Example of linear detrended
+data for all Industries and NACE Code `Number of Employees' plotted over
+years}
+
+\end{figure}
+
+Because data has been linearily detrended, to account for any remaining
+trend left in the data, the control variable ``Year'' is added to the
+regression analyses. This is done to ensure that any remaining trend in
+the data is accounted for and does not bias the regression results.
+Furthermore, the control variable ``Year'' is also added to the
+regression analyses to account for any time dependent macroeconomic
+effects that may have affected the chosen economic indicators but are
+not considered in the model.
+
+\subsection{Hypothesis}\label{hypothesis}
+
+Do determine whether a relationship between the number of patents and
+the chosen economic indicators exists, the following hypotheses are
+tested. Given a standard multiple linear regression model of the form
+\(ŷ_{ij} = \beta_0 + \beta_1x_i + + \beta_1x_t\), where
+\(i=\text{industry, }j=\text{economic indicator }\text{and }t=\text{time}\),
+the coefficient \(\beta_1\) is assumed to be \(0\). Specifically, the
+following assumptions are tested. \begin{align}
+H_0^{lb}: \beta_1 = 0\text{ for }y_{j=lb}=\text{wage adjusted labor productivity} \\
+H_0^{pc}: \beta_1 = 0\text{ for }y_{j=pc}=\text{personnel costs in production} \\
+H_0^{e}: \beta_1 = 0\text{ for }y_{j=e}=\text{number of employees} \\
+H_0^{va}: \beta_1 = 0\text{ for }y_{j=va}=\text{gross value added per employee}
+\end{align}
 
 \section{Results}\label{results}
+
+The following section presents the main findings from the regression
+analyses. Results are summarized by industry, allowing a sectional
+comparrison of patent counts' influence on economic indicators within an
+industry.
+
+\setstretch{1}
+
+\phantomsection\label{tbl-regression-results-ind-b}
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1404}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1667}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1491}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1667}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1754}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.2018}}@{}}
+\caption{\label{tbl-regression-results-ind-b}Regression results - Mining
+and Quarrying (B)}\tabularnewline
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Enterprises (n)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Employees (n)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Labor prod. (\%)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+GVA/employee (€)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Personnel costs (\%)
+\end{minipage} \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Enterprises (n)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Employees (n)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Labor prod. (\%)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+GVA/employee (€)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Personnel costs (\%)
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+const & 0.000 & 0.000 & -0.000 & -3878292.052 & 0.000 \\
+& (119814.660) & (8940.246) & (32619.930) & (20665152.759) &
+(998.515) \\
+Sum patents & -88.647 & 0.363 & -8.145 & -1340.991 & 0.645 \\
+& (83.139) & (6.204) & (22.635) & (14778.928) & (0.693) \\
+Year & -0.000 & -0.000 & 0.000 & 1921.611 & -0.000 \\
+& (59.373) & (4.430) & (16.164) & (10239.141) & (0.495) \\
+R-squared & 0.362 & 0.002 & 0.061 & 0.041 & 0.302 \\
+R-squared Adj. & -0.275 & -0.997 & -0.878 & -1.877 & -0.395 \\
+\end{longtable}
+
+\setstretch{1.5}
+
+For patents classified as industry ``Mining and Quarrying'' (NACE code
+``B''), depicted in Table~\ref{tbl-regression-results-ind-b}, the
+regression results show no significant relation between the sum of
+patents retrieved for each year and the chosen indicators. Furthermore,
+the control variable ``Year'', too, does not exhibit any significant
+relationships with the economic indicators. It should be noted, howver,
+that the number of patents retrieved for this industry is very low.
+While, as discussed in the \nameref{sec-data-acquisition}, industries
+for which patents were retrieved in fewer than five years were
+eliminated from the data, for Mining and Quarrying only 17.0 patents in
+5 years were retrieved.
+
+\setstretch{1}
+
+\phantomsection\label{tbl-regression-results-ind-c}
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1404}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1667}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1491}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1667}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1754}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.2018}}@{}}
+\caption{\label{tbl-regression-results-ind-c}Regression results -
+Manufacturing (C)}\tabularnewline
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Enterprises (n)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Employees (n)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Labor prod. (\%)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+GVA/employee (€)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Personnel costs (\%)
+\end{minipage} \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Enterprises (n)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Employees (n)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Labor prod. (\%)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+GVA/employee (€)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Personnel costs (\%)
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+const & 0.000 & 0.000 & -0.000 & -0.000 & 0.000 \\
+& (15775939.211) & (161822.011) & (554.469) & (306669.659) &
+(133.493) \\
+Sum patents & -14.607 & -82.489** & -0.130 & -203.313** & 0.040 \\
+& (1778.568) & (18.244) & (0.063) & (34.574) & (0.015) \\
+Year & -0.000 & -0.000 & 0.000 & 0.000 & -0.000 \\
+& (7817.609) & (80.189) & (0.275) & (151.967) & (0.066) \\
+R-squared & 0.000 & 0.911 & 0.684 & 0.945 & 0.779 \\
+R-squared Adj. & -1.000 & 0.822 & 0.368 & 0.891 & 0.558 \\
+\end{longtable}
+
+\setstretch{1.5}
+
+For patents classified as industry ``Manufacturing'' (NACE code ``C''),
+depicted in Table~\ref{tbl-regression-results-ind-c}, the regression
+results show a statistically significant negative relationship between
+the number of retrieved patents and the number of employees within the
+Manufacturing sector (coeff. -82.488.8, SE 18.243`). In particular, the
+regression result's coefficient estimates a decrease of 82489 employees
+for each additional patent retrieved\footnote{Note that while the
+  coefficient's implications are mentioned, this merely refers to the
+  slope of the regression line and should not be interpreted as valid
+  result with real-world implications. The regression model is not
+  intended to be used for prediction.}. Furthermore, the control
+variable ``Year'' does not exhibit a statistically significant
+relationship with the number of employees (coeff. 0). The adjusted
+\(R^2\) of 0.82 indicates a high ratio of explainability for the model.
+
+While there are no statistically significant relations between the
+number of patents retrieved and the number of enterprises, wage adjusted
+labor productivity (labor prod.) and the percentage of personnel costs
+in production, the relationship between the number of patents and the
+gross value added per employee is statistically significant and negative
+(coeff. -203.313, SE 34.574) with an adjustes \(R^2\) of 0.89. Lastly,
+it should be noted that the control variable does not exhibit a
+statistically significant relationship with any of the economic
+indicators.
+
+\setstretch{1}
+
+\phantomsection\label{tbl-regression-results-ind-d}
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1404}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1667}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1491}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1667}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1754}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.2018}}@{}}
+\caption{\label{tbl-regression-results-ind-d}Regression results -
+Electricity, gas, steam and air conditioning supply (D)}\tabularnewline
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Enterprises (n)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Employees (n)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Labor prod. (\%)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+GVA/employee (€)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Personnel costs (\%)
+\end{minipage} \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Enterprises (n)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Employees (n)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Labor prod. (\%)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+GVA/employee (€)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Personnel costs (\%)
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+const & 0.000 & 0.000 & -0.000 & 0.000 & 0.000 \\
+& (7090398.833) & (19752.895) & (2819.369) & (1493538.845) &
+(103.597) \\
+Sum patents & -2148.926 & -3.428 & 1.436 & 581.888 & 0.044 \\
+& (2160.274) & (6.018) & (0.859) & (455.045) & (0.016) \\
+Year & -0.000 & -0.000 & 0.000 & -0.000 & -0.000 \\
+& (3515.317) & (9.793) & (1.398) & (740.475) & (0.051) \\
+R-squared & 0.198 & 0.075 & 0.411 & 0.290 & 0.878 \\
+R-squared Adj. & -0.203 & -0.387 & 0.117 & -0.065 & 0.634 \\
+\end{longtable}
+
+\phantomsection\label{tbl-regression-results-ind-f}
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1404}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1667}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1491}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1667}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1754}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.2018}}@{}}
+\caption{\label{tbl-regression-results-ind-f}Regression results -
+Construction (F)}\tabularnewline
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Enterprises (n)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Employees (n)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Labor prod. (\%)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+GVA/employee (€)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Personnel costs (\%)
+\end{minipage} \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Enterprises (n)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Employees (n)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Labor prod. (\%)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+GVA/employee (€)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Personnel costs (\%)
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+const & -0.000 & -0.000 & -0.000 & 0.000 & 0.000 \\
+& (21172494.612) & (58291.431) & (659.644) & (476813.850) & (117.828) \\
+Sum patents & 9252.711 & 23.444 & -0.236 & 16.501 & 0.019 \\
+& (6911.846) & (19.029) & (0.215) & (155.658) & (0.038) \\
+Year & 0.000 & 0.000 & 0.000 & -0.000 & -0.000 \\
+& (10494.417) & (28.893) & (0.327) & (236.339) & (0.058) \\
+R-squared & 0.374 & 0.336 & 0.285 & 0.004 & 0.076 \\
+R-squared Adj. & -0.043 & -0.107 & -0.191 & -0.660 & -0.541 \\
+\end{longtable}
+
+\setstretch{1.5}
+
+For patents classified as industry ``Electricity, gas, steam and air
+conditioning supply'' (NACE code ``D''), depicted in
+Table~\ref{tbl-regression-results-ind-d}, as well as for patents falling
+into the ``Construction'' (``F'') industry
+Table~\ref{tbl-regression-results-ind-f} the regression results show no
+statistically significant relationship between the number of patents
+retrieved and the chosen economic indicators. The control variable
+``Year'', too, does not exhibit a statistically significant relationship
+with the chosen indicators. Furthermore, the adjusted \(R^2\) is very
+low (and often even negative) across all dependent variables, indicating
+no explanatory power of the model.
+
+\setstretch{1}
+
+\phantomsection\label{tbl-regression-results-ind-h}
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1404}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1667}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1491}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1667}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1754}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.2018}}@{}}
+\caption{\label{tbl-regression-results-ind-h}Regression results -
+Transportation and storage (H)}\tabularnewline
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Enterprises (n)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Employees (n)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Labor prod. (\%)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+GVA/employee (€)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Personnel costs (\%)
+\end{minipage} \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Enterprises (n)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Employees (n)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Labor prod. (\%)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+GVA/employee (€)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Personnel costs (\%)
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+const & 0.000 & 0.000 & 0.000 & 0.000 & 0.000 \\
+& (3846872.767) & (39250.021) & (706.071) & (376987.668) & (124.398) \\
+Sum patents & 594.779*** & -0.454 & -0.102** & -33.065* & 0.016** \\
+& (159.016) & (1.622) & (0.029) & (15.583) & (0.005) \\
+Year & -0.000 & -0.000 & -0.000 & -0.000 & -0.000 \\
+& (1908.642) & (19.474) & (0.350) & (187.044) & (0.062) \\
+R-squared & 0.667 & 0.011 & 0.636 & 0.391 & 0.567 \\
+R-squared Adj. & 0.571 & -0.271 & 0.532 & 0.218 & 0.444 \\
+\end{longtable}
+
+\setstretch{1.5}
+
+The regression models between number of patents allocated to the
+transportation and storage industry (H) and the chosen endogenous
+variables, depicted in Table~\ref{tbl-regression-results-ind-h}, show a
+number of statistically significant relationships. First, the number of
+filed patents is statistically significant in predicting the number of
+Enterprises present in any given year. The coefficient of 94.78 (SE
+159.016) implies a positive relationship between the number of AI
+patents and the number of Enterprises. The control variable remains
+statistically insignificant. This holds also true for the remaining
+indicators modelled within the transportation and storage industry. The
+adjusted \(R^2\) of 0.57 indicates that over 50\% of the predictors'
+variance is explained by the model. No statistically significant
+relationship can be reported between the industries retrieved annual
+patent counts and the number of employees. However, wage adjusted labor
+productivity exhibits a statistically negative relationship to
+increasing patent AI patent filings with a coefficient of -0.102 and a
+standard error of 0.029 (Adj. \(R^2\) 0.532). The same relationship
+occurs for the gross value added per employee, which, too, shows a
+significant inverse relation to the predictor variable (coeff. -33.065,
+SE 15.583). Lastly, the percentage of personnel costs in production is
+found to be significantly positively related to the number of patents
+filed (coeff. 0.005, SE 0.005)
+
+\setstretch{1}
+
+\phantomsection\label{tbl-regression-results-ind-j}
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1404}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1667}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1491}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1667}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1754}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.2018}}@{}}
+\caption{\label{tbl-regression-results-ind-j}Regression results -
+Information and communication (J)}\tabularnewline
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Enterprises (n)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Employees (n)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Labor prod. (\%)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+GVA/employee (€)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Personnel costs (\%)
+\end{minipage} \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Enterprises (n)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Employees (n)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Labor prod. (\%)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+GVA/employee (€)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Personnel costs (\%)
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+const & -0.000 & 0.000 & 0.000 & 0.000 & -0.000 \\
+& (2195739.889) & (27234.725) & (438.822) & (225189.965) & (69.777) \\
+Sum patents & 2.981 & 0.296 & 0.033*** & 22.082*** & -0.003* \\
+& (37.959) & (0.471) & (0.008) & (3.893) & (0.001) \\
+Year & 0.000 & -0.000 & -0.000 & -0.000 & 0.000 \\
+& (1089.426) & (13.513) & (0.218) & (111.729) & (0.035) \\
+R-squared & 0.001 & 0.053 & 0.724 & 0.821 & 0.441 \\
+R-squared Adj. & -0.285 & -0.217 & 0.645 & 0.770 & 0.281 \\
+\end{longtable}
+
+\setstretch{1.5}
 
 \section{Discussion}\label{discussion}
 
@@ -625,20 +1217,8 @@ incorporating weights.
 \phantomsection\label{refs}
 \begin{CSLReferences}{1}{0}
 \bibitem[\citeproctext]{ref-acemoglu_harms_2021}
-Acemoglu, D., 2021. Harms of {AI}. Department of Economics,
-Massachusetts Institute of Technology.
-
-\bibitem[\citeproctext]{ref-acemoglu_chapter_2011}
-Acemoglu, D., Autor, D., 2011. Chapter 12 - {Skills}, {Tasks} and
-{Technologies}: {Implications} for {Employment} and {Earnings}**{We}
-thank {Amir} {Kermani} for outstanding research assistance and {Melanie}
-{Wasserman} for persistent, meticulous and ingenious work on all aspects
-of the chapter. {We} are indebted to {Arnaud} {Costinot} for insightful
-comments and suggestions. {Autor} acknowledges support from the
-{National} {Science} {Foundation} ({CAREER} award {SES}-0239538)., in:
-Card, D., Ashenfelter, O. (Eds.), Handbook of {Labor} {Economics}.
-Elsevier, pp. 1043--1171.
-\url{https://doi.org/10.1016/S0169-7218(11)02410-5}
+Acemoglu, D., 2021. Harms of {AI}. Working {Paper} {Series}.
+\url{https://doi.org/10.3386/w29247}
 
 \bibitem[\citeproctext]{ref-acemoglu_ai_2020}
 Acemoglu, D., Autor, D., Hazell, J., Restrepo, P., 2020a. {AI} and
@@ -668,7 +1248,7 @@ Acemoglu, D., Restrepo, P., 2020b. Unpacking {Skill} {Bias}:
 \bibitem[\citeproctext]{ref-acemoglu_automation_2019}
 Acemoglu, D., Restrepo, P., 2019. Automation and {New} {Tasks}: {How}
 {Technology} {Displaces} and {Reinstates} {Labor}. Journal of Economic
-Perspectives 33, 3--30. \url{https://doi.org/10.1257/jep.33.2.3}
+Perspectives 33, 3--29. \url{https://doi.org/10.1257/jep.33.2.3}
 
 \bibitem[\citeproctext]{ref-acemoglu_race_2018}
 Acemoglu, D., Restrepo, P., 2018a. The {Race} between {Man} and
@@ -809,12 +1389,6 @@ Social Change 114, 254--280.
 Graetz, G., Michaels, G., 2018. Robots at {Work}. Review of Economics \&
 Statistics 100, 753--768. \url{https://doi.org/10.1162/rest_a_00754}
 
-\bibitem[\citeproctext]{ref-graetz_robots_2015}
-Graetz, G., Michaels, G., 2015.
-\href{https://ideas.repec.org//p/cep/cepcnp/447.html}{Robots at work:
-The impact on productivity and jobs}. CentrePiece - The magazine for
-economic performance.
-
 \bibitem[\citeproctext]{ref-karabarbounis_global_2014}
 Karabarbounis, L., Neiman, B., 2014. The {Global} {Decline} of the
 {Labor} {Share}. The Quarterly Journal of Economics 129, 61--103.
@@ -825,9 +1399,9 @@ Legg, S., Hutter, M., 2007. \href{http://arxiv.org/abs/0706.3639}{A
 {Collection} of {Definitions} of {Intelligence}}.
 
 \bibitem[\citeproctext]{ref-mann_benign_2018}
-Mann, K., Püttmann, L., 2018.
-\href{https://ssrn.com/abstract=2959584}{Benign {Effects} of
-{Automation}: {New} {Evidence} {From} {Patent} {Texts}}.
+Mann, K., Püttmann, L., 2018. Benign {Effects} of {Automation}: {New}
+{Evidence} from {Patent} {Texts}.
+\url{https://doi.org/10.2139/ssrn.2959584}
 
 \bibitem[\citeproctext]{ref-mokyr_history_2015}
 Mokyr, J., Vickers, C., Ziebarth, N.L., 2015. The {History} of
@@ -841,10 +1415,46 @@ Pajarinen, M., Rouvinen, P., Ekeland, A., 2015.
 {Threatens} {One}-{Third} of {Finnish} and {Norwegian} {Employment}}.
 ETLA Brief.
 
+\bibitem[\citeproctext]{ref-the_pandas_development_team_pandas-devpandas_2023}
+The pandas development team, 2023. Pandas-dev/pandas: {Pandas}.
+\url{https://doi.org/10.5281/ZENODO.3509134}
+
+\bibitem[\citeproctext]{ref-the_scipy_community_scipysignaldetrend_2023}
+The SciPy community, 2023.
+\href{https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.detrend.html}{Scipy.signal.detrend
+--- {SciPy} v1.11.3 {Manual}}.
+
 \bibitem[\citeproctext]{ref-trajtenberg_penny_1990}
 Trajtenberg, M., 1990. A {Penny} for {Your} {Quotes}: {Patent}
 {Citations} and the {Value} of {Innovations}. The RAND Journal of
 Economics 21, 172. \url{https://doi.org/10.2307/2555502}
+
+\bibitem[\citeproctext]{ref-virtanen_scipy_2020}
+Virtanen, P., Gommers, R., Oliphant, T.E., Haberland, M., Reddy, T.,
+Cournapeau, D., Burovski, E., Peterson, P., Weckesser, W., Bright, J.,
+Van Der Walt, S.J., Brett, M., Wilson, J., Millman, K.J., Mayorov, N.,
+Nelson, A.R.J., Jones, E., Kern, R., Larson, E., Carey, C.J., Polat, İ.,
+Feng, Y., Moore, E.W., VanderPlas, J., Laxalde, D., Perktold, J.,
+Cimrman, R., Henriksen, I., Quintero, E.A., Harris, C.R., Archibald,
+A.M., Ribeiro, A.H., Pedregosa, F., Van Mulbregt, P., SciPy 1.0
+Contributors, Vijaykumar, A., Bardelli, A.P., Rothberg, A., Hilboll, A.,
+Kloeckner, A., Scopatz, A., Lee, A., Rokem, A., Woods, C.N., Fulton, C.,
+Masson, C., Häggström, C., Fitzgerald, C., Nicholson, D.A., Hagen, D.R.,
+Pasechnik, D.V., Olivetti, E., Martin, E., Wieser, E., Silva, F.,
+Lenders, F., Wilhelm, F., Young, G., Price, G.A., Ingold, G.-L., Allen,
+G.E., Lee, G.R., Audren, H., Probst, I., Dietrich, J.P., Silterra, J.,
+Webber, J.T., Slavič, J., Nothman, J., Buchner, J., Kulick, J.,
+Schönberger, J.L., De Miranda Cardoso, J.V., Reimer, J., Harrington, J.,
+Rodríguez, J.L.C., Nunez-Iglesias, J., Kuczynski, J., Tritz, K., Thoma,
+M., Newville, M., Kümmerer, M., Bolingbroke, M., Tartre, M., Pak, M.,
+Smith, N.J., Nowaczyk, N., Shebanov, N., Pavlyk, O., Brodtkorb, P.A.,
+Lee, P., McGibbon, R.T., Feldbauer, R., Lewis, S., Tygier, S., Sievert,
+S., Vigna, S., Peterson, S., More, S., Pudlik, T., Oshima, T., Pingel,
+T.J., Robitaille, T.P., Spura, T., Jones, T.R., Cera, T., Leslie, T.,
+Zito, T., Krauss, T., Upadhyay, U., Halchenko, Y.O., Vázquez-Baeza, Y.,
+2020. {SciPy} 1.0: Fundamental algorithms for scientific computing in
+{Python}. Nature Methods 17, 261--272.
+\url{https://doi.org/10.1038/s41592-019-0686-2}
 
 \bibitem[\citeproctext]{ref-webb_impact_2019}
 Webb, M., 2019. The {Impact} of {Artificial} {Intelligence} on the
@@ -852,7 +1462,10 @@ Webb, M., 2019. The {Impact} of {Artificial} {Intelligence} on the
 
 \end{CSLReferences}
 
-\newpage{} \# Appendix \{\#sec-appendix .unnumbered\}
+\newpage{}
+
+\section*{Appendix}\label{sec-appendix}
+\addcontentsline{toc}{section}{Appendix}
 
 \phantomsection\label{tbl-nacemainkeywords}
 \begin{longtable}[]{@{}ll@{}}
