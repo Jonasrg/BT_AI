@@ -1,5 +1,6 @@
 # module to transform data returned by extract.py into a dataframe
 import pandas as pd
+from scipy.signal import detrend
 
 
 def tf_search_biblio(ls: list) -> pd.DataFrame:
@@ -20,10 +21,10 @@ def prep_eurostat_data(
     data_path: str, indic_sb_codes: str, nace_codes: str
 ) -> pd.DataFrame:
     rename = {
-        "Enterprises - number": "Enterprises",
-        "Persons employed - number": "Employees",
-        "Wage adjusted labour productivity (Apparent labour productivity by average personnel costs) - percentage": "Labor prod.",
-        "Gross value added per employee - thousand euro": "GVA/employee",
+        "Enterprises - number": "Enterprises (n)",
+        "Persons employed - number": "Employees (n)",
+        "Wage adjusted labour productivity (Apparent labour productivity by average personnel costs) - percentage": "Labor prod. (%)",
+        "Gross value added per employee - thousand euro": "GVA/employee (€)",
         "Share of personnel costs in production - percentage": "Personnel costs (%)",
     }
     indic_sb_codes = pd.read_csv(
@@ -37,6 +38,9 @@ def prep_eurostat_data(
     df = df.merge(nace_codes, on="nace_r2", how="left")
     df.drop(columns=["STRUCTURE", "STRUCTURE_ID", "freq"], inplace=True)
     df["indic_sb_name"] = df["indic_sb_name"].apply(lambda x: rename[x])
+    # scale gross value added per employee
+    df.loc[df["indic_sb_name"] == "GVA/employee (€)", "OBS_VALUE"] = df.loc[df["indic_sb_name"] == "GVA/employee (€)", "OBS_VALUE"] * 1000
+    df.loc[df["indic_sb_name"] == "Employees (n)", "OBS_VALUE"] = df.loc[df["indic_sb_name"] == "Employees (n)", "OBS_VALUE"] / 1000
     return df
 
 
@@ -67,6 +71,7 @@ def prep_data(
     prepped_patents_df: pd.DataFrame,
     prepped_eurostat_df: pd.DataFrame,
     time_all: bool = False,
+    detrended: bool = False
 ) -> pd.DataFrame:
     # merge eurostat data with patent data
     df = pd.merge(
@@ -113,6 +118,18 @@ def prep_data(
     # Drop N/As in OBS_VALUE column
     # Cannot have N/A for regression. Replacing with 0 would be misleading
     prepped_df = prepped_df.dropna(subset="OBS_VALUE")
+    # detrend "OBS_VALUE" and "sum patents"
+    if detrended is True:
+        for industry in prepped_df["nace_r2"].unique():
+            for indicator in prepped_df["indic_sb_name"].unique():
+                # There probably is a nicer way to do this. But it works.
+                # create copy of df
+                tmp_df = prepped_df.loc[(prepped_df["nace_r2"] == industry) & (prepped_df["indic_sb_name"] == indicator)]
+                # loc group and replace values with detrended series
+                prepped_df.loc[(prepped_df["nace_r2"] == industry)
+                               & (prepped_df["indic_sb_name"] == indicator), "OBS_VALUE"] = detrend(tmp_df["OBS_VALUE"])
+                prepped_df.loc[(prepped_df["nace_r2"] == industry)
+                               & (prepped_df["indic_sb_name"] == indicator), "sum_patents"] = detrend(tmp_df["sum_patents"])
     prepped_df.rename(
         columns={
             "sum_patents": "Sum patents",
