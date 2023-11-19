@@ -61,7 +61,7 @@ def prep_patents(patents_df) -> pd.DataFrame:
     return prepped_patents
 
 
-def prep_data(prepped_patents_df, prepped_eurostat_df) -> pd.DataFrame:
+def prep_data(prepped_patents_df: pd.DataFrame, prepped_eurostat_df: pd.DataFrame, time_all: bool = False) -> pd.DataFrame:
     # merge eurostat data with patent data
     df = pd.merge(
         prepped_eurostat_df,
@@ -87,17 +87,16 @@ def prep_data(prepped_patents_df, prepped_eurostat_df) -> pd.DataFrame:
     df["sum_patents"] = df["sum_patents"].fillna(0)
     # get cumulative sum of patents per industry and indicator
     df["cumsum_patents"] = df.groupby(["nace_r2", "indic_sb"])["sum_patents"].cumsum()
-    # only keep values for each industry and indicator after the first patent was recorded
-    df = df[df["cumsum_patents"] > 0]
-    # drop NaNs in cumsum_patents to keep only data for each industry and indicator from the year
-    # where first patent was retrieved
-    df.dropna(subset="cumsum_patents", inplace=True)
     # Calculate the min and max year for each industry
-    years_min_max = df.groupby("nace_r2").agg(
+    years_min_max = df[df["sum_patents"] != 0].groupby("nace_r2").agg(
         min_year=("document_date_year", "min"), max_year=("document_date_year", "max")
     )
     # Merge the minimum year back to the original dataframe
     prepped_df = df.merge(years_min_max, on="nace_r2")
+    if time_all is False:
+        # Keep only values in min_max time span for each industry
+        prepped_df = prepped_df[(prepped_df["TIME_PERIOD"] >= prepped_df["min_year"]) &
+                                (prepped_df["TIME_PERIOD"] <= prepped_df["max_year"])]
     # Drop N/As in OBS_VALUE column
     # Cannot have N/A for regression. Replacing with 0 would be misleading
     prepped_df = prepped_df.dropna(subset="OBS_VALUE")
