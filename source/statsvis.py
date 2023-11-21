@@ -6,6 +6,8 @@ import plotly.graph_objects as go
 import pandas as pd
 import numpy as np
 
+FLOAT_FORMAT = '%.4f'
+
 
 # run regressions and save results in dict
 def run_regressions(data, industries, indicators, x_cols, successive=True):
@@ -57,7 +59,7 @@ def summarize_results(results, indicators, industries, by="indicator"):
                 regressor_order=result_list[-1].params.index.tolist(),
                 stars=True,
                 model_names=model_names,
-                float_format="%.1f",
+                float_format=FLOAT_FORMAT,
             )
         return summarized
     if by == "industry":
@@ -75,11 +77,85 @@ def summarize_results(results, indicators, industries, by="indicator"):
                 regressor_order=result_list[-1].params.index.tolist(),
                 stars=True,
                 model_names=model_names,
-                float_format="%.3f",
+                float_format=FLOAT_FORMAT,
             )
         return summarized
     else:
         raise ValueError("Argument by either industry or indicator")
+
+
+def extract_pvalues(results, decimals=5, stars=True, threshold=0.05) -> list:
+    # create table of pvalues
+    # round decimals
+    # create stars if coefficient is positive
+    # return only pvalues that are underneath the threshold
+    pvalues = []
+    for industry in results.keys():
+        for indicator in results[industry].keys():
+            if len(results[industry][indicator]) == 1:
+                pval = results[industry][indicator][0].pvalues["Sum patents"].round(decimals)
+                coef = results[industry][indicator][0].params["Sum patents"]
+                if pval < threshold:
+                    if stars is True:
+                        pval = f"{pval}*" if coef >= 0 else f"{pval}"
+                else:
+                    pval = ""
+                pvalues.append(
+                    {
+                        "Industry": industry,
+                        "Indicator": indicator,
+                        "P value": pval,
+                    }
+                )
+            else:
+                pvals = [results[industry][indicator][i].pvalues["Sum patents"].round(decimals) for i in range(0, len(results[industry][indicator]))]
+                coef = [results[industry][indicator][i].params["Sum patents"].round(decimals) for i in range(0, len(results[industry][indicator]))]
+                for index, value in enumerate(pvals):
+                    if pvals[index] < threshold:
+                        if stars is True:
+                            pvals[index] = f"{pvals[index]}*" if coef[index] >= 0 else f"{pval[index]}"
+                    else:
+                        pvals[index] = ""
+                pvalues.append(
+                    {
+                        "Industry": industry,
+                        "Indicator": indicator,
+                        "P value": pvals,
+                    }
+                )
+    pvalues = pd.DataFrame.from_dict(pvalues)
+    pvalues = pvalues.pivot(index="Indicator", columns="Industry", values="P value")
+    return pvalues
+
+
+def sample_size(df:pd.DataFrame, by:str):
+    samples = dict()
+    samples["sum"] = dict()
+    samples["count"] = dict()
+    if by == "nace":
+        for nace in df["NACE"].unique():
+            samples["sum"][nace] = [int(df[df["NACE"] == nace].drop_duplicates(subset="Year")["Sum patents"].sum())]
+            samples["count"][nace] = [int(df[df["NACE"] == nace].drop_duplicates(subset="Year")["Sum patents"].count())]
+    if by == "indicator":
+        for indicator in df["Indicator"].unique():
+            samples["sum"][indicator] = [int(df[df["Indicator"] == indicator]["Sum patents"].sum())]
+            samples["count"][indicator] = [int(df[df["Indicator"] == indicator]["Sum patents"].count())]
+    return samples
+
+
+def extent_pvalues(pvalues, prepped_df, sum_name="Patents (sum)", count_name="Sample size"):
+    # create DataFrames holding sum of patents for industries and indicators
+    ss_indic = pd.DataFrame.from_dict(sample_size(prepped_df, by="indicator")["sum"], orient="index").rename(columns={0: sum_name})
+    ss_nace = pd.DataFrame.from_dict(sample_size(prepped_df, by="nace")["sum"], orient="columns").rename(index={0: sum_name})
+    # create dataframes holdung sample count for industries and indicators
+    sc_indic = pd.DataFrame.from_dict(sample_size(prepped_df, by="indicator")["count"], orient="index").rename(columns={0: count_name})
+    sc_nace = pd.DataFrame.from_dict(sample_size(prepped_df, by="nace")["count"], orient="columns").rename(index={0: count_name})
+    # merge dataframes along index and columns
+    df = pd.concat([pvalues, ss_nace])
+    df = pd.concat([df, sc_nace])
+    df = df.merge(ss_indic, left_index=True, right_index=True, how="left")
+    df = df.merge(sc_indic, left_index=True, right_index=True, how="left")
+    return df
 
 
 # descriptives
@@ -95,11 +171,18 @@ def descriptives(df):
         "average_years": round(np.average(df.groupby(by=["NACE", "Indicator"]).size())),
     }
     for nace in df["NACE"].unique():
-        data[f"{nace}_n_patents"] = df[df["NACE"] == nace].drop_duplicates(subset="Year")["Sum patents"].sum()
-        data[f"{nace}_n_years"] = df[(df["NACE"] == nace) & (df["Year"] != 0)].drop_duplicates(subset="Year")["Year"].count()
+        data[f"{nace}_n_patents"] = (
+            df[df["NACE"] == nace].drop_duplicates(subset="Year")["Sum patents"].sum()
+        )
+        data[f"{nace}_n_years"] = (
+            df[(df["NACE"] == nace) & (df["Year"] != 0)]
+            .drop_duplicates(subset="Year")["Year"]
+            .count()
+        )
     return data
 
 
+# plotly visuals
 PLOTLY_TEMPLATE = "plotly_white"
 
 
