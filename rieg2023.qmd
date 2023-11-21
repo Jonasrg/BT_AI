@@ -83,6 +83,7 @@ import json
 import matplotlib.pyplot as plt
 import seaborn as sns
 import os
+import numpy as np
 
 with open("source/config.yaml", "r") as f:
   config = f.read()
@@ -152,6 +153,8 @@ The net impact assessment of automation on socioeconomic factors widely differs 
 
 The classification if Artificial Intelligence remains also difficult due to the fact that there is yet no widespread agreement on the definition of intelligence itself [@legg_collection_2007].
 
+Given the various contradicting results on the relationship between automation and labor effects and the increasing presence of AI, this research aims to add to the current corpus of literature by assessing the relationship between AI innovation and socioeconomic factors. Specifically, the research question is as follows: How does AI innovation across industries impact labor?
+
 # Methodology
 
 The methodological approach has similarities to @mann_benign_2018 [p.13] who used patent counts as a proxy for estimating the level of automation present within a US commuting zone. However, the method of selecting patents differs. While @mann_benign_2018 classified texts based on the tasks they may effect within occupations, the presented approach here uses API query composition to preselect patents whose title or abstract match keywords reserved to an industry.
@@ -160,7 +163,7 @@ The methodological approach has similarities to @mann_benign_2018 [p.13] who use
 
 Data about patent publications is obtained from the European Patent Office's Open Patent Services (OPS) API [@european_patent_office_open_2023] as well as the Annual Structural Business Statistics (SBS) by Eurostat [@eurostat_annual_2023]. Furthermore, Eurostats code lists of Statistical classification of economic activities in the European Community (NACE Revision 2) [@eurostat_statistical_2023] (henceforth "NACE") and Economic Indicators for Eurostat's SBS [@eurostat_economical_2023]. While there are a variety of possible technologies that may fall under the umbrella term "Artificial Intelligence", as this research aims to assess AI's socioeconomic impact - which, if negative, falls into the governmental realm - a legal definition of AI is preferable as a classifier. Furthermore, it is arguable that the political definition is likely to have the greatest (socio)economic impact in the near future due to possible (and probable) regulation. As there is no legal definition yet - at least in the EU - technologies listed in the European Commisions latest proposal for the "Artificial Intelligence Act\['s\]" [@european_commission_proposal_2021] annex [@european_commission_annexes_202] will be used.[^1]
 
-[^1]: While this proposal is not yet in effect, it is likely to be adopted in the near future and is therefore used as a proxy for a legal definition of AI.
+[^1]: The European Commission's proposal for the "Artificial Intelligence Act" is currently in the legislative process. At the time of writing, the European Parliament has made amendments to this proposal, one of which - unfortunately - is the removal of the list of technologies classified as AI from the initial proposal's annex [@p9ta(202023, p. 326f.]. For the time being, the AI Act now lacks a clear defintion which is why the European Comission's initial proposal's definition will be used.
 
 Additionally Cooperative Patent Classification (CPC) codes are used to retrieve patents that utilize artificial intelligence technology. As there is no clear mapping between the European Commission's definition and CPC codes, classifications are chosen to the author's best knowledge.
 
@@ -182,35 +185,41 @@ Markdown(cpc.to_markdown(index=False))
 
 \setstretch{1.5}
 
+### Why certain variables have been chosen? -> 
+
 ## Data Acquisition {#sec-data-acquisition}
 
 In order to retrieve data from the European Patent Office's Open Patent Services (OPS) API, queries were composed to link retrieved patents to their respective industry. The query composition is based on the selected CPC codes displayed in @tbl-cpc-codes as well as keywords from the list of NACE codes that have been retrieved from Eurostat. Each NACE code is composed of section (alphabetical), division (numerical), group (numerical) and class (numerical) of a particular economic activity. Sections relate to the overall industry, while divisions, groups and classes relate to more specific activities within the industry [@nacebac]. For each industry, keywords are extracted from the NACE code's description. To ensure only relevant keywords are used, each description is cleaned of common characters and unrelated words (e.g., ",", "and", "or", "to"). Descriptions for each industry are then split into lists of single keywords that will be used in the API query.
 
 Because some industries contain a variety of different activities (e.g., NACE industry (section) "A" relates to "Agriculture, forestry and fishing" [@eurostat_economical_2023]), main keywords that relate to the section as a whole are manually selected (see @tbl-nacemainkeywords in the \nameref{sec-appendix}). For each industry and main keyword, queries are then build using the (manuallly selected) main keyword, the description keywords, as well as the chosen CPC codes. The resulting query is then used to retrieve patents from the OPS API. To limit query results to the relevant market, only patents filed with the European Patent Office (EP) will be retrieved. This approach disregards patents filed with national patent offices. However, since the query language is english, and many national patents are only filed in their native language, retrieving patents for all EU markets was unfeasible. The query is composed of the following elements:
 
+\setstretch{1.0}
+
 > **(ta = Main Keyword) AND (ta = ANY Description Keywords) AND (cpc ANY CPC Codes) AND (ap = "EP")**\
 > *Note: ta = title or abstract; ap = Application Number, referring to the Patent Office the patent was filed at. In this case, "EP" refers to the European Patent Office. See @tbl-queryexample for example queries*
 
-The queries are then posted to the OPS API's Published Data Keywords Search with Variable Constituents endpoint [@european_patent_office_published_nodate] and data from the responses - which are provided in JSON format - extracted.
+\setstretch{1.5}
+
+The queries are then posted to the OPS API's Published Data Keywords Search with Variable Constituents endpoint [@european_patent_office_published_nodate] and data from the responses - which are provided in JSON format - extracted. Initially, queries were created not only for the European Patent Office but all patent offices within the European Union to retrieve patent data on a national level. This approach would have resulted in a much richer dataset, enabled better aggregates while also allowing for between-country comparissons. However, initial tests showed that most of the patents filed with a national patent office contain only patent titles and absracts in their native language, which renders the chosen keywords in the query language (english) ineffective. As a result, the decision was made to only retrieve patents filed with the European Patent Office.
 
 ## Preprocessing {#sec-preprocessing}
 
-Since Eurostat's SBS data only includes codes to refer to given indicators as well as industries, data retrieved from Eurostat (SBS, and Code Lists about NACE and SBS codes) is merged. This is done by matching the NACE codes and SBS indicator codes to the respective NACE code and indicator in the SBS data. The economic indicators "Enterprises" and "Persons employed" are reported as totals. "Wage adjusted labour productivity (Apparent labour productivity by average personnel costs)" and "Share of personnel costs in production" are reported as percentages, and "Gross value added per employee" is reported in Euros. Because the number of employees is rather large for each industry, the number of employees is divided by 1000 to reduce the scale of the data. This increases readability of tables in the following regression results while also still large enough that it is unlikely for coefficients (coeff.) and standard errors (SE) to fall too far into the decimals.[^3]
+Since Eurostat's SBS data only includes codes to refer to given indicators as well as industries, data retrieved from Eurostat (SBS, and Code Lists about NACE and SBS codes) is merged. This is done by matching the NACE codes and SBS indicator codes to the respective NACE code and indicator in the SBS data. The economic indicators "Enterprises" and "Persons employed" are reported as totals. "Wage adjusted labour productivity (Apparent labour productivity by average personnel costs)" and "Share of personnel costs in production" are reported as percentages, and "Gross value added per employee" is reported in Euros. Because the number of employees is rather large for each industry, the number of employees is divided by 1000 to reduce the scale of the data. This increases readability of tables in the following regression results while also still large enough that it is unlikely for coefficients (coeff.) and standard errors (SE) to fall too far into the decimals.[^2]
 
-[^3]: Note that this is done to ensure readability and does not affect the regression results. Defactoring data by more than a thousand might lead to coefficients and standard errors falling into the decimals, which in turn may show up - due to rounding - as zeros despite having large scale effects (when rescaled with the original factor).\label{note3}
+[^2]: Note that this is done to ensure readability and does not affect the regression results. Defactoring data by more than a thousand might lead to coefficients and standard errors falling into the decimals, which in turn may show up - due to rounding - as zeros despite having large scale effects (when rescaled with the original factor).\label{note3}
 
 Next, patent data retrieved from the OPS API, which returns data in JSON format, is converted into a pandas DataFrame [@the_pandas_development_team_pandas-devpandas_2023] (i.e., a table). As multiple queries for the same industry - but with different keywords - have been posted to the API, duplicates in the patent data are removed. Specifically, duplicate patent data (indicated by the patent application number) are removed in each industry subset of the data. This ensures that each industry only contains unique patents while patents can still appear in more than one industry (as their applicable usage may not be restricted to only one industry). Furthermore, as the SBS data only spans from 2011 to 2020, patents that have been filed before or after this period are removed from the data. As a next step, patents are grouped by their respective industry and year of application and the patent count for each subgroup is recorded. Furthermore, industries for which patents have been retrieved in less than four years within 2011-2020 are removed from the data to ensure a minimum sample size for the following statistics. The sum of patents for each industry and year composes the exogenous variable "Sum patents" that will be used in the regression analyses.
 
-Furthermore, the SBS data is merged with the patent data by matching the industry and year of application with the industry and year of the SBS data. This ensures that each industry and year combination in the SBS data has a corresponding patent count. Furthermore, the data is once more grouped for each industry to retrieve the earliest and latest year for which patent counts are available. For each industry, SBS data is removed for the years before and after the first and last patent retrieval for the respective industry. This is done to ensure that the regression analyses are only conducted for years in which patent counts are available.[^2] However, in some cases, patents were discontinuously retrieved for industries. In other words, if patents are retrieved for an industry in 2016, 2018, 2019, and 2020, but not in 2017, the SBS data for 2017 and the respective do not have a corresponding patent count. In order to account for missing values within a series of definite patent retrieval, the patent count for the missing year is set to zero. This is done for each industry and year combination in which patent counts are missing.
+Furthermore, the SBS data is merged with the patent data by matching the industry and year of application with the industry and year of the SBS data. This ensures that each industry and year combination in the SBS data has a corresponding patent count. Furthermore, the data is once more grouped for each industry to retrieve the earliest and latest year for which patent counts are available. For each industry, SBS data is removed for the years before and after the first and last patent retrieval for the respective industry. This is done to ensure that the regression analyses are only conducted for years in which patent counts are available.[^3] However, in some cases, patents were discontinuously retrieved for industries. In other words, if patents are retrieved for an industry in 2016, 2018, 2019, and 2020, but not in 2017, the SBS data for 2017 and the respective do not have a corresponding patent count. In order to account for missing values within a series of definite patent retrieval, the patent count for the missing year is set to zero. This is done for each industry and year combination in which patent counts are missing.
 
-[^2]: There are valid arguments to be made for and against excluding these data. For once, the lack of patent retrieval for any given year implies no patent filing within that year, making null values a good control instance to check for variation in SBS data that is definitely not affected by patent filings. On the other hand, for a few industries, this would result in many null values, giving the data series of patent counts a definite trend. Furthermore, patent counts have also been removed for years in which SBS data is unavailable. To reduce potential bias produced by imputing and keeping the data's integrity, removing the missing values has been chosen over the data's accuracy.
+[^3]: There are valid arguments to be made for and against excluding these data. For once, the lack of patent retrieval for any given year implies no patent filing within that year, making null values a good control instance to check for variation in SBS data that is definitely not affected by patent filings. On the other hand, for a few industries, this would result in many null values, giving the data series of patent counts a definite trend. Furthermore, patent counts have also been removed for years in which SBS data is unavailable. To reduce potential bias produced by imputing and keeping the data's integrity, removing the missing values has been chosen over the data's accuracy.
 
 Lastly, in some rare cases, SBS data is missing for a given year and industry. In these cases, rows of the respective year and industry are removed from the data. This is done to ensure that the regression analyses are only conducted for years in which SBS data is available. The resulting data is then used for the regression analyses. In summary, data for each year and industry will be used further if the following conditions are met.
 
-1. Patents have been retrieved for the industry in at least four years within 2011-2020 
-2. Patents have been retrieved for this or an earlier year 
-3. Patents have been retrieved for this or a later year 
-4. SBS data is available for this year and industry
+1.  Patents have been retrieved for the industry in at least four years within 2011-2020
+2.  Patents have been retrieved for this or an earlier year
+3.  Patents have been retrieved for this or a later year
+4.  SBS data is available for this year and industry
 
 The resulting data contains `{python} descriptives["len_df"]` data points across `{python} descriptives["num_industries"]` Industries, each with `{python} descriptives["num_indicators"]` economic indicators. However, given the relatively short time period in which data could have been collected, paired with the fact that the retrieved patents are aggregated for each year, the resulting data size for each industry and economic indicator is relative small. The average number of years in which patent counts have been recorded -according to the methods above- is only `{python} descriptives["average_years"]` years, ranging from a minimum of `{python} descriptives["min_years"]` years up to `{python} descriptives["max_years"]` years. Since each year per industry and indicator will be used as a data point in the following regression analyses, it is neccesary to note that results may be biased due to the small sample size. Furthermore, given the small dataset -which makes diminishes the accuracy with which a regression can be fitted (i.e., fewer "anchor points"), assumptions about the extend to which patent counts affect the chosen economic indicators will not be made. Instead, the regression analyses will be used to assess whether a relationship between the number of patents and the chosen economic indicators exists at all. That is, the interest lies whether AI patent counts yield any explanatory power over the chosen economic indicators.
 
@@ -224,7 +233,7 @@ Because the collected data comrpises a time-series, as each industry's patent ap
 tmp_df = prepped_df_raw[prepped_df_raw["Indicator"] == "Employees (n)"]
 fig = sv.subplots_two_yaxes(df = tmp_df, x="Year", x_name="Year", y1="OBS_VALUE", y1_name="Employees (n)", y2="Sum patents", y2_name="Sum patents", by="Industry", rows=3, cols=2)
 fig.update_layout(
-    margin=dict(l=0, r=0, t=10, b=0),
+    margin=dict(l=0, r=0, t=15, b=0),
 )
 
 Image(fig.to_image(format="jpeg", engine="kaleido", scale=3, height=500, width=800))
@@ -238,26 +247,28 @@ Image(fig.to_image(format="jpeg", engine="kaleido", scale=3, height=500, width=8
 tmp_df = prepped_df[prepped_df["Indicator"] == "Employees (n)"]
 fig = sv.subplots_two_yaxes(df = tmp_df, x="Year", x_name="Year", y1="OBS_VALUE", y1_name="Employees (n)", y2="Sum patents", y2_name="Sum patents", by="Industry", rows=3, cols=2)
 fig.update_layout(
-    margin=dict(l=0, r=0, t=10, b=0),
+    margin=dict(l=0, r=0, t=15, b=0),
 )
 
 
 Image(fig.to_image(format="jpeg", engine="kaleido", scale=3,height=500, width=800))
 ```
 
-Because data has been linearily detrended, to account for any remaining trend left in the data, the control variable "Year" is added to the regression analyses. This is done to ensure that any remaining trend in the data is accounted for and does not bias the regression results. Furthermore, the control variable "Year" is also added to the regression analyses to account for any time dependent macroeconomic effects that may have affected the chosen economic indicators but are not considered in the model. 
+Because data has been linearily detrended, to account for any remaining trend left in the data, the control variable "Year" is added to the regression analyses. This is done to ensure that any remaining trend in the data is accounted for and does not bias the regression results. Furthermore, the control variable "Year" is also added to the regression analyses to account for any time dependent macroeconomic effects that may have affected the chosen economic indicators but are not considered in the model.
 
 ## Hypothesis
 
-Do determine whether a relationship between the number of patents and the chosen economic indicators exists, the following hypotheses are tested. Given a standard multiple linear regression model of the form $ŷ_{ij} = \beta_0 + \beta_1x_i + + \beta_1x_t$, where $i=\text{industry, }j=\text{economic indicator }\text{and }t=\text{time}$, the coefficient $\beta_1$ is assumed to be $0$. Specifically, the following assumptions are tested.
+Do determine whether a relationship between the number of patents and the chosen economic indicators exists, the following hypotheses are tested. Given a standard multiple linear regression model of the form $y_{i,j} = \beta_0 + \beta_1x_i + \beta_2x_t$, where $i=\text{industry, }j=\text{economic indicator }\text{and }t=\text{time}$, the coefficient $\beta_1$ is assumed to be $0$. Specifically, the following assumptions are tested. 
+
 \begin{align}
-H_0^{lb}: \beta_1 = 0\text{ for }y_{j=lb}=\text{wage adjusted labor productivity} \\
-H_0^{pc}: \beta_1 = 0\text{ for }y_{j=pc}=\text{personnel costs in production} \\
-H_0^{e}: \beta_1 = 0\text{ for }y_{j=e}=\text{number of employees} \\
-H_0^{va}: \beta_1 = 0\text{ for }y_{j=va}=\text{gross value added per employee}
+H_{0, i, j}: \beta_1 = 0\text{ for }j=e=\text{number of enterprises} \\
+H_{0, i, j}: \beta_1 = 0\text{ for }j=L=\text{number of employees} \\
+H_{0, i, j}: \beta_1 = 0\text{ for }j=l=\text{wage adjusted labor productivity} \\
+H_{0, i, j}: \beta_1 = 0\text{ for }j=v=\text{gross value added per employee} \\
+H_{0, i, j}: \beta_1 = 0\text{ for }j=c=\text{personnel costs in production}
 \end{align}
 
-# Results
+# Results {#sec-results}
 
 The following section presents the main findings from the regression analyses. Results are summarized by industry, allowing a sectional comparrison of patent counts' influence on economic indicators within an industry.
 
@@ -277,13 +288,14 @@ results_by_indicator = sv.summarize_results(results=results, indicators=INDICATO
 #| tbl-pos: H
 
 # show regression results as table
-Markdown(results_by_industry["B"].tables[0].to_markdown(index=True))
+display(Markdown(results_by_industry["B"].tables[0].to_markdown(index=True)), 
+# Latex(r"\rule{\textwidth}{1pt}"),
+Markdown("_\* p < 0.1, \*\* p < 0.05, \*\*\* p < 0.01. Standard errors in paranthesis_"))
 ```
 
 \setstretch{1.5}
 
-
-For patents classified as industry "Mining and Quarrying" (NACE code "B"), depicted in @tbl-regression-results-ind-b, the regression results show no significant relation between the sum of patents retrieved for each year and the chosen indicators. Furthermore, the control variable "Year", too, does not exhibit any significant relationships with the economic indicators. It should be noted, howver, that the number of patents retrieved for this industry is very low. While, as discussed in the \nameref{sec-data-acquisition}, industries for which patents were retrieved in fewer than five years were eliminated from the data, for Mining and Quarrying only `{python} descriptives["B_n_patents"]` patents in `{python} descriptives["B_n_years"]` years were retrieved.
+For patents classified as industry "Mining and Quarrying" (NACE code "B"), depicted in @tbl-regression-results-ind-b, the regression results show no significant relation between the sum of patents retrieved for each year and the chosen indicators. Furthermore, the control variable "Year", too, does not exhibit any significant relationships with the economic indicators. It should be noted, howver, that the number of patents retrieved for this industry is very low. While, as discussed in the \nameref{sec-data-acquisition}, industries for which patents were retrieved in fewer than five years were eliminated from the data, for Mining and Quarrying only `{python} descriptives["B_n_patents"]` patents in `{python} descriptives["B_n_years"]` years were retrieved. As a result, the nullhypotheses $H_{0, i, j}\text{ for }j\in \{e, L, l, v, c\}, i=B$ are not rejected.
 
 \setstretch{1}
 
@@ -298,12 +310,11 @@ Markdown(results_by_industry["C"].tables[0].to_markdown(index=True))
 
 \setstretch{1.5}
 
-
-For patents classified as industry "Manufacturing" (NACE code "C"), depicted in @tbl-regression-results-ind-c, the regression results show a statistically significant negative relationship between the number of retrieved patents and the number of employees within the Manufacturing sector (coeff. -82.488.8, SE 18.243`). In particular, the regression result's coefficient estimates a decrease of 82489 employees for each additional patent retrieved[^4]. Furthermore, the control variable "Year" does not exhibit a statistically significant relationship with the number of employees (coeff. 0). The adjusted $R^2$ of 0.82 indicates a high ratio of explainability for the model.
+For patents classified as industry "Manufacturing" (NACE code "C"), depicted in @tbl-regression-results-ind-c, the regression results show a statistically significant negative relationship between the number of retrieved patents and the number of employees within the Manufacturing sector (coeff. -82.488.8, SE 18.243\`). In particular, the regression result's coefficient estimates a decrease of 82489 employees for each additional patent retrieved[^4]. Furthermore, the control variable "Year" does not exhibit a statistically significant relationship with the number of employees (coeff. 0). The adjusted $R^2$ of 0.82 indicates a high ratio of explainability for the model.
 
 [^4]: Note that while the coefficient's implications are mentioned, this merely refers to the slope of the regression line and should not be interpreted as valid result with real-world implications. The regression model is not intended to be used for prediction.
 
-While there are no statistically significant relations between the number of patents retrieved and the number of enterprises, wage adjusted labor productivity (labor prod.) and the percentage of personnel costs in production, the relationship between the number of patents and the gross value added per employee is statistically significant and negative (coeff. -203.313, SE 34.574) with an adjustes $R^2$ of 0.89. Lastly, it should be noted that the control variable does not exhibit a statistically significant relationship with any of the economic indicators.
+While there are no statistically significant relations between the number of patents retrieved and the number of enterprises, wage adjusted labor productivity (labor prod.) and the percentage of personnel costs in production, the relationship between the number of patents and the gross value added per employee is statistically significant and negative (coeff. -203.313, SE 34.574) with an adjustes $R^2$ of 0.89. Lastly, it should be noted that the control variable does not exhibit a statistically significant relationship with any of the economic indicators. In summary,  As a result, the nullhypotheses $H_{0, i, j}\text{ for }j\in \{L, v\}, i=C$ are rejected and  $H_{0, i, j}\text{ for }j\in \{e, l, c\}, i=C$ cannot be rejected.
 
 \setstretch{1}
 
@@ -327,7 +338,7 @@ Markdown(results_by_industry["F"].tables[0].to_markdown(index=True))
 
 \setstretch{1.5}
 
-For patents classified as industry "Electricity, gas, steam and air conditioning supply" (NACE code "D"), depicted in @tbl-regression-results-ind-d, as well as for patents falling into the "Construction" ("F") industry [@tbl-regression-results-ind-f] the regression results show no statistically significant relationship between the number of patents retrieved and the chosen economic indicators. The control variable "Year", too, does not exhibit a statistically significant relationship with the chosen indicators. Furthermore, the adjusted $R^2$ is very low (and often even negative) across all dependent variables, indicating no explanatory power of the model.
+For patents classified as industry "Electricity, gas, steam and air conditioning supply" (NACE code "D"), depicted in @tbl-regression-results-ind-d, as well as for patents falling into the "Construction" ("F") industry [@tbl-regression-results-ind-f] the regression results show no statistically significant relationship between the number of patents retrieved and the chosen economic indicators. The control variable "Year", too, does not exhibit a statistically significant relationship with the chosen indicators. Furthermore, the adjusted $R^2$ is very low (and often even negative) across all dependent variables, indicating no explanatory power of the model. Therefore, the nullhypotheses  $H_{0, i, j}\text{ for }j\in \{e, L, l v, c\}, i\in\{D, F\}$ cannot be rejected.
 
 \setstretch{1}
 
@@ -342,7 +353,7 @@ Markdown(results_by_industry["H"].tables[0].to_markdown(index=True))
 
 \setstretch{1.5}
 
-The regression models between number of patents allocated to the transportation and storage industry (H) and the chosen endogenous variables, depicted in @tbl-regression-results-ind-h, show a number of statistically significant relationships. First, the number of filed patents is statistically significant in predicting the number of Enterprises present in any given year. The coefficient of 94.78 (SE 159.016) implies a positive relationship between the number of AI patents and the number of Enterprises. The control variable remains statistically insignificant. This holds also true for the remaining indicators modelled within the transportation and storage industry. The adjusted $R^2$ of 0.57 indicates that over 50% of the predictors' variance is explained by the model. No statistically significant relationship can be reported between the industries retrieved annual patent counts and the number of employees. However, wage adjusted labor productivity exhibits a statistically negative relationship to increasing patent AI patent filings with a coefficient of -0.102 and a standard error of 0.029 (Adj. $R^2$ 0.532). The same relationship occurs for the gross value added per employee, which, too, shows a significant inverse relation to the predictor variable (coeff. -33.065, SE 15.583). Lastly, the percentage of personnel costs in production is found to be significantly positively related to the number of patents filed (coeff. 0.005, SE 0.005)
+The regression models between number of patents allocated to the transportation and storage industry (H) and the chosen endogenous variables, depicted in @tbl-regression-results-ind-h, show a number of statistically significant relationships. First, the number of filed patents is statistically significant in predicting the number of Enterprises present in any given year. The coefficient of 94.78 (SE 159.016) implies a positive relationship between the number of AI patents and the number of Enterprises. The control variable remains statistically insignificant. This holds also true for the remaining indicators modelled within the transportation and storage industry. The adjusted $R^2$ of 0.57 indicates that over 50% of the predictors' variance is explained by the model. No statistically significant relationship can be reported between the industries retrieved annual patent counts and the number of employees and gross value added per employee. However, wage adjusted labor productivity exhibits a statistically negative relationship to increasing patent AI patent filings with a coefficient of -0.102 and a standard error of 0.029 (Adj. $R^2$ 0.532). The same relationship occurs for the percentage of personnel costs in production is found to be significantly positively related to the number of patents filed (coeff. 0.005, SE 0.005). To conclude, hypotheses $H_{0, i, j}\text{ for }j\in \{e, l, c\}, i=H$ are rejected and  $H_{0, i, j}\text{ for }j\in \{L, v\}, i=H$ cannot be rejected.
 
 \setstretch{1}
 
@@ -357,12 +368,56 @@ Markdown(results_by_industry["J"].tables[0].to_markdown(index=True))
 
 \setstretch{1.5}
 
+Lastly, the regression models' results, as shown in @tbl-regression-results-ind-j, paint a somewhat similar picture for the information and communication industry (NACE code "J"). Here no significant relationship was found between the number of patents retrieved and the number of enterprises, with a negative adjusted $R^2$, showing independent variables yielding no explanatory power over the dependent variable. The same results can be reported for the model on the number of employees. However, the number of patents retrieved is found to be significantly and positively related to wage adjusted labor productivity (coeff. 0.033, SE 0.008) and results show an adjusted $R^2$ of 0.645. The same relationship can be reported for the gross value added per employee (coeff. 22.082, SE 3.893), which yields the highest adjusted $R^2$ (0.770) of all models in this analysis. The number of AI patents does not significantly explain the percentage share of personnel costs in production. Therefore, $H_{0, i, j}\text{ for }j\in \{l, v\},  i=J$ are rejected and $H_{0, i, j}\text{ for }j\in \{e, L, c\},  i=J$ are accepted.
 
-# Discussion
+In summary, the models' results paint a rather mixed picture with the majority of models tested showing statistically insignificant relationships between the number of AI patents retrieved for an industry, and the the chosen economic indicators reported within each industry. Only seven out of the 30 models tested exhibit statistically significant relationships. The results are further exacerbated, when one considers the fact that the chance of a rare event occuring increases with repeated exposure to that probability.[^5] A common method to correct for the possibility of false positives is the Bonferroni Correction [@mittelhammer_econometric_2000, p. 73f.]. Given the above chosen $\alpha$-level of 0.05, the Bonferroni Correction counterbalances the increased likelyhood of rare events (in this case, the Type I error) occuring when exposed to a plurality of situations in which they could occur (e.g., running a multitude of regressions). The Bonferroni Correction is calculated by dividing the chosen $\alpha$-level by the number of tests conducted. In this case, the Bonferroni Correction would be $\frac{0.05}{30}=0.00167$. This means that accounting for the number of models evaluated in this section, adjusted $\alpha$-level would need to be set to 0.00167 to diminish the chance of false positives in the models' results.
 
-# Limitations
+[^5]: A good analogy would be that the chance of winning the lottery increases with repeated playing. Or that the chance of rolling a six on a die is more likely in four rolls than in one roll.
 
+\setstretch{1}
+
+```{python}
+#| label: tbl-pvalues
+#| tbl-cap: Retrieved  significant p values for coefficients of number of patents by industry and indicator
+#| tbl-pos: H
+pvalues = sv.extract_pvalues(results, decimals=5, stars=False, threshold=0.05)
+Markdown(pvalues.to_markdown(index=True))
+```
+
+\setstretch{1.5}
+
+@tbl-pvalues, depicts only the number of patents' coefficient's p-values that lie beneath the unadjusted $\alpha$ threshold of 0.05. When considering the adjusted $\alpha$ value of 0.00167, one can see that merely one regression result's p value fulfills the new criterion (wage adjusted labor productivits in industry J). To conclude, the presented regression results vary in their significance and explanatory power to such extent, that is doubtful in how far relationships, while being statistically significant, actually exist. Furthermore, the Bonferroni Correction shows that the at least some of the presented results are likely to be false positives.
+ 
+# Discussion {#sec-discussion}
+
+## Implications
+This research aims to answer the question of if and how AI innovation impacts labor. Given the mixed results presented in @sec-results, it is difficult to deduce clear implications of the findings. 
+
+\setstretch{1}
+
+```{python}
+#| label: tbl-pvalues-extended
+#| tbl-cap: Significant p values with coefficient sign, sample size and total number of patents
+#| tbl-pos: H
+pvalues_stars = sv.extract_pvalues(results, decimals=5, stars=True, threshold=0.05)
+pvalues_extended = sv.extent_pvalues(pvalues = pvalues_stars, prepped_df=prepped_df_raw, sum_name="Patents (sum)", count_name="Sample size").replace(np.nan, "")
+Markdown(pvalues_extended.to_markdown(index=True))
+```
+
+\setstretch{1.5}
+
+## Limitations
+
+### Small data set
+
+### Patent weighting
 As pointed out by @trajtenberg_penny_1990, the plain number of patent counts disregard the fact that patents to not carry equal economical weight, i.e., the effect a patent might have on a market or industry cannot be inferred by the presence of a patent without incorporating weights.
+
+### Additional CPC classes
+
+### Further control variables
+
+## Further research
 
 # Conclusion
 
@@ -373,7 +428,7 @@ As pointed out by @trajtenberg_penny_1990, the plain number of patent counts dis
 ::: {#refs}
 :::
 
-{{< pagebreak >}} 
+{{< pagebreak >}}
 
 # Appendix {#sec-appendix .unnumbered}
 
