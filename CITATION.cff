@@ -3,7 +3,6 @@ message: "If you use this software, please cite it as below."
 authors:
 - family-names: "Rieg"
   given-names: "Jonas"
-title: "socioeconomic disruption by artificial intelligence"
-version: 1.0.0
+title: "Socioeconomic Disruption by Artificial Intelligence"
 date-released: 2023-11-26
 url: "https://github.com/Jonasrg/BT_AI"
