@@ -4,8 +4,7 @@ from json import JSONDecodeError
 import yaml
 
 
-
-def write_to_file(path, ls)-> None:
+def write_to_file(path, ls) -> None:
     """
     Write retrieved data to file.
     Parameters
@@ -17,8 +16,8 @@ def write_to_file(path, ls)-> None:
     """
     if ls != None:
         try:
-            with open(path, 'r') as f:
-                    json_file = json.load(f)
+            with open(path, "r") as f:
+                json_file = json.load(f)
         except FileNotFoundError as e:
             json_file = []
         except JSONDecodeError:
@@ -26,7 +25,7 @@ def write_to_file(path, ls)-> None:
 
         json_file.append(ls)
 
-        with open(path, 'w') as f:
+        with open(path, "w") as f:
             json.dump(json_file, f, indent=4)
     else:
         pass
@@ -44,7 +43,8 @@ def count_words_between_quotes(request):
         word_count += len(phrase.split())
     return word_count
 
-def load_config(path:str) -> dict:
+
+def load_config(path: str) -> dict:
     with open(path, "r") as stream:
         config = yaml.safe_load(stream)
     return config
