@@ -118,7 +118,6 @@ def check_response(response, Sleeper, Access_token) -> bool:
 def make_request(
     query, range_begin, range_end, AccessToken, Sleeper, endpoint="biblio-search"
 ):
-    # use global access_token to be able to replace when expired
     ep = {
         "search": "https://ops.epo.org/3.2/rest-services/published-data/search",
         "biblio-search": "https://ops.epo.org/3.2/rest-services/published-data/search/biblio",
