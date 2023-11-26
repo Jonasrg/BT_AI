@@ -139,4 +139,5 @@ def prep_data(
         },
         inplace=True,
     )
+    prepped_df["Year (dummy)"] = prepped_df["Year"] - prepped_df["min_year"]
     return prepped_df
