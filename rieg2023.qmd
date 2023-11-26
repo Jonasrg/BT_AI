@@ -4,6 +4,7 @@ subtitle: "A comparative analysis on labor effects between industries in the Eur
 bibliography: references.bib
 csl: elsevier-harvard.csl
 engine: jupyter
+warning: false
 lang: en
 execute:
   echo: false
@@ -32,7 +33,6 @@ format:
     fig-cap-location: bottom
     tbl-cap-location: top
     papersize: a4paper
-
     toc: false
     link-citations: true
     number-sections: true
@@ -52,6 +52,7 @@ format:
 {{< pagebreak >}}
 
 ```{=latex}
+\setstretch{1}
 \tableofcontents
 ```
 {{< pagebreak >}}
@@ -68,11 +69,8 @@ format:
 
 ```{=latex}
 \pagenumbering{arabic}
+\setstretch{1.5}
 ```
-# Abstract
-
-# Introduction {#sec-introduction}
-
 ```{python}
 #| label: setup
 
@@ -138,59 +136,65 @@ def add_note(note=r"* p < 0.1, ** p < 0.05, *** p < 0.01. Standard errors in par
 
 ```
 
-@mokyr_history_2015 [p. 32] identifies two forms of technological anxiety, the fear of labor displacement through technology and and the fear of morally negative applications resulting in declining welfare. The majority of the US population has been found to assess the potential impact of automation as unfavorable rather than beneficial [@anderson_automation_2017].
+# Abstract
 
-Since AI is a still fairly new topic in the literature and has only seen real increase in dominance and interest in recent years [@acemoglu_ai_2020, p. 23f.], is is worth noting the effects of previous technologies as the adoption of machines (specifically often industrial robots [see for example @graetz_robots_2018; @acemoglu_robots_2020]) and software (also referred to as computerization[see for example @pajarinen_computerization_2015; @frey_future_2017; @autor_growth_2013]) have been seen as previous stages in the evolution of automation with AI composing the next stage [@acemoglu_harms_2021, p. 19]. Furthermore, these technologies have been summarized under the umbrella term "automation" [@mann_benign_2018, p. 40] indicating common characteristics and thereby - possibly - common effects.
+# Introduction {#sec-introduction}
+
+In the last few years, Artificial Intelligence has seen major breakthroughs in its capabilities and applicable domains [@michael_l_littman_gathering_2021, p. 12]. The popular AI chatbot ChatGPT has set a historical record in its user acquisition pace [@hu_chatgpt_2023], and internet searches for the term "AI" are on an all-time high [@google_google_2023]. This trend has also arrived in the scientific community, with AI related papers exploding in popularity in recent years [@catherine_cheung_growth_2022]. However, undeniably, the introduction of new technology, this time, Artificial Intelligence, does raise concerns about its potential implications on various aspects of society [see @joint_research_centre_european_commission_artificial_2018, p. 77; @lu_review_2021, p. 1055; @gries_artificial_2018, p. 1]. And even OpenAI's co-founder and chief scientist Ilya Sutskever admits that "for every positive application of AGI there will be a negative as well" [@ted_exciting_2023]. While AI is not the first technology to raise such concerns [@martens_will_2018, p. 5], the pace at which AI evolves and advances into various domains is unseen. @mokyr_history_2015 [p. 32] identifies two forms of technological anxiety, the fear of labor displacement through technology and and the fear of morally negative applications resulting in declining welfare. This technological anxiety seems to be increasing again in recent times, with the majority of the US population assessing the potential impact of automation as generally unfavorable rather than beneficial [@anderson_automation_2017]. Because of the recent advances in Artificial Intelligence and its increasing presence in the media, everyday life, and work, there is a growing need for research to meticulously scrutinize AI technology's accompanying concerns to objectively assess its true potential and risks. Given the seemingly ubiquitous applicability of AI, there is a correspondingly vast number of possible effects and side effects which AI might induce. This paper specifically focuses on the aforementioned technological anxiety of labor displacement. Specifically, Artificial Intelligence's effects on labor displacement, which in this context also relate to partial displacements induces by a reduction in labor wages and labor bargaining power.
+
+The paper is structured as follows. @sec-introduction provides an overview about the current literature on automation induces labor effects. @sec-methodology introduces the methodological approach used to assess AI's impact on labor with an overview of the data sources (@sec-data-sources), the data acquisition process (@sec-data-acquisition) and preproccessing methods (@sec-preprocessing), along with the chosen model (@sec-model) and its hypotheses (@sec-hypotheses). Results are then presented in @sec-results, followed by a discussion (@sec-discussion) which includes the models results' implications (@sec-implications), important limitations (@sec-limitations), and suggestions for future research (@sec-further-research). Finally, @sec-conclusion concludes the paper and \nameref{sec-appendix} provides additional tables and figures accompanying this research.
 
 ## Effects of Artificial Intelligence {#sec-effects-of-ai}
 
-@brynjolfsson_what_2018 \[p. 46\] found that machine learning affects different types of tasks than earlier forms of automation. A year later, in a study comparing the impact of AI on the job market between industries, @webb_impact_2019 [p. 46] shows that AI affects mostly the highly educated workforce and that this group is affected significantly more by AI than the presence of software or robots. Under the assumption that the current trend in technological evolution is set to continue, the speed of labor displacement through technological innovation is found likely to outpace the speed at which labor can be relocated [@mokyr_history_2015, p. 43f.]. By constructing impact scores of Artificial Intelligence on occupations, @felten_effect_2019 found low-income occupations to experience a decline in wage growth that is attributed to the increased presence of AI and middle and high-income occupations to experience an increase in wage growth [p. 6]. Furthermore, the authors found found that occupations with a medium and high degree of automation (degree of automation being the presence of automation technologies - not just AI) positively correlate with employment when exposed to Artificial Intelligence, while they did not find any relationship for occupations already exhibiting a low degree of automation [p. 5]. @damioli_impact_2021 [p. 14] linked SMEs having filed patents related to AI to have a significant increases in labor productivity. The same effect, however, could not be found once SMEs and large firms were studies together nor when only considering large firms (p.14).
+@brynjolfsson_what_2018 \[p. 46\] found that machine learning affects different types of tasks than earlier forms of automation. A year later, in a study comparing the impact of AI on the job market between industries, @webb_impact_2019 [p. 46] shows that AI affects mostly the highly educated workforce and that this group is affected significantly more by AI than the presence of software or robots. Under the assumption that the current trend in technological evolution is set to continue, the speed of labor displacement through technological innovation is found likely to outpace the speed at which labor can be relocated [@mokyr_history_2015, p. 43f.]. By constructing impact scores of Artificial Intelligence on occupations, @felten_effect_2019 found low-income occupations to experience a decline in wage growth that is attributed to the increased presence of AI and middle and high-income occupations to experience an increase in wage growth [p. 6]. Furthermore, the authors found that occupations with a medium and high degree of automation (degree of automation being the presence of automation technologies - not just AI) positively correlate with employment when exposed to Artificial Intelligence, while they did not find any relationship for occupations already exhibiting a low degree of automation [p. 5]. @damioli_impact_2021 [p. 14] linked SMEs having filed patents related to AI to have a significant increases in labor productivity. The same effect, however, could not be found once SMEs and large firms were studies together nor when only considering large firms (p.14).
 
-It has also been noted that the presence of Artificial Intelligence does not have a linear impact on labor but depends on influencing factors, such as price elasticity, complementaries, or elasticity of labor that govern the implementation of these technologies [@brynjolfsson_what_2017, p. 1533f.]. Additionally, the adoption of AI technology is found to significantly alter the skill-demand distribution of firms, with the number of previously highly demanded skills declining while simultaneously creating demand for new skills [@acemoglu_ai_2020, p. 19]. By surveying 203 attendees at three AI conferences, @gruetzemacher_forecasting_2020 [p. 4, 9] found attendees, on average, to evaluate 22% of human tasks being prone to replacement, with the number rising to 40% in the next five years. And even OpenAI's Co-founder and chief scientist Ilya Sutskever admits that "for every positive application of AGI there will be a negative as well" [@ted_exciting_2023]. Researchers have also argued that AI technology can be seen as a new general purpose technology (GPT) which has implications in every aspect of society as had other GPTs before, such as the steam engine or computers [@brynjolfsson_artificial_2018, p. 39]. In a meta analysis of the current literature, @lu_review_2021 [p. 1263] came to the conclusion that the general consensus among researchers is a definite concern about AI's implications as well as expected labor displacement, although unsure about the extend of displacement and whether these effects are offset elsewhere.
+It has also been noted that the presence of Artificial Intelligence does not have a linear impact on labor but depends on influencing factors, such as price elasticity, complementaries, or elasticity of labor that govern the implementation of these technologies [@brynjolfsson_what_2017, p. 1533f.]. Additionally, the adoption of AI technology is found to significantly alter the skill-demand distribution of firms, with the number of previously highly demanded skills declining while simultaneously creating demand for new skills [@acemoglu_ai_2020, p. 19]. By surveying 203 attendees at three AI conferences, @gruetzemacher_forecasting_2020 [p. 4, 9] found attendees, on average, to evaluate 22% of human tasks being prone to replacement, with the number rising to 40% in the next five years. Researchers have also argued that AI technology can be seen as a new general purpose technology (GPT) which has implications in every aspect of society as had other GPTs before, such as the steam engine or computers [@brynjolfsson_artificial_2018, p. 39]. In a meta analysis of the current literature, @lu_review_2021 [p. 1263] came to the conclusion that the general consensus among researchers is a definite concern about AI's implications as well as expected labor displacement, although unsure about the extend of displacement and whether these effects are offset elsewhere.
 
-Given the yet small body of empirical literature about the effects of AI [see @seamans_ai_2018, p. 3], it is interesting to note how previous technologies, specifically automation through robotics and computerization, affected labor.
+Given the yet small body of empirical literature about the effects of AI [@seamans_ai_2018, p. 3], which is due to the fact that AI is a still fairly new topic which has seen real increase in dominance and interest only in recent years [@acemoglu_ai_2020, p. 23f.], it is worth noting the effects of previous technologies. The adoption of machines (specifically often industrial robots [see @graetz_robots_2018; @acemoglu_robots_2020]) and software (also referred to as computerization[see @pajarinen_computerization_2015; @frey_future_2017; @autor_growth_2013]) have been seen as previous stages in the evolution of automation, with AI composing the next stage [@acemoglu_harms_2021, p. 19]. Furthermore, all of these technologies have been summarized under the umbrella term "automation" [@mann_benign_2018, p. 40] indicating common characteristics and thereby - possibly - common effects.
 
 ## Effects of Automation {#sec-effects-of-automation-on-labor}
 
-In a 2018 study, the introduction of automation technology was found to have positive effects on employment gains, but only within the same commuting zone [@mann_benign_2018, p. 26]. These findings contradict the results from @autor_untangling_2015 \[p. 632\], that found no relation between exposure to automation and employment as a whole but found a significant decline in employment related to routine tasks in the non-manufacturing sector (p. 641). @graetz_robots_2018 [p. 766] found no relationship between the usage of industrial robots and net employment. However, usage of industrial robots was found to lower employment of low-skilled workers. However, a later study also looking at employment effects induced by usage of industrial robots found a significant decline of employment as well as a reduction in wages related to robot exposure within a commuting zone [@acemoglu_robots_2020, p. 2215f, 2218]. @dauth_german_2017 \[p. 25\] found no relation between robot exposure and employment in the German market. A few years later, @dauth_adjustment_2021 [p. 3126ff] found robot exposure to lead to within-firm and between-firm job displacement, with displaced workers having difficulties reallocating their jobs within the same industry, leading to a migration of workers from manufacturing (where robot exposure is most present) to the service sector. They also exhibited that a lack of worker protections (for example unionization or tenure) is related to greater displacement. These results were also confirmed by @boustan_automation_2022 \[p. 21, 23\] who observed that displaced workers acquire new skills and concluded job displacement by automation to be less discernible among unionized and high-skilled workers. Similarily, @acemoglu_robots_2020 [p. 2215f., 2218] provided evidence showing automation (adoption of industrial robots) within a commuting zone (local labor market) relating to significant declines in employment as well as wages. By studying 53 developing countries, @cirera_effects_2019 [p. 172] did not find a relationship between exposure to automation and firm level employment. Hoewever, while a net effect on employment was absent, in line with the aforementioned literature, they did find automation to alter the composition of tasks and skills within firms (p. 172).
+In a 2018 study, the introduction of automation technology was found to have positive effects on employment gains, but only within the same commuting zone [@mann_benign_2018, p. 26]. These findings contradict the results from @autor_untangling_2015 [p. 632], that found no relation between exposure to automation and employment as a whole but found a significant decline in employment related to routine tasks in the non-manufacturing sector (p. 641). @graetz_robots_2018 [p. 766] found no relationship between the usage of industrial robots and net employment. However, usage of industrial robots was found to lower employment of low-skilled workers. A later study also looking at employment effects induced by usage of industrial robots found a significant decline of employment as well as a reduction in wages related to robot exposure within a commuting zone [@acemoglu_robots_2020, p. 2215f, 2218]. @dauth_german_2017 [p. 25] found no relation between robot exposure and employment in the German market. A few years later, @dauth_adjustment_2021 [p. 3126ff] found robot exposure to lead to within-firm and between-firm job displacement, with displaced workers having difficulties reallocating their jobs within the same industry, leading to a migration of workers from manufacturing (where robot exposure is most present) to the service sector. They also exhibited that a lack of worker protections (for example unionization or tenure) is related to greater displacement. These results were also confirmed by @boustan_automation_2022 [p. 21, 23] who observed that displaced workers acquire new skills and concluded job displacement by automation to be less discernible among unionized and high-skilled workers. Similarily, @acemoglu_robots_2020 [p. 2215f., 2218] provided evidence showing automation (adoption of industrial robots) within a commuting zone (local labor market) relating to significant declines in employment as well as wages. By studying 53 developing countries, @cirera_effects_2019 [p. 172] did not find a relationship between exposure to automation and firm level employment. However, while a net effect on employment was absent, in line with the aforementioned literature, they did find automation to alter the composition of tasks and skills within firms (p. 172).
 
-In a purely theoretical approach to the effects of automation on labor, @acemoglu_low-skill_2017 \[p. 12, 15\] concluded that automation leads to labor displacement and the displacement of low skilled-labor leading to an increase in the wage gap (pay gap between low-skilled and high-skilled workers) while the displacement of high-skilled labor is followed by a reduction in the wage gap as high-skill labor reallocates into medium- and low-skilled occupations. This reallocation from displaced high-skill labor into lower skilled occupations has also been shown by @beaudry_great_2016 [p. 21] who studied the effects on labor when prices for specific types of labor fall - as is induced when substitution (through technology) becomes economically viable. While labor displacement induced by the introduction of automation is followed by increased inequality between low-skill and high-skilled labor in the short run [@acemoglu_race_2018, p. 1519], the creation of new tasks - that is followed by increased productivity gains from automation - is seen to reduce this gap in the long run (p. 1521). However, this positive outlook of a net positive on employment only holds true as long as the productivity effects which accompany the adoption of automation technologies offset the displacement effects incurred in the first place - and should the offset be insufficient, automation is found to negatively impact the demand for labor and its wages [@acemoglu_artificial_2018, p. 227]. There is also growing evidence suggesting automation to cause a decline in real wages of low-skilled workers, for example @acemoglu_unpacking_2020 \[p. 360f.\] found strong relationships between the adoption of automation technology and wages. @acemoglu_tasks_2022 [p. 1993] found a relationship between labor displacement and a decrease in relative wages, concluding automation to cause an increase in wage inequality (p. 1998). Automation is also attributed to the decline in the demand for labor in the US over recent decades [@acemoglu_automation_2019, p. 21].
+In a purely theoretical approach to the effects of automation on labor, @acemoglu_low-skill_2018 [p. 220, 224] concluded that automation leads to labor displacement and the displacement of low skilled-labor leading to an increase in the wage gap (pay gap between low-skilled and high-skilled workers) while the displacement of high-skilled labor is followed by a reduction in the wage gap as high-skill labor reallocates into medium- and low-skilled occupations. This reallocation from displaced high-skill labor into lower skilled occupations has also been shown by @beaudry_great_2016 [p. 21] who studied the effects on labor when prices for specific types of labor fall - as is induced when substitution (through technology) becomes economically viable. While labor displacement induced by the introduction of automation is followed by increased inequality between low-skill and high-skilled labor in the short run [@acemoglu_race_2018, p. 1519], the creation of new tasks - that is followed by increased productivity gains from automation - is seen to reduce this gap in the long run (p. 1521). However, this positive outlook of a net positive on employment only holds true as long as the productivity effects which accompany the adoption of automation technologies offset the displacement effects incurred in the first place - and should the offset be insufficient, automation is found to negatively impact the demand for labor and its wages [@acemoglu_artificial_2018, p. 227]. There is also growing evidence suggesting automation to cause a decline in real wages of low-skilled workers, for example @acemoglu_unpacking_2020 [p. 360f.] found strong relationships between the adoption of automation technology and wages. @acemoglu_tasks_2022 [p. 1993] found a relationship between labor displacement and a decrease in relative wages, concluding automation to cause an increase in wage inequality (p. 1998). Automation is also attributed to the decline in the demand for labor in the US over recent decades [@acemoglu_automation_2019, p. 21].
 
-Furthermore, @arntz_risk_2016 \[p. 14f.\] studying 21 OECD countries found 9% in the US, and over all countries studies a 6-12% high risk of employment to be substitutable for automation, while @acemoglu_skills_2011 [p. 61] came to the conclusion that labor displacement by machines mostly affects routine tasks.
+Furthermore, @arntz_risk_2016 [p. 14f.] studying 21 OECD countries found 9% in the US, and over all countries studies a 6-12% high risk of employment to be substitutable for automation, while @acemoglu_skills_2011 [p. 61] came to the conclusion that labor displacement by machines mostly affects routine tasks.
 
 ## Effects of Computerization {#sec-effects-of-computerization}
 
-In a study from Finland, @pajarinen_computerization_2015 found that computerization is likely to place high risk of displacement on 35% of the Finish labor market [p. 5], 33% of Norwegian labor (p. 5) as well as 49% in the US [p. 5]. @frey_future_2017 [p. 41] found 47% of US employment to have a a high risk suitability for substitution by computerization. They further classify the process of automation into two "waves" with the first wave affecting routine tasks (transportation, logistics, office, and administration) \[p. 41\] followed by a second wave that, once technological obstacles are overcome, will effect the jobs involving creative or abstract tasks \[p. 43\]. Evidence also suggests computerization to significantly induce labor displacement from occupations relying on routine tasks into higher-skilled occupations as well as low-skilled service occupations [@autor_growth_2013, p. 1573]
+In a study from Finland, @pajarinen_computerization_2015 found that computerization is likely to place high risk of displacement on 35% of the Finish labor market (p. 5), 33% of Norwegian labor (p. 5) as well as 49% in the US (p. 5). @frey_future_2017 [p. 41] found 47% of US employment to have a a high risk suitability for substitution by computerization. They further classify the process of automation into two "waves" with the first wave affecting routine tasks (transportation, logistics, office and administration) (p. 41) followed by a second wave that, once technological obstacles are overcome, will effect the jobs involving creative or abstract tasks (p. 43). Evidence also suggests computerization to significantly induce labor displacement from occupations relying on routine tasks into higher-skilled occupations as well as low-skilled service occupations [@autor_growth_2013, p. 1573]
 
 ## Changes in Occupational Composition {#sec-changes-of-occupational-composition}
 
-Furthermore, it is important to note that previous research on the effects of robots, software and AI - that have been summarized under the umbrella term "automation" [@mann_benign_2018, p. 40] - in general may not have found net negative effects on employment but a restructuring of composition of occupations. The aforementioned study from @autor_untangling_2015 \[p. 644\] found automation, while having no aggregate effects on employment, lead to a decline in occupations involving routine tasks and and an increase in non-routine (abstract) tasks. The same effect was found in @graetz_robots_2015 [p. 766] studying the introduction of industrial robots. Furthermore, using weighted patents and firm level data together with Eurostat's Structural Business Statistics, @van_roy_technology_2018 [p. 7] technology innovation to only have positive effects on employment on firm level as well as in high-tech and medium-tech sectors and found no relationship between technology innovation and employment in the service sector. These effects remain only harmless as long as the assumption holds true that displaced labor can in fact always reallocate itself to new tasks. Should this assumption be contradicted, and the the negative effects of automation on employment are no longer offset by the positive effects of reallocation, the phenomenon of occupational migration would turn into an observation of job destruction.
+Furthermore, it is important to note that previous research on the effects of robots, software and AI - that have been summarized under the umbrella term "automation" [@mann_benign_2018, p. 40] - in general may not have found net negative effects on employment but a restructuring of composition of occupations. The aforementioned study from @autor_untangling_2015 [p. 644] found automation, while having no aggregate effects on employment, lead to a decline in occupations involving routine tasks and and an increase in non-routine (abstract) tasks. The same effect was found in @graetz_robots_2015 [p. 766] studying the introduction of industrial robots. Furthermore, using weighted patents and firm level data together with Eurostat's Structural Business Statistics, @van_roy_technology_2018 [p. 7] technology innovation to only have positive effects on employment on firm level as well as in high-tech and medium-tech sectors and found no relationship between technology innovation and employment in the service sector. These effects remain only harmless as long as the assumption holds true that displaced labor can in fact always reallocate itself to new tasks. Should this assumption be contradicted, and the negative effects of automation on employment are no longer offset by the positive effects of reallocation, the phenomenon of occupational migration would turn into an observation of job destruction.
 
 ## Changes in labor share
 
-The introduction of capital, whether to complement or substitute labor, intuitively leads to a decline of a firms profits paid to labor as the share of labors input relative to the output value decreases. And in fact @karabarbounis_global_2014 \[p. 99\] show that the observed decline in capital prices explains almost half the decline in global labor share, that has been observed in recent decades. This might seem problematic as an increasing portion of a firms revenue remains as corporate profits and savings (given that the capital invested leads to a decrease in marginal costs - through substitution of labor and/ or increased production) rather than being redistributed to labor. @karabarbounis_global_2014 [p. 102] further show that the observed decline in labor share is accompanied by an increase in corporate revenue and savings. This is also brought forward from @acemoglu_automation_2019 \[p. 27\] who conclude that "\[...\] automation always reduces the labor share and may reduce labor demand \[...\]" but also mention that the creation of new tasks necessarily increases the labor share. These results where further solidified by @acemoglu_competing_2020 [p. 387] who investigated the French manufacturing market and found firms exposed to automation (in this study measured by the introduction of robots) to experience significant declines in their labor share.
+The introduction of capital, whether to complement or substitute labor, intuitively leads to a decline of a firms profits paid to labor as the share of labors input relative to the output value decreases. And in fact @karabarbounis_global_2014 [p. 99] show that the observed decline in capital prices explains almost half the decline in global labor share, that has been observed in recent decades. This might seem problematic as an increasing portion of a firms revenue remains as corporate profits and savings (given that the capital invested leads to a decrease in marginal costs - through substitution of labor and/ or increased production) rather than being redistributed to labor. @karabarbounis_global_2014 [p. 102] further show that the observed decline in labor share is accompanied by an increase in corporate revenue and savings. This is also brought forward from @acemoglu_automation_2019 [p. 27] who conclude that "\[...\] automation always reduces the labor share and may reduce labor demand \[...\]" but also mention that the creation of new tasks necessarily increases the labor share. These results where further solidified by @acemoglu_competing_2020 [p. 387] who investigated the French manufacturing market and found firms exposed to automation (in this study measured by the introduction of robots) to experience significant declines in their labor share.
 
-## Summary of the different findings -\> why findings differ
+## Summary {#sec-summary-of-effects}
 
-The net impact assessment of automation on socioeconomic factors widely differs in the aforementioned literature [see also @frank_toward_2019, p. 6532]. Some research has focused on local labor markets (commuting zones) [see @acemoglu_robots_2020; @autor_untangling_2015; @autor_growth_2013], while other research has researched national effects [see xxx] and international effects [see @graetz_robots_2018]. While one would expect to see the same relationship between the chosen variables on all levels and apart from differences in research design, it may be difficult to assess effects on a greater aggregate level as the number of variables that would need to be included to account for differences between and within groups becomes unfeasible.
+To conclude, the net impact assessment of automation on socioeconomic factors widely differs in the aforementioned literature [see also @frank_toward_2019, p. 6532]. Some research has focused on local labor markets (commuting zones) [see @acemoglu_robots_2020; @autor_untangling_2015; @autor_growth_2013], while other research has focused on national effects [TODO] and international effects [see @graetz_robots_2018]. While one would expect to see the same relationship between the chosen variables on all levels and apart from differences in research design, it may be difficult to assess effects on a greater aggregate level as the number of variables that would need to be included to account for differences between and within groups becomes unfeasible.
 
-## Definitions of AI
+## Definitions of AI {#sec-definitions-of-ai}
 
 Lastly, research on Artificial Intelligence's implication has been intrinsically difficult due to the fact that there is no consensus in the definition of AI yet [see @lu_review_2021, p. 1063]. The classification if Artificial Intelligence remains also difficult due to the fact that there is yet no widespread agreement on the definition of intelligence itself [see @legg_collection_2007]. While AI and machine learning are sometimes regarded as two different terms, the former applying to the industry and the latter applying to the technology [@crawford_atlas_2021, p. 9], in this research, the term Artificial Intelligence refers to the underlying technologies and its applications.
 
 Given the various contradicting results on the relationship between automation and labor effects and the increasing presence of AI, this research aims to add to the current corpus of literature by assessing the relationship between AI innovation and socioeconomic factors. Specifically, the research question is as follows: How does AI innovation across industries impact labor?
 
-# Methodology
+# Methodology {#sec-methodology}
 
-A key problem to current AI research is the lack availability on precise data about the usage and implementation of AI technologies [@seamans_ai_2018, p. 5f.]. Therefore, this research adopts an approach which has similarities to @mann_benign_2018 \[p.13\] who used patent counts as a proxy for estimating the level of automation present within a US commuting zone and @van_roy_technology_2018 who used firm-level citation-weighted patent counts to measure effects on employment. However, the here presented method of patent selection differs. While @mann_benign_2018 classified texts based on the tasks they may effect within occupations, the presented approach here uses API query composition to preselect patents whose title or abstract match keywords reserved to an industry. It should be noted that there have been other approaches to measure the presence of AI, such as using the AI Progress Measurement from the Electronic Frontier Foundation (EFF) and job postings [@acemoglu_ai_2020, p. 12] and surveys [@gruetzemacher_forecasting_2020, p. 4]. However, the EFF project, while being a promising source of data, has been discontinued in 2017 [@electronic_frontier_foundation_ai_2017].
+The following section introduces the methodology adopted in this research along with the data sources used, the data acquisition process, the data preprocessing methods as well as an overfiew of the data, the chosen model and its hypotheses. Note that the data acquisition, preprocessing, as well as the statistical models have been implemented in Python and are available in the GitHub repository accompanying this research [@rieg_socioeconomic_2023]. The repository also contains the source code for this paper as a Quarto document [@allaire_quarto_2022] as well as seperate source code for most tables and figures provided in this paper.
+
+A key problem to current AI research is the lack availability on precise data about the usage and implementation of AI technologies [@seamans_ai_2018, p. 5f.]. Therefore, this research adopts an approach which has similarities to @mann_benign_2018 [p.13] who used patent counts as a proxy for estimating the level of automation present within a US commuting zone and @van_roy_technology_2018 who used firm-level citation-weighted patent counts to measure effects on employment. However, the here presented method of patent selection differs. While @mann_benign_2018 classified texts based on the tasks they may effect within occupations, the presented approach here uses API query composition to preselect patents whose title or abstract match keywords reserved to an industry. It should be noted that there have been other approaches to measure the presence of AI, such as using the AI Progress Measurement from the Electronic Frontier Foundation (EFF) and job postings [@acemoglu_ai_2020, p. 12] and surveys [@gruetzemacher_forecasting_2020, p. 4]. However, the EFF project, while being a promising source of data, has been discontinued in 2017 [@electronic_frontier_foundation_ai_2017].
 
 ## Data Sources {#sec-data-sources}
 
-Data about patent publications is obtained from the European Patent Office's Open Patent Services (OPS) API [@european_patent_office_open_2023] as well as the Annual Structural Business Statistics (SBS) by Eurostat [@european_commission_eurostat_structural_nodate]. Furthermore, Eurostats code lists of Statistical classification of economic activities in the European Community (NACE Revision 2) [@european_commission_eurostat_statistical_2023] (henceforth "NACE") and economic indicators for Eurostat's SBS [@european_commission_eurostat_economical_2023] are retrieved to map codes to their respective definition. Additionally Cooperative Patent Classification (CPC) codes are retrieved manually from the European Patent Ofiice's Espacenet website [@european_patent_office_classification_nodate].
+Data about patent publications is obtained from the European Patent Office's Open Patent Services (OPS) API [@european_patent_office_open_2023] as well as the Annual Structural Business Statistics (SBS) by Eurostat [@european_commission_eurostat_structural_nodate]. Furthermore, Eurostat's code lists of Statistical classification of economic activities in the European Community (NACE Revision 2) [@european_commission_eurostat_statistical_2023] (henceforth "NACE") and economic indicators for Eurostat's SBS [@european_commission_eurostat_economical_2023] are retrieved to map codes to their respective definition. Additionally Cooperative Patent Classification (CPC) codes are retrieved manually from the European Patent Office's Espacenet website [@european_patent_office_classification_nodate].
 
 ### Patents
 
-Cooperative Patent Classification is a classification system by the European Patent Office and the US Patent and Trademark Office that allows for a structural hierarchical classification of patents [@european_patent_office_cooperative_nodate]. As seen in @tbl-cpc-codes, CPC codes are composed of a section (alphabetical), class (numerical), subclass (alphabetical), and main group (numerical). The CPC codes are used to retrieve patents that utilize artificial intelligence technology. The European Patent Office's OPS API allows for programmatic access to the Patent Office's database [@european_patent_office_open_2023]. With it, one can retrieve data on individual patents, such as - among others - their title and abstract, date of application, place of application, the names of the applicants, the patents classification (CPC), and a patent's references to other patents and documents. The OPS will is used to systematically retrieve patents with that contain specified attributes (see @sec-data-acquisition). Retrieved patents are used as a proxy for the current level of interest and level of innovation in AI, which in turn is assumed to be an indicator for the extend to which AI is present within an industry.
+Cooperative Patent Classification is a classification system by the European Patent Office and the US Patent and Trademark Office that allows for a structural hierarchical classification of patents [@european_patent_office_cooperative_nodate]. As seen in @tbl-cpc-codes, CPC codes are composed of a section (alphabetical), class (numerical), subclass (alphabetical), and main group (numerical). The CPC codes are used to retrieve patents that utilize artificial intelligence technology. The European Patent Office's OPS API allows for programmatic access to the Patent Office's database [@european_patent_office_open_2023]. With it, one can retrieve data on individual patents, such as - among others - their title and abstract, date of application, place of application, the names of the applicants, the patents classification (CPC), and a patent's references to other patents and documents. The OPS is used to systematically retrieve patents with that contain specified attributes (see @sec-data-acquisition). Retrieved patents are used as a proxy for the current level of interest and level of innovation in AI, which in turn is assumed to be an indicator for the extend to which AI is present within an industry.
 
 ### Structural Business Statistics
 
@@ -204,11 +208,11 @@ Third, the wage adjusted labor productivity. It is expressed as a ration of valu
 
 Fourth, gross value added per employee. This variable was chosen on the assumption of increased productivity through the adoption of new technology. As capital (in this case AI technology) aids to increase output production on a marginal (per employee) basis, one would expect the ratio to grow with increased adoption of technology.
 
-Fifth, the percentage of personnel costs in production, which is a derived value from production costs and and personnel costs, calculated by Eurostat [@european_commission_eurostat_derived_nodate, p. 1]. One would expect - all else equal - the percentage share of labor costs in the production process to decrease with the adoption through technology. Either because capital spending is increased, or marginal costs of capital is decreased, or production quantity (and value ) is increased by adoption of new technology. The SBS data's indicators are used as the endogenous variables to by explained by the number of retrieved patent applications.
+Fifth, the percentage of personnel costs in production, which is a derived value from production costs and and personnel costs, calculated by Eurostat [@european_commission_eurostat_derived_nodate, p. 1]. One would expect - all else equal - the percentage share of labor costs in the production process to decrease with the adoption through technology. Either because capital spending is increased, or marginal costs of capital is decreased, or production quantity (and value ) is increased by adoption of new technology. The SBS data's indicators are used as the endogenous variables to be explained by the number of retrieved patent applications.
 
 ### Definition of AI
 
-To retrieve patents that relate or incorporate to AI technology, the selection of correct CPC codes is crucial. While there are a variety of possible technologies that may fall under the umbrella term "Artificial Intelligence", this research aims to assess AI's socioeconomic impact, which, if negative, falls into the governmental realm. Therefore, a legal definition of AI is preferable as a classifier on which basis CPC codes are selected. Furthermore, it is arguable that the political definition is likely to have the greatest (socio)economic impact in the near future due to possible (and probable) regulation. However, as there is no legal definition yet - at least in the EU - technologies listed in the European Commision's latest proposal for the "Artificial Intelligence Act\['s\]" [@european_commission_proposal_2021] annex [@european_commission_annexes_202] will be used.[^2] In its annex \\rom{1}, the European Commsission suggests the following definition for AI.
+To retrieve patents that relate or incorporate to AI technology, the selection of correct CPC codes is crucial. While there are a variety of possible technologies that may fall under the umbrella term "Artificial Intelligence", this research aims to assess AI's socioeconomic impact, which, if negative, falls into the governmental realm. Therefore, a legal definition of AI is preferable as a classifier on which basis CPC codes are selected. Furthermore, it is arguable that the political definition is likely to have the greatest (socio)economic impact in the near future due to possible (and probable) regulation. However, as there is no legal definition yet - at least in the EU - technologies listed in the European Commision's latest proposal for the "Artificial Intelligence Act\['s\]" [@european_commission_proposal_2021] annex [@european_commission_annexes_202] will be used.[^2] In its annex $\rom{1}$, the European Commsission suggests the following definition for AI.
 
 [^2]: The European Commission's proposal for the "Artificial Intelligence Act" is currently in the legislative process. At the time of writing, the European Parliament has made amendments to this proposal, one of which - unfortunately - is the removal of the list of technologies classified as AI from the initial proposal's annex [@european_parliament_texts_2023, p. 326f.]. For the time being, the EU Parliament's new definition (amendment 165, p. 111f.) of Artificial Intelligence is rather vague, which is why the European Comission's initial proposal's definition will be used.
 
@@ -248,12 +252,12 @@ Because some industries contain a variety of different activities (e.g., NACE in
 
 [^3]: To be precise, because of the API's restrictions, there can be multiple queries for the same division. The OPS API allows for a maximum number of 20 "terms" (keywords, such as a single CPC code or industry keyword) but also only a maximum number of 10 terms per argument (such as keywords that must be contained in the patent's title or abstract; the argument is "title or abstract"). Given that each query contains seven CPC codes and one application number, if there are together more than 12 main keywords and general keywords, the general keywords are subdivided into smaller chunks across multiple queries. Therefore, each query contains all main keywords, CPC codes and the application number, while the remaining terms are filled with the general keywords.
 
-The resulting query is then used to retrieve patents from the OPS API. Initially, queries were created not only for the European Patent Office but all patent offices within the European Union to retrieve patent data on a national level. This approach would have resulted in a much richer dataset and enabled better aggregates while also allowing for between-country comparisons. However, initial tests showed that most of the patents filed with a national patent office contain only patent titles and abstracts in their native language which renders the chosen keywords in the query language (English) ineffective. As a result, the decision was made to only retrieve patents filed with the European Patent Office. This approach disregards patents filed with national patent offices. The query is composed of the following elements.
+The resulting query is then used to retrieve patents from the OPS API. Initially, queries were created not only for the European Patent Office but all patent offices within the European Union to retrieve patent data on a national level. This approach would have resulted in a much richer dataset and enabled better aggregates while also allowing for between-country comparisons. However, initial tests showed that most of the patents filed with a national patent office contain only patent titles and abstracts in their native language which renders the chosen keywords in the query language (English) ineffective. As a result, the decision was made to only retrieve patents filed with the European Patent Office. This approach disregards patents filed with national patent offices. The query is composed of the following elements:
 
 \setstretch{1.0}
 
 > **(ta = Main Keywords) AND (ta = Description Keywords) AND (cpc = CPC Codes) AND (ap = "EP")**\
-> *Note: ta = title or abstract; ap = Application Number, referring to the Patent Office the patent was filed at. In this case, "EP" refers to the European Patent Office. See @tbl-queryexample for example queries*
+> *Note: ta = title or abstract; ap = Application Number, referring to the Patent Office the patent was filed at. In this case, "EP" refers to the European Patent Office. See @tbl-queryexample for example queries.*
 
 \setstretch{1.5}
 
@@ -337,7 +341,7 @@ Because data has been linearly detrended, to account for any remaining trend lef
 
 This research aims to answer the question of how innovation in AI across industries impact labor conditions. To answer this question, a multiple linear regression model is used. For each industry, the number of patents retrieved for each year is used as the exogenous variable to explain the endogenous variables, which are the chosen economic indicators. Given five economic indicators across 6 industries, 30 regressions are modeled. The relationship between the number of patents and the chosen economic indicators are assumed to be linear. While other relationships may be plausible too, given the small sample size, the assumption of linearity is made to ensure against possible overfitting (see @sec-limitations).
 
-### Hypothesis {#sec-hypothesis}
+### Hypotheses {#sec-hypotheses}
 
 Do determine whether a relationship between the number of patents and the chosen economic indicators exists, the following hypotheses are tested. Given a standard multiple linear regression model of the form $\hat{y}_{i,j} = \beta_0 + \beta_1x_i + \beta_2x_t$, where $\hat{y}=\text{esitmated response, }i=\text{industry, }j=\text{economic indicator }\text{and }t=\text{time}$. The coefficient $\beta_1$ is assumed to be $0$. Specifically, the following assumptions are tested.
 
@@ -458,7 +462,7 @@ add_note()
 
 Lastly, the regression models' results, as shown in @tbl-regression-results-ind-j, paint a somewhat similar picture for the information and communication industry (NACE code "J"). Here no significant relationship was found between the number of patents retrieved and the number of enterprises, with a negative adjusted $R^2$, showing independent variables yielding no explanatory power over the dependent variable. The same results can be reported for the model on the number of employees. However, the number of patents retrieved is found to be significantly and positively related to wage adjusted labor productivity (coef. 0.033, SE 0.008) and results show an adjusted $R^2$ of 0.645. The same relationship can be reported for the gross value added per employee (coef. 22.082, SE 3.893), which yields the highest adjusted $R^2$ (0.770) of all models in this analysis. The number of AI patents does not significantly explain the percentage share of personnel costs in production. Therefore, $H_{0, i, j}\text{ for }j\in \{l, v\}, i=J$ are rejected and $H_{0, i, j}\text{ for }j\in \{e, L, c\}, i=J$ are accepted.
 
-In summary, the models' results paint a rather mixed picture with the majority of models tested showing statistically insignificant relationships between the number of AI patents retrieved for an industry, and the the chosen economic indicators reported within each industry. Only seven out of the 30 models tested exhibit statistically significant relationships. The results are further exacerbated, when one considers the fact that the chance of a rare event occurring increases with repeated exposure to that probability.[^7] A common method to correct for the possibility of false positives is the Bonferroni Correction [@mittelhammer_econometric_2000, p. 73f.]. Given the above chosen $\alpha$-level of 0.05, the Bonferroni Correction counterbalances the increased likelihood of rare events (in this case, the Type I error) occurring when exposed to a plurality of situations in which they could occur (e.g., running a multitude of regressions). The Bonferroni Correction is calculated by dividing the chosen $\alpha$-level by the number of tests conducted. In this case, the Bonferroni Correction would be $\frac{0.05}{30}=0.00167$. This means that accounting for the number of models evaluated in this section, adjusted $\alpha$-level would need to be set to 0.00167 to diminish the chance of false positives in the models' results.
+In summary, the models' results paint a rather mixed picture with the majority of models tested showing statistically insignificant relationships between the number of AI patents retrieved for an industry, and the chosen economic indicators reported within each industry. Only seven out of the 30 models tested exhibit statistically significant relationships. The results are further exacerbated, when one considers the fact that the chance of a rare event occurring increases with repeated exposure to that probability.[^7] A common method to correct for the possibility of false positives is the Bonferroni Correction [@mittelhammer_econometric_2000, p. 73f.]. Given the above chosen $\alpha$-level of 0.05, the Bonferroni Correction counterbalances the increased likelihood of rare events (in this case, the Type I error) occurring when exposed to a plurality of situations in which they could occur (e.g., running a multitude of regressions). The Bonferroni Correction is calculated by dividing the chosen $\alpha$-level by the number of tests conducted. In this case, the Bonferroni Correction would be $\frac{0.05}{30}=0.00167$. This means that accounting for the number of models evaluated in this section, adjusted $\alpha$-level would need to be set to 0.00167 to diminish the chance of false positives in the models' results.
 
 [^7]: A good analogy would be that the chance of winning the lottery increases with repeated playing. Or that the chance of rolling a six on a die is more likely in four rolls than in one roll.
 
@@ -479,7 +483,7 @@ add_note(note="Note: p values for regression models smaller than 0.05.", hspace=
 
 # Discussion {#sec-discussion}
 
-## Implications
+## Implications {#sec-implications}
 
 This research aims to answer the question of if and how AI innovation impacts labor. Given the mixed results presented in @sec-results, it is difficult to deduce clear implications of the findings. While there are significant relationships between some of the number of AI patent filed and industries and indicators, the vast majority depicts -if any- insufficiently strong links between the main predictor and predicted variable. Furthermore, as discussed in @sec-results, when adjusting the p value threshold for the number of models fitted, only one model out of 30 fits fulfills this new threshold. Furthermore, as this research utilized an in some degree novel approach to assess the relationship between AI innovation and labor, the absence of significant findings still aids to enrich the current corpus of literature by providing evidence that the relationship between AI patents filed and the chosen economic indicators is not as clear as one might expect. Nevertheless, when looking at between-industry and between-indicator results, a few interesting findings can be reported.
 
@@ -511,7 +515,7 @@ To conclude, while there are indications in the results that suggest the possibl
 
 Given the to some degree novel approach in the data collection process that this research adopted, a few limitations must be considered to assess the validity of the presented results above. First, the data acquisition process. Since patents have been retrieved from the EPO API via keyword search and not - like previous research - via patent text classification [see @mann_benign_2018] or occupational classification [see @acemoglu_ai_2020], the retrieved patents may not be representative of the actual number of AI patents filed. For once, keywords used to map a patent's title or abstract to its industry were only retrieved from the NACE codes' description. While keywords have been retrieved not only for the overall industry but also for each group within each division, the keywords extracted from these descriptions are likely not fully representative for the industry as a whole. Occupations and tasks within each industry as well as characteristics of an industry are manifold. Furthermore, a patents applicable use may not be concealed to one specific industry but rather to a type of task that occurs across industries or occupations. These patents have likely not been retrieved and therefore lowered the data quality and size of the data set. In addition, as discussed in @sec-data-acquisition, due to language restrictions, only patents with an application number for the European Patent Office have been retrieved. While economic data retrieved from Eurostat represents aggregate country levels, patent applications filed with the EPO are not necessarily also filed with their respective national patent office and vice versa. In other words, the patents filed with the EPO are not aggregates of the national patent offices' applications. While the total number of retrieved patent applications from the EPO is representative for the actual number of AI patents filed within the EU, it may also be the case that some industries tend to file patent applications generally with national patent offices rather than the EPO. Assuming that this is the case, it would mean that the distribution of retrieved patents between industries is biased. Lastly, the chosen Cooperative Patent Classification (CPC) codes may not capture all patents that are related to AI. While the CPC codes have been chosen to be as broad as possible, it is likely that some patents have been missed. As mentioned in @sec-data-sources, there are valid arguments to choose a legal definition of AI on which CPC code selection is based. However, a legal definition may fail to capture the whole spectrum of AI technologies, or capture more than what others may consider to be Artificial Intelligence. Here, the lack of a clear definition of what AI encapsulates inhibits a precise selection of AI technologies. Additionally, while a legal definition has been chosen, there is no precise mapping between the chosen definition and the CPC codes. As a result, CPC codes have been chosen as good as possible but may not be a complete set. Even with the same definition of AI, it is likely that the mapping from the definition to the CPC codes would differ from person to person as many definitions often leave room for interpretation. Regarding the CPC codes, it may also be the case that patent classification codes do not exist for certain technologies yet, which would inhibit the precision with which patents can be retrieved.
 
-A second limitation regards the nature and characteristics of the patent applications themselves. More specifically, the date of patent application does not relate to the date that a patent gains economic traction. Since patent application is a time consuming process (which, according to the EPO, takes between three to four years [@european_patent_office_patenting_nodate]), the time a patent becomes economically applicable is shifted from the time a patent application is filed. Previous research has incorporated such shifts, or lags, to account for the time delay between patent application and implementation [see @van_roy_technology_2018, p. 5]. This, however, is not necessarily a severe limitation as the number of patent applications filed serve merely as a proxy for the interest and innovation in AI applications at any given time. It can be assumed, that increased inventorship in AI, as approximated by AI related patent applications, is accompanied by an increased interest in currently available AI technologies. This, of course, is merely an assumption and would need to be verified. It would be possible to shift the retrieved patent data by any given number of years, but as Eurostat's Structural Business Statistic currently only captures economic activity until 2020, most retrieved patent applications would have been pushed out of the data set, making it even smaller. It would be interesting to see future research, once additional data becomes available, to reproduce a modified version of this research with retrieved patent applications' dates being shifted by the average time a patent application takes to be granted. Furthermore, as pointed out by @trajtenberg_penny_1990, the plain number of patent counts disregards the fact that patents do not carry equal economical weight. That is, the effect which a patent might have on a market or industry cannot be inferred by the presence of a patent without incorporating weights. Since this research did not aim to establish a clear link between patent applications and economic indicators, but rather used patent applications as a proxy for the interest in AI, this limitation is of lesser severity. Nevertheless, weighted patent counts [see @van_roy_technology_2018, p. 5] may yield different results as not every patent application is, first, granted, and second, also of economic value. Lastly, the patent data retrieved from the EPO API does not contain any information on the patent's country of origin. While the EPO is an EU-wide patent office, it is likely that not all patents have been filed by EU-based companies or inventors. While some patents carry a company as the applicant's name, any inventor may file a patent with the European Patent Office, even if the inventor never intends to make economic use of the patent in the EPO's jurisdiction. Therefore, it may be the case that at least some of the patents filed with the EPO do not serve as a proxy for the interest in AI within the EU but rather outside it.
+A second limitation regards the nature and characteristics of the patent applications themselves. More specifically, the date of patent application does not relate to the date that a patent gains economic traction. Since patent application is a time consuming process (which, according to the EPO, takes between three to four years [@european_patent_office_patenting_nodate]), the time a patent becomes economically applicable is shifted from the time a patent application is filed. Previous research has incorporated such shifts, or lags, to account for the time delay between patent application and implementation [see @van_roy_technology_2018, p. 5]. This, however, is not necessarily a severe limitation as the number of patent applications filed serve merely as a proxy for the interest and innovation in AI applications at any given time. It can be assumed, that increased inventorship in AI, as approximated by AI related patent applications, is accompanied by an increased interest in currently available AI technologies. This, of course, is merely an assumption and would need to be verified. It would be possible to shift the retrieved patent data by any given number of years, but as Eurostat's Structural Business Statistic currently only captures economic activity until 2020, most retrieved patent applications would have been pushed out of the data set, making it even smaller. It would be interesting to see future research, once additional data becomes available, to reproduce a modified version of this research with retrieved patent applications' dates being shifted by the average time a patent application takes to be granted. Furthermore, as pointed out by @trajtenberg_penny_1990, the plain number of patent counts disregards the fact that patents do not carry equal economical weight. That is, the effect which a patent might have on a market or industry cannot be inferred by the presence of a patent without incorporating weights. Since this research did not aim to establish a clear link between patent applications and economic indicators, but rather used patent applications as a proxy for the interest in AI, this limitation is of lesser severity. Nevertheless, weighted patent counts [see @van_roy_technology_2018, p. 5] may yield different results as not every patent application is, first, granted, and second, also of economic value. There are a variety of weighting methods that may yield better results in estimating a patent's economic value and impact, such as forward-citation count, backward-citation count, and number of non-patent references [see @squicciarini_measuring_2013; @neuhausler_patents_2011; @gambardella_value_2008; @bronwyn_h_hall_market_2005; @harhoff_citations_2003]. Lastly, the patent data retrieved from the EPO API does not contain any information on the patent's country of origin. While the EPO is an EU-wide patent office, it is likely that not all patents have been filed by EU-based companies or inventors. While some patents carry a company as the applicant's name, any inventor may file a patent with the European Patent Office, even if the inventor never intends to make economic use of the patent in the EPO's jurisdiction. Therefore, it may be the case that at least some of the patents filed with the EPO do not serve as a proxy for the interest and innovation in AI within the EU but rather outside it.
 
 A third limitation is the number of data points in the final data set on which the overall analysis is build upon. While almost ten thousand patents have been retrieved from the API, only 4347 were unique in each industry, and only 1190 patents fulfilled the criteria listed in \nameref{sec-preprocessing} @sec-preprocessing. Given that Eurostat's Structural Business Statistics (SBS) does not include all industries, many retrieved patents could not be used in the analysis. Furthermore, the SBS currently carries data until 2020 which excludes the last two years in which interest in AI increased significantly. Furthermore, given the small subsets of data on which regressions were modeled, linearity was assumed. This may not accurately represent the actual relationship between the interest in, or implementation of, AI technologies. In fact, intuitively it is likely that the relationship between AI patent applications and the chosen economic indicators are overall better represented by a polynomial regression of second order. One argument for such a relation is the counterintuitive implication that the application of linear regression involves. It is doubtful whether there can exist such a linear relationship indefinetly as it would approximate the same unit change (slope) in the dependent variable for any given unit change in the independent variable. However, economically speaking, one would expect that the marginal economic impact that additional presence of technologies has is decreasing with each additional unit (diminishing marginal returns to scale).[^10] But the opposite may also be true. As the number of AI patent applications does not describe one technology but the evolutionary path of technology, an increase in patent applications is not equal to the introduction of more of the same technology. Rather, it describes the introduction of new technology that may or may not be a substitute, complementary, or inferior product to existing technology. Therefore, as the given data is a time series, technology developed later in time has the ability to build upon (evolve from) earlier technologies. This holds true, even when considering the legal protection granted by patent rights as new novel technology is likely to spark new ideas and inventions. Hence, while the relationship between the two variables may still be assimilating the polynomial shape of order two, it may actually represent a convex shape where the marginal returns increase to scale.[^11] Here of course, the question remains whether invention is inexhaustible or not. Nevertheless, given the small size of sampes which are a result of the small time range for which data has been collected, it would be difficult to confidently assess such a relation without exposing the model to the risk of overfitting. The shape of the relationship may only appear clearly once more data is present. In other words, once one can "zoom out" of the window that has been considered in this research, and examine more attributes of the relationship, it may be possible to assess the shape of the relationship more accurately.
 
@@ -521,7 +525,7 @@ A third limitation is the number of data points in the final data set on which t
 
 Lastly, as a fourth limitation, the omitted variables. The methodology applied in this research did not include any control variables other than time, which was chosen to control for any residual trend in the detrended data. But as the statistics provided by the SBS are the result of a complex web of economic activity, which in turn is influenced by an almost incomprehensible number of factors, there is a high probability that additional control variables would yield different results. Furthermore, it is not unlikely to think that the relationship between AI patent applications and the chosen economic indicators may have a common factor that explains both. Since research and development is a costly undertaking for many firms, it may be that other economic factors define the chosen dependent variables as well as the number of AI applications filed.
 
-## Further Research
+## Further Research {#sec-further-research}
 
 Given the ambiguous results presented in this study, further research is needed to confirm or falsify the results presented here. In particular, future research could build upon the here presented approach and extend its methodology by including additional control variables and further improving keyword related patent extraction. Future research could also include additional data sources as proxies for the advancement in Artificial Intelligence. Perhaps, patent counts may be used not as a definite proxy for the interest or presence of technologies but as a weighting factor that accompanies additional sources of data. In addition, it would be valuable to define a clear definition of what Artificial Intelligence entails in order to build further research in this field upon a homogeneous definition that allows for cross-research comparison of results. Lastly, it would be interesting to see future research that builds upon the here presented approach but extends the time range for which data has been collected. This would allow for a more accurate assessment of the relationship between AI patent applications and the chosen economic indicators. Additionally, it would allow for a more accurate assessment of the shape that this relationship takes on.
 
@@ -535,7 +539,7 @@ While the here presented approach did not yield clear results, it is likely that
 
 [^12]: A good analogy would be a skier proudly claiming that he will always reach the end of the slope because he has never had an accident. The claim rests on mere extrapolation of the past, oblivious to any possible risks.
 
-# Conclusion
+# Conclusion {#sec-conclusion}
 
 {{< pagebreak >}}
 
@@ -581,18 +585,180 @@ df = pd.DataFrame(ls[:10], columns=["Query examples"])
 display(Markdown(df.to_markdown(index=True)))
 ```
 
+{{< pagebreak >}}
+
+<!-- Transformed and Untransformed data -->
+<!-- Enterprises -->
+
 ```{python}
-#| label: create-untransfromed-data-figures
-#| output: asis
-for indicator in prepped_df["Indicator"].unique():
-  tmp_df = prepped_df_raw[prepped_df_raw["Indicator"] == indicator]
-  fig = sv.subplots_two_yaxes(df = tmp_df, x="Year", x_name="Year", y1="OBS_VALUE", y1_name="Employees (n)", y2="Sum patents", y2_name="Sum patents", by="Industry", rows=3, cols=2)
-  fig.update_layout(
-      margin=dict(l=0, r=0, t=15, b=0),
-  )
-  headings = "```{python}\n#|label: fig-untransformed-data-example-" + indicator.lower().replace(" ", "") + "\n#|fig-cap: 'Example of untransformed data for all Industries and NACE " + indicator + " plotted over years'"
-  end = "\n```"
-  display(Markdown(headings)) 
-  display("Image(fig.to_image(format='jpeg', engine='kaleido', scale=3, height=500, width=800))") 
-  display(Markdown(end))
+#| label: fig-untransformed-data-enterprises
+#| fig-cap: "Untransformed data across all industries and NACE code 'Enterprises (n)' plotted over years"
+#| fig-pos: H
+
+tmp_df = prepped_df_raw[prepped_df_raw["Indicator"] == "Enterprises (n)"]
+fig = sv.subplots_two_yaxes(df = tmp_df, x="Year", x_name="Year", y1="OBS_VALUE", y1_name="Enterprises (n)", y2="Sum patents", y2_name="Sum patents", by="Industry", rows=3, cols=2)
+fig.update_layout(
+    margin=dict(l=0, r=0, t=15, b=0),
+)
+
+Image(fig.to_image(format="jpeg", engine="kaleido", scale=3, height=400, width=800))
+```
+
+```{python}
+#| label: fig-transformed-data-example-enterprises
+#| fig-cap: "Transformed data across all industries and NACE code 'Enterprises (n)' plotted over years"
+#| fig-pos: H
+
+tmp_df = prepped_df[prepped_df["Indicator"] == "Enterprises (n)"]
+fig = sv.subplots_two_yaxes(df = tmp_df, x="Year", x_name="Year", y1="OBS_VALUE", y1_name="Enterprises (n)", y2="Sum patents", y2_name="Sum patents", by="Industry", rows=3, cols=2)
+fig.update_layout(
+    margin=dict(l=0, r=0, t=15, b=0),
+)
+
+Image(fig.to_image(format="jpeg", engine="kaleido", scale=3, height=400, width=800))
+```
+
+<!-- Employees -->
+
+```{python}
+#| label: fig-untransformed-data-employees
+#| fig-cap: "Untransformed data across all industries and NACE code 'Employees (n)' plotted over years"
+#| fig-pos: H
+
+tmp_df = prepped_df_raw[prepped_df_raw["Indicator"] == "Employees (n)"]
+fig = sv.subplots_two_yaxes(df = tmp_df, x="Year", x_name="Year", y1="OBS_VALUE", y1_name="Employees (n)", y2="Sum patents", y2_name="Sum patents", by="Industry", rows=3, cols=2)
+fig.update_layout(
+    margin=dict(l=0, r=0, t=15, b=0),
+)
+
+Image(fig.to_image(format="jpeg", engine="kaleido", scale=3, height=400, width=800))
+```
+
+```{python}
+#| label: fig-transformed-data-employees
+#| fig-cap: "Transformed data across all industries and NACE code 'Employees(n)' plotted over years"
+#| fig-pos: H
+
+tmp_df = prepped_df[prepped_df["Indicator"] == "Employees (n)"]
+fig = sv.subplots_two_yaxes(df = tmp_df, x="Year", x_name="Year", y1="OBS_VALUE", y1_name="Employees (n)", y2="Sum patents", y2_name="Sum patents", by="Industry", rows=3, cols=2)
+fig.update_layout(
+    margin=dict(l=0, r=0, t=15, b=0),
+)
+
+Image(fig.to_image(format="jpeg", engine="kaleido", scale=3, height=400, width=800))
+```
+
+<!-- Labor productivity -->
+
+```{python}
+#| label: fig-untransformed-data-labor-prod
+#| fig-cap: "Untransformed data across all industries and NACE code 'Wage adjusted labor productivity (%)' plotted over years"
+#| fig-pos: H
+
+tmp_df = prepped_df_raw[prepped_df_raw["Indicator"] == "Labor prod. (%)"]
+fig = sv.subplots_two_yaxes(df = tmp_df, x="Year", x_name="Year", y1="OBS_VALUE", y1_name="Labor prod. (%)", y2="Sum patents", y2_name="Sum patents", by="Industry", rows=3, cols=2)
+fig.update_layout(
+    margin=dict(l=0, r=0, t=15, b=0),
+)
+
+Image(fig.to_image(format="jpeg", engine="kaleido", scale=3, height=400, width=800))
+```
+
+```{python}
+#| label: fig-transformed-data-labor-prod
+#| fig-cap: "Transformed data across all industries and NACE code 'Wage adjusted labor productivity (%)' plotted over years"
+#| fig-pos: H
+
+tmp_df = prepped_df[prepped_df["Indicator"] == "Labor prod. (%)"]
+fig = sv.subplots_two_yaxes(df = tmp_df, x="Year", x_name="Year", y1="OBS_VALUE", y1_name="Labor prod. (%)", y2="Sum patents", y2_name="Sum patents", by="Industry", rows=3, cols=2)
+fig.update_layout(
+    margin=dict(l=0, r=0, t=15, b=0),
+)
+
+Image(fig.to_image(format="jpeg", engine="kaleido", scale=3, height=400, width=800))
+```
+
+<!-- Gross value added per employee -->
+
+```{python}
+#| label: fig-untransformed-data-value-added
+#| fig-cap: "Untransformed data across all industries and NACE code 'Gross value added per employee (€)' plotted over years"
+#| fig-pos: H
+
+tmp_df = prepped_df_raw[prepped_df_raw["Indicator"] == "GVA/employee (€)"]
+fig = sv.subplots_two_yaxes(df = tmp_df, x="Year", x_name="Year", y1="OBS_VALUE", y1_name="GVA/employee (€)", y2="Sum patents", y2_name="Sum patents", by="Industry", rows=3, cols=2)
+fig.update_layout(
+    margin=dict(l=0, r=0, t=15, b=0),
+)
+
+Image(fig.to_image(format="jpeg", engine="kaleido", scale=3, height=400, width=800))
+```
+
+```{python}
+#| label: fig-transformed-data-value-added
+#| fig-cap: "Transformed data across all industries and NACE code 'Gross value added per employee (€)' plotted over years"
+#| fig-pos: H
+
+tmp_df = prepped_df[prepped_df["Indicator"] == "GVA/employee (€)"]
+fig = sv.subplots_two_yaxes(df = tmp_df, x="Year", x_name="Year", y1="OBS_VALUE", y1_name="GVA/employee (€)", y2="Sum patents", y2_name="Sum patents", by="Industry", rows=3, cols=2)
+fig.update_layout(
+    margin=dict(l=0, r=0, t=15, b=0),
+)
+
+Image(fig.to_image(format="jpeg", engine="kaleido", scale=3, height=400, width=800))
+```
+
+<!-- Personnel costs in production -->
+
+```{python}
+#| label: fig-untransformed-data-personnel-costs
+#| fig-cap: "Untransformed data across all industries and NACE code 'Personnel costs in production (%)' plotted over years"
+#| fig-pos: H
+
+tmp_df = prepped_df_raw[prepped_df_raw["Indicator"] == "Personnel costs (%)"]
+fig = sv.subplots_two_yaxes(df = tmp_df, x="Year", x_name="Year", y1="OBS_VALUE", y1_name="Personnel costs (%)", y2="Sum patents", y2_name="Sum patents", by="Industry", rows=3, cols=2)
+fig.update_layout(
+    margin=dict(l=0, r=0, t=15, b=0),
+)
+
+Image(fig.to_image(format="jpeg", engine="kaleido", scale=3, height=400, width=800))
+```
+
+```{python}
+#| label: fig-transformed-data-personnel-costs
+#| fig-cap: "Transformed data across all industries and NACE code 'Personnel costs in production (%)' plotted over years"
+#| fig-pos: H
+
+tmp_df = prepped_df[prepped_df["Indicator"] == "Personnel costs (%)"]
+fig = sv.subplots_two_yaxes(df = tmp_df, x="Year", x_name="Year", y1="OBS_VALUE", y1_name="Personnel costs (%)", y2="Sum patents", y2_name="Sum patents", by="Industry", rows=3, cols=2)
+fig.update_layout(
+    margin=dict(l=0, r=0, t=15, b=0),
+)
+
+Image(fig.to_image(format="jpeg", engine="kaleido", scale=3, height=400, width=800))
+```
+
+<!-- REGRESSION RESULTS -->
+
+```{python}
+#| label: tbl-regression-results
+#| fig-cap: "Regression results"
+#| fig-pos: H
+#| 
+res = results["B"]["Enterprises (n)"][0]
+data = {
+    "Dep. Variable" : "Enterprises (n)",
+    "F-statistic": res.fvalue,
+    "Prob (F-statistic)" : res.f_pvalue,
+    "Observations" : res.nobs,
+    "R-squared" : res.rsquared,
+    "Adj. R-squared" : res.rsquared_adj
+}
+tbl_1 = pd.DataFrame.from_dict(data=data, orient="index")
+tbl_2 = res.summary().tables[1]
+tbl_3 = res.summary().tables[2]
+
+display(Markdown(tbl_1.to_markdown(index = False)))
+display(Markdown(tbl_2.as_html()))
+display(Markdown(tbl_3.as_html()))
 ```
