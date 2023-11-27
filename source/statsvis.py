@@ -5,6 +5,8 @@ from plotly.subplots import make_subplots
 import plotly.graph_objects as go
 import pandas as pd
 import numpy as np
+from statsmodels.stats.stattools import durbin_watson, jarque_bera
+from statsmodels.stats.diagnostic import het_breuschpagan
 
 FLOAT_FORMAT = '%.4f'
 
@@ -156,6 +158,55 @@ def extent_pvalues(pvalues, prepped_df, sum_name="Patents (sum)", count_name="Sa
     df = df.merge(ss_indic, left_index=True, right_index=True, how="left")
     df = df.merge(sc_indic, left_index=True, right_index=True, how="left")
     return df
+
+
+def create_summary_statistics(results, cols, decimals=3, index=0) -> dict:
+    """
+    utility function to summarize main regression tests and key figures by industry
+
+    PARAMS
+    ------
+    results: dict
+        dictionary containing OLS result instances
+    cols: list
+        list of variables for which coefficients, p values and conf. interval is retrieved
+    decimals: int
+        Number of decimal places to round results to
+    index: int
+        If multiple result instances for each indicator, indicate which one to summarize
+    """
+    summary_statistics = dict()
+    for industry in results.keys():
+        industry_stats = None
+        for indicator in results[industry].keys():
+            res = results[industry][indicator][index]
+            data = {
+                "F-statistic": res.fvalue,
+                "Prob (F-statistic)": res.f_pvalue,
+                "Observations": res.nobs,
+                "R-squared": res.rsquared,
+                "Adj. R-squared": res.rsquared_adj,
+                "Jarque-Bera": jarque_bera(res.resid)[1],
+                "Skew": jarque_bera(res.resid)[2],
+                "Kurtosis": jarque_bera(res.resid)[3],
+                "Durbin-Watson": durbin_watson(res.resid),
+                "Breusch-Pagan": het_breuschpagan(resid=res.resid, exog_het=res.model.exog)[1]
+            }
+            for i in cols:
+                data[i + " Coef."] = res.pvalues[i]
+                data[i + " p value"] = res.pvalues[i]
+                data[i + " SE"] = res.bse[i]
+                data[i + " Conf. lower"] = res.conf_int().at[i, 0]
+                data[i + " Conf. upper"] = res.conf_int().at[i, 1]
+            series = pd.Series(data=data)           
+            tmp_df = series.to_frame(name=indicator).round(3)
+            if industry_stats is None:
+                industry_stats = tmp_df
+            else:
+                industry_stats = industry_stats.merge(tmp_df, left_index=True, right_index=True)
+                industry_stats = industry_stats.round(decimals)
+        summary_statistics[industry] = industry_stats
+    return summary_statistics
 
 
 # descriptives
