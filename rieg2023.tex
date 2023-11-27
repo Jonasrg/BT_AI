@@ -4,7 +4,7 @@
 \PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
 %
 \documentclass[
-  11,
+  12pt,
   a4paperpaper,
 ]{article}
 
@@ -55,46 +55,6 @@
   \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
 \fi
 
-\usepackage{color}
-\usepackage{fancyvrb}
-\newcommand{\VerbBar}{|}
-\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
-\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
-% Add ',fontsize=\small' for more characters per line
-\usepackage{framed}
-\definecolor{shadecolor}{RGB}{241,243,245}
-\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
-\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
-\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
-\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.40,0.45,0.13}{#1}}
-\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
-\newcommand{\BuiltInTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
-\newcommand{\CharTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
-\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
-\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
-\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
-\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
-\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
-\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
-\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
-\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
-\newcommand{\ExtensionTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
-\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
-\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.28,0.35,0.67}{#1}}
-\newcommand{\ImportTok}[1]{\textcolor[rgb]{0.00,0.46,0.62}{#1}}
-\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
-\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
-\newcommand{\NormalTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
-\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
-\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
-\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
-\newcommand{\RegionMarkerTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
-\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
-\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
-\newcommand{\StringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
-\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.07,0.07,0.07}{#1}}
-\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
-\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
 
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}\usepackage{longtable,booktabs,array}
@@ -155,8 +115,15 @@
 \newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
 
 \let\oldsection\section
-\renewcommand\section{\clearpage\oldsection}
 \usepackage[font=it,labelfont=bf]{caption}
+\usepackage{sectsty}
+\sectionfont{\centering}
+\subsectionfont{\raggedright}
+\subsubsectionfont{\raggedright\itshape}
+\usepackage{etoolbox}
+\AtBeginEnvironment{longtable}{\small}
+\pretocmd{\section}{\clearpage}{}{}
+\usepackage{romannum}
 \makeatletter
 \makeatother
 \makeatletter
@@ -225,10 +192,10 @@
   pdftitle={Socioeconomic Disruption by Artificial Intelligence},
   pdflang={en},
   colorlinks=true,
-  linkcolor={blue},
+  linkcolor={black},
   filecolor={Maroon},
-  citecolor={Blue},
-  urlcolor={Blue},
+  citecolor={black},
+  urlcolor={black},
   pdfcreator={LaTeX via pandoc}}
 
 \title{Socioeconomic Disruption by Artificial Intelligence}
@@ -250,6 +217,7 @@ the European Union}
 
 \newpage{}
 
+\setstretch{1}
 \tableofcontents
 
 \newpage{}
@@ -263,150 +231,77 @@ the European Union}
 \newpage{}
 
 \pagenumbering{arabic}
+\setstretch{1.5}
 
 \section{Abstract}\label{abstract}
 
 \section{Introduction}\label{sec-introduction}
 
+In the last few years, Artificial Intelligence has seen major
+breakthroughs in its capabilities and applicable domains
+(\citeproc{ref-michael_l_littman_gathering_2021}{Michael L. Littman et
+al., 2021, p. 12}). The popular AI chatbot ChatGPT has set a historical
+record in its user acquisition pace (\citeproc{ref-hu_chatgpt_2023}{Hu,
+2023}), and internet searches for the term ``AI'' are on an all-time
+high (\citeproc{ref-google_google_2023}{Google, 2023}). This trend has
+also arrived in the scientific community, with AI related papers
+exploding in popularity in recent years
+(\citeproc{ref-catherine_cheung_growth_2022}{Catherine Cheung et al.,
+2022}). However, undeniably, the introduction of new technology, this
+time, Artificial Intelligence, does raise concerns about its potential
+implications on various aspects of society
+(\citeproc{ref-gries_artificial_2018}{Gries and Naudé, 2018, p. 1}; see
+\citeproc{ref-joint_research_centre_artificial_2018}{Joint Research
+Centre, 2018, p. 77}; \citeproc{ref-lu_review_2021}{Lu and Zhou, 2021,
+p. 1055}). And even OpenAI's co-founder and chief scientist Ilya
+Sutskever admits that ``for every positive application of AGI there will
+be a negative as well'' (\citeproc{ref-ted_exciting_2023}{TED, 2023}).
+While AI is not the first technology to raise such concerns
+(\citeproc{ref-martens_will_2018}{Martens and Tolan, 2018, p. 5}), the
+pace at which AI evolves and advances into various domains is unseen.
 Mokyr et al. (\citeproc{ref-mokyr_history_2015}{2015, p. 32}) identifies
 two forms of technological anxiety, the fear of labor displacement
 through technology and and the fear of morally negative applications
-resulting in declining welfare. The majority of the US population has
-been found to assess the potential impact of automation as unfavorable
+resulting in declining welfare. This technological anxiety seems to be
+increasing again in recent times, with the majority of the US population
+assessing the potential impact of automation as generally unfavorable
 rather than beneficial
-(\citeproc{ref-anderson_automation_2017}{Anderson, 2017}).
+(\citeproc{ref-anderson_automation_2017}{Anderson, 2017}). Because of
+the recent advances in Artificial Intelligence and its increasing
+presence in the media, everyday life, and work, there is a growing need
+for research to meticulously scrutinize AI technology's accompanying
+concerns to objectively assess its true potential and risks. Given the
+seemingly ubiquitous applicability of AI, there is a correspondingly
+vast number of possible effects and side effects which AI might induce.
+This paper specifically focuses on the aforementioned technological
+anxiety of labor displacement. Specifically, Artificial Intelligence's
+effects on labor displacement, which in this context also relate to
+partial displacements induces by a reduction in labor wages and labor
+bargaining power.
 
-Since AI is a still fairly new topic in the literature and has only seen
-real increase in dominance and interest in recent years
-(\citeproc{ref-acemoglu_ai_2020}{Acemoglu et al., 2020a, p. 23f}.), is
-is worth noting the effects of previous technologies as the adoption of
-machines (specifically often industrial robots
-(\citeproc{ref-acemoglu_robots_2020}{Acemoglu and Restrepo, 2020a}; see
-for example \citeproc{ref-graetz_robots_2018}{Graetz and Michaels,
-2018})) and software (also referred to as
-computerization(\citeproc{ref-autor_growth_2013}{Autor and Dorn, 2013};
-\citeproc{ref-frey_future_2017}{Frey and Osborne, 2017}; see for example
-\citeproc{ref-pajarinen_computerization_2015}{Pajarinen et al., 2015}))
-have been seen as previous stages in the evolution of automation with AI
-composing the next stage (\citeproc{ref-acemoglu_harms_2021}{Acemoglu,
-2021, p. 19}). Furthermore, these technologies have been summarized
-under the umbrella term ``automation''
-(\citeproc{ref-mann_benign_2018}{Mann and Püttmann, 2018, p. 40})
-indicating common characteristics and thereby - possibly - common
-effects.
+The paper is structured as follows: Section~\ref{sec-introduction}
+provides an overview about the current literature on automation induces
+labor effects. Section~\ref{sec-methodology} introduces the
+methodological approach used to assess AI's impact on labor with an
+overview of the data sources (Section~\ref{sec-data-sources}), the data
+acquisition process (Section~\ref{sec-data-acquisition}) and
+preproccessing methods (Section~\ref{sec-preprocessing}), along with the
+chosen model (Section~\ref{sec-model}) and its hypotheses
+(Section~\ref{sec-hypotheses}). Results are then presented in
+Section~\ref{sec-results}, followed by a discussion
+(Section~\ref{sec-discussion}) which includes the models' results'
+implications (Section~\ref{sec-implications}), important limitations
+(Section~\ref{sec-limitations}), and suggestions for future research
+(Section~\ref{sec-further-research}). Finally,
+Section~\ref{sec-conclusion} concludes the paper and
+\nameref{sec-appendix} provides additional tables and figures
+accompanying this research.
 
-\subsection{Effects of Automation on
-labor}\label{sec-effects-of-automation-on-labor}
+\subsection{Effects of Artificial Intelligence}\label{sec-effects-of-ai}
 
-In a 2018 study, the introduction of automation technology was found to
-have positive effects on employment gains, but only within the same
-commuting zone (\citeproc{ref-mann_benign_2018}{Mann and Püttmann, 2018,
-p. 26}). These findings contradict the results from Autor et al.
-(\citeproc{ref-autor_untangling_2015}{2015}) {[}p.~632{]}, that found no
-relation between exposure to automation and employment as a whole but
-found a significant decline in employment related to routine tasks in
-the non-manufacturing sector (p.~641). Graetz and Michaels
-(\citeproc{ref-graetz_robots_2018}{2018, p. 766}) found no relationship
-between the usage of industrial robots and net employment. However,
-usage of industrial robots was found to lower employment of low-skilled
-workers. However, a later study also looking at employment effects
-induced by usage of industrial robots found a significant decline of
-employment as well as a reduction in wages related to robot exposure
-within a commuting zone (\citeproc{ref-acemoglu_robots_2020}{Acemoglu
-and Restrepo, 2020a, pp. 2215f, 2218}). Dauth et al.
-(\citeproc{ref-dauth_german_2017}{2017}) {[}p.~25{]} found no relation
-between robot exposure and employment in the German market. A few years
-later, Dauth et al. (\citeproc{ref-dauth_adjustment_2021}{2021, p.
-3126ff}) found robot exposure to lead to within-firm and between-firm
-job displacement, with displaced workers having difficulties
-reallocating their jobs within the same industry, leading to a migration
-of workers from manufacturing (where robot exposure is most present) to
-the service sector. They also exhibited that a lack of worker
-protections (for example unionization or tenure) is related to greater
-displacement. These results were also confirmed by Boustan et al.
-(\citeproc{ref-boustan_automation_2022}{2022}) {[}p.~21, 23{]} who
-observed that displaced workers acquire new skills and concluded job
-displacement by automation to be less discernible amongst unionized and
-high-skilled workers. Similarily, Acemoglu and Restrepo
-(\citeproc{ref-acemoglu_robots_2020}{2020a, p. 2215f}., 2218) provided
-evidence showing automation (adoption of industrial robots) within a
-commuting zone (local labor market) relating to significant declines in
-employment as well as wages. By studying 53 developing countries, Cirera
-and Sabetti (\citeproc{ref-cirera_effects_2019}{2019, p. 172}) did not
-find a relationship between exposure to automation and firm level
-employment. Hoewever, while a net effect on employment was absent, in
-line with the aforementioned literature, they did find automation to
-alter the composition of tasks and skills within firms (p.~172).
-
-In a purely theoretical approach to the effects of automation on labor,
-Acemoglu and Restrepo (\citeproc{ref-acemoglu_low-skill_2017}{2017})
-{[}p.~12, 15{]} concluded that automation leads to labor displacement
-and the displacement of low skilled-labor leading to an increase in the
-wage gap (pay gap between low-skilled and high-skilled workers) while
-the displacement of high-skilled labor is followed by a reduction in the
-wage gap as high-skill labor reallocates into medium- and low-skilled
-occupations. This reallocation from displaced high-skill labor into
-lower skilled occupations has also been shown by Beaudry et al.
-(\citeproc{ref-beaudry_great_2016}{2016, p. 21}) who studied the effects
-on labor when prices for specific types of labor fall - as is induced
-when substitution (through technology) becomes economically viable.
-While labor displacement induced by the introduction of automation is
-followed by increased inequality between low-skill and high-skilled
-labor in the short run (\citeproc{ref-acemoglu_race_2018}{Acemoglu and
-Restrepo, 2018a, p. 1519}), the creation of new tasks - that is followed
-by increased productivity gains from automation - is seen to reduce this
-gap in the long run (p.~1521). However, this positive outlook of a net
-positive on employment only holds true as long as the productivity
-effects which accompany the adoption of automation technologies offset
-the displacement effects incurred in the first place - and should the
-offset be insufficient, automation is found to negatively impact the
-demand for labor and its wages
-(\citeproc{ref-acemoglu_artificial_2018}{Acemoglu and Restrepo, 2018b,
-p. 227}). There is also growing evidence suggesting automation to cause
-a decline in real wages of low-skilled workers, for example Acemoglu and
-Restrepo (\citeproc{ref-acemoglu_unpacking_2020}{2020b}) {[}p.~360f.{]}
-found strong relationships between the adoption of automation technology
-and wages. Acemoglu and Restrepo
-(\citeproc{ref-acemoglu_tasks_2022}{2022, p. 1993}) found a relationship
-between labor displacement and a decrease in relative wages, concluding
-automation to cause an increase in wage inequality (p.~1998). Automation
-is also attributed to the decline in the demand for labor in the US over
-recent decades (\citeproc{ref-acemoglu_automation_2019}{Acemoglu and
-Restrepo, 2019, p. 21}).
-
-Furthermore, Arntz et al. (\citeproc{ref-arntz_risk_2016}{2016})
-{[}p.~14f.{]} studying 21 OECD countries found 9\% in the US, and over
-all countries studies a 6-12\% high risk of employment to be
-substitutable for automation, while Acemoglu and Autor
-(\citeproc{ref-acemoglu_skills_2011}{2011, p. 61}) came to the
-conclusion that labor displacement by machines mostly affects routine
-tasks.
-
-\subsection{Effects of
-computerization}\label{sec-effects-of-computerization}
-
-In a study from Finland, Pajarinen et al.
-(\citeproc{ref-pajarinen_computerization_2015}{2015}) found that
-computerization is likely to place high risk of displacement on 35\% of
-the Finish labor market {[}p.~5{]}, 33\% of Norwegian labor (p.~5) as
-well as 49\% in the US {[}p.~5{]}. Frey and Osborne
-(\citeproc{ref-frey_future_2017}{2017, p. 41}) found 47\% of US
-employment to have a a high risk suitability for substitution by
-computerization. They further classify the process of automation into
-two ``waves'' with the first wave affecting routine tasks
-(transportation, logistics, office, and administration) {[}p.~41{]}
-followed by a second wave that, once technological obstacles are
-overcome, will effect the jobs involving creative or abstract tasks
-{[}p.~43{]}. Evidence also suggests computerization to significantly
-induce labor displacement from occupations relying on routine tasks into
-higher-skilled occupations as well as low-skilled service occupations
-(\citeproc{ref-autor_growth_2013}{Autor and Dorn, 2013, p. 1573})
-
-\subsection{Effects of AI}\label{sec-effects-of-ai}
-
-Brynjolfsson et al. (\citeproc{ref-brynjolfsson_what_2018}{2018})
-{[}p.~46{]} found that machine learning affects different types of tasks
-than earlier forms of automation. A year later, in a study comparing the
+Brynjolfsson et al. (\citeproc{ref-brynjolfsson_what_2018}{2018a, p.
+46}) found that machine learning affects different types of tasks than
+earlier forms of automation. A year later, in a study comparing the
 impact of AI on the job market between industries, Webb
 (\citeproc{ref-webb_impact_2019}{2019, p. 46}) shows that AI affects
 mostly the highly educated workforce and that this group is affected
@@ -419,27 +314,174 @@ relocated (\citeproc{ref-mokyr_history_2015}{Mokyr et al., 2015, p.
 occupations, Felten et al. (\citeproc{ref-felten_effect_2019}{2019})
 found low-income occupations to experience a decline in wage growth that
 is attributed to the increased presence of AI and middle and high-income
-occupations to experience an increase in wage growth {[}p.~6{]}.
-Furthermore, the authors found found that occupations with a medium and
-high degree of automation (degree of automation being the presence of
+occupations to experience an increase in wage growth (p.~6).
+Furthermore, the authors found that occupations with a medium and high
+degree of automation (degree of automation being the presence of
 automation technologies - not just AI) positively correlate with
 employment when exposed to Artificial Intelligence, while they did not
 find any relationship for occupations already exhibiting a low degree of
-automation {[}p.~5{]}.
+automation (p.~5). Damioli et al.
+(\citeproc{ref-damioli_impact_2021}{2021, p. 14}) linked SMEs having
+filed patents related to AI to have a significant increases in labor
+productivity. The same effect, however, could not be found once SMEs and
+large firms were studies together nor when only considering large firms
+(p.14).
 
 It has also been noted that the presence of Artificial Intelligence does
 not have a linear impact on labor but depends on influencing factors,
-such as price elasticity, complementarities, or elasticity of labor that
+such as price elasticity, complementaries, or elasticity of labor that
 govern the implementation of these technologies
 (\citeproc{ref-brynjolfsson_what_2017}{Brynjolfsson and Mitchell, 2017,
 p. 1533f}.). Additionally, the adoption of AI technology is found to
 significantly alter the skill-demand distribution of firms, with the
 number of previously highly demanded skills declining while
 simultaneously creating demand for new skills
-(\citeproc{ref-acemoglu_ai_2020}{Acemoglu et al., 2020a, p. 19}).
+(\citeproc{ref-acemoglu_ai_2020}{Acemoglu et al., 2020a, p. 19}). By
+surveying 203 attendees at three AI conferences, Gruetzemacher et al.
+(\citeproc{ref-gruetzemacher_forecasting_2020}{2020, pp. 4, 9}) found
+attendees, on average, to evaluate 22\% of human tasks being prone to
+replacement, with the number rising to 40\% in the next five years.
+Researchers have also argued that AI technology can be seen as a new
+general purpose technology (GPT) which has implications in every aspect
+of society as had other GPTs before, such as the steam engine or
+computers (\citeproc{ref-brynjolfsson_artificial_2018}{Brynjolfsson et
+al., 2018b, p. 39}). In a meta analysis of the current literature, Lu
+and Zhou (\citeproc{ref-lu_review_2021}{2021, p. 1263}) came to the
+conclusion that the general consensus among researchers is a definite
+concern about AI's implications as well as expected labor displacement,
+although unsure about the extend of displacement and whether these
+effects are offset elsewhere.
 
-\subsection{Changes of Occupational
-composition}\label{sec-changes-of-occupational-composition}
+Given the yet small body of empirical literature about the effects of AI
+(\citeproc{ref-seamans_ai_2018}{Seamans and Raj, 2018, p. 3}), which is
+due to the fact that AI is a still fairly new topic which has seen real
+increase in dominance and interest only in recent years
+(\citeproc{ref-acemoglu_ai_2020}{Acemoglu et al., 2020a, p. 23f}.), it
+is worth noting the effects of previous technologies. The adoption of
+machines (specifically often industrial robots
+(\citeproc{ref-acemoglu_robots_2020}{Acemoglu and Restrepo, 2020a}; see
+\citeproc{ref-graetz_robots_2018}{Graetz and Michaels, 2018})) and
+software (also referred to as
+computerization(\citeproc{ref-autor_growth_2013}{Autor and Dorn, 2013};
+\citeproc{ref-frey_future_2017}{Frey and Osborne, 2017}; see
+\citeproc{ref-pajarinen_computerization_2015}{Pajarinen et al., 2015}))
+have been seen as previous stages in the evolution of automation, with
+AI composing the next stage
+(\citeproc{ref-acemoglu_harms_2021}{Acemoglu, 2021, p. 19}).
+Furthermore, all of these technologies have been summarized under the
+umbrella term ``automation'' (\citeproc{ref-mann_benign_2018}{Mann and
+Püttmann, 2018, p. 40}) indicating common characteristics and thereby -
+possibly - common effects.
+
+\subsection{Effects of
+Automation}\label{sec-effects-of-automation-on-labor}
+
+In a 2018 study, the introduction of automation technology was found to
+have positive effects on employment gains, but only within the same
+commuting zone (\citeproc{ref-mann_benign_2018}{Mann and Püttmann, 2018,
+p. 26}). These findings contradict the results from Autor et al.
+(\citeproc{ref-autor_untangling_2015}{2015, p. 632}), that found no
+relation between exposure to automation and employment as a whole but
+found a significant decline in employment related to routine tasks in
+the non-manufacturing sector (p.~641). Graetz and Michaels
+(\citeproc{ref-graetz_robots_2018}{2018, p. 766}) found no relationship
+between the usage of industrial robots and net employment. However,
+usage of industrial robots was found to lower employment of low-skilled
+workers. A later study also looking at employment effects induced by
+usage of industrial robots found a significant decline of employment as
+well as a reduction in wages related to robot exposure within a
+commuting zone (\citeproc{ref-acemoglu_robots_2020}{Acemoglu and
+Restrepo, 2020a, pp. 2215f, 2218}). Dauth et al.
+(\citeproc{ref-dauth_german_2017}{2017, p. 25}) found no relation
+between robot exposure and employment in the German market. A few years
+later, Dauth et al. (\citeproc{ref-dauth_adjustment_2021}{2021, p.
+3126ff}) found robot exposure to lead to within-firm and between-firm
+job displacement, with displaced workers having difficulties
+reallocating their jobs within the same industry, leading to a migration
+of workers from manufacturing (where robot exposure is most present) to
+the service sector. They also exhibited that a lack of worker
+protections (for example unionization or tenure) is related to greater
+displacement. These results were also confirmed by Boustan et al.
+(\citeproc{ref-boustan_automation_2022}{2022, pp. 21, 23}) who observed
+that displaced workers acquire new skills and concluded job displacement
+by automation to be less discernible among unionized and high-skilled
+workers. Similarily, Acemoglu and Restrepo
+(\citeproc{ref-acemoglu_robots_2020}{2020a, p. 2215f}., 2218) provided
+evidence showing automation (adoption of industrial robots) within a
+commuting zone (local labor market) relating to significant declines in
+employment as well as wages. By studying 53 developing countries, Cirera
+and Sabetti (\citeproc{ref-cirera_effects_2019}{2019, p. 172}) did not
+find a relationship between exposure to automation and firm level
+employment. However, while a net effect on employment was absent, in
+line with the aforementioned literature, they did find automation to
+alter the composition of tasks and skills within firms (p.~172).
+
+In a purely theoretical approach to the effects of automation on labor,
+Acemoglu and Restrepo (\citeproc{ref-acemoglu_low-skill_2018}{2018a, pp.
+220, 224}) concluded that automation leads to labor displacement and the
+displacement of low skilled-labor leading to an increase in the wage gap
+(pay gap between low-skilled and high-skilled workers) while the
+displacement of high-skilled labor is followed by a reduction in the
+wage gap as high-skill labor reallocates into medium- and low-skilled
+occupations. This reallocation from displaced high-skill labor into
+lower skilled occupations has also been shown by Beaudry et al.
+(\citeproc{ref-beaudry_great_2016}{2016, p. 21}) who studied the effects
+on labor when prices for specific types of labor fall - as is induced
+when substitution (through technology) becomes economically viable.
+While labor displacement induced by the introduction of automation is
+followed by increased inequality between low-skill and high-skilled
+labor in the short run (\citeproc{ref-acemoglu_race_2018}{Acemoglu and
+Restrepo, 2018b, p. 1519}), the creation of new tasks - that is followed
+by increased productivity gains from automation - is seen to reduce this
+gap in the long run (p.~1521). However, this positive outlook of a net
+positive on employment only holds true as long as the productivity
+effects which accompany the adoption of automation technologies offset
+the displacement effects incurred in the first place - and should the
+offset be insufficient, automation is found to negatively impact the
+demand for labor and its wages
+(\citeproc{ref-acemoglu_artificial_2018}{Acemoglu and Restrepo, 2018c,
+p. 227}). There is also growing evidence suggesting automation to cause
+a decline in real wages of low-skilled workers, for example Acemoglu and
+Restrepo (\citeproc{ref-acemoglu_unpacking_2020}{2020b, p. 360f}.) found
+strong relationships between the adoption of automation technology and
+wages. Acemoglu and Restrepo (\citeproc{ref-acemoglu_tasks_2022}{2022,
+p. 1993}) found a relationship between labor displacement and a decrease
+in relative wages, concluding automation to cause an increase in wage
+inequality (p.~1998). Automation is also attributed to the decline in
+the demand for labor in the US over recent decades
+(\citeproc{ref-acemoglu_automation_2019}{Acemoglu and Restrepo, 2019, p.
+21}).
+
+Furthermore, Arntz et al. (\citeproc{ref-arntz_risk_2016}{2016, p. 14f})
+studying 21 OECD countries found 9\% in the US, and over all countries
+studies a 6-12\% high risk of employment to be substitutable for
+automation, while Acemoglu and Autor
+(\citeproc{ref-acemoglu_skills_2011}{2011, p. 61}) came to the
+conclusion that labor displacement by machines mostly affects routine
+tasks.
+
+\subsection{Effects of
+Computerization}\label{sec-effects-of-computerization}
+
+In a study from Finland, Pajarinen et al.
+(\citeproc{ref-pajarinen_computerization_2015}{2015}) found that
+computerization is likely to place high risk of displacement on 35\% of
+the Finish labor market (p.~5), 33\% of Norwegian labor (p.~5) as well
+as 49\% in the US (p.~5). Frey and Osborne
+(\citeproc{ref-frey_future_2017}{2017, p. 41}) found 47\% of US
+employment to have a a high risk suitability for substitution by
+computerization. They further classify the process of automation into
+two ``waves'' with the first wave affecting routine tasks
+(transportation, logistics, office and administration) (p.~41) followed
+by a second wave that, once technological obstacles are overcome, will
+effect the jobs involving creative or abstract tasks (p.~43). Evidence
+also suggests computerization to significantly induce labor displacement
+from occupations relying on routine tasks into higher-skilled
+occupations as well as low-skilled service occupations
+(\citeproc{ref-autor_growth_2013}{Autor and Dorn, 2013, p. 1573})
+
+\subsection{Changes in Occupational
+Composition}\label{sec-changes-of-occupational-composition}
 
 Furthermore, it is important to note that previous research on the
 effects of robots, software and AI - that have been summarized under the
@@ -447,16 +489,22 @@ umbrella term ``automation'' (\citeproc{ref-mann_benign_2018}{Mann and
 Püttmann, 2018, p. 40}) - in general may not have found net negative
 effects on employment but a restructuring of composition of occupations.
 The aforementioned study from Autor et al.
-(\citeproc{ref-autor_untangling_2015}{2015}) {[}p.~644{]} found
-automation, while having no aggregate effects on employment, lead to a
-decline in occupations involving routine tasks and and an increase in
-non-routine (abstract) tasks. The same effect was found in
-(\citeproc{ref-graetz_robots_2015}{\textbf{graetz\_robots\_2015?}})
-studying the introduction of industrial robots. These effects remain
-only harmless as long as the assumption holds true that displaced labor
-can in fact always reallocate itself to new tasks. Should this
-assumption be contradicted, and the the negative effects of automation
-on employment are no longer offset by the positive effects of
+(\citeproc{ref-autor_untangling_2015}{2015, p. 644}) found automation,
+while having no aggregate effects on employment, lead to a decline in
+occupations involving routine tasks and and an increase in non-routine
+(abstract) tasks. Graetz and Michaels
+(\citeproc{ref-graetz_robots_2018}{2018, p. 766}) found the same effect
+studying the introduction of industrial robots. Furthermore, using
+weighted patents and firm level data together with Eurostat's Structural
+Business Statistics, Van Roy et al.
+(\citeproc{ref-van_roy_technology_2018}{2018, p. 7}) technology
+innovation to only have positive effects on employment on firm level as
+well as in high-tech and medium-tech sectors and found no relationship
+between technology innovation and employment in the service sector.
+These effects remain only harmless as long as the assumption holds true
+that displaced labor can in fact always reallocate itself to new tasks.
+Should this assumption be contradicted, and the negative effects of
+automation on employment are no longer offset by the positive effects of
 reallocation, the phenomenon of occupational migration would turn into
 an observation of job destruction.
 
@@ -466,39 +514,37 @@ The introduction of capital, whether to complement or substitute labor,
 intuitively leads to a decline of a firms profits paid to labor as the
 share of labors input relative to the output value decreases. And in
 fact Karabarbounis and Neiman
-(\citeproc{ref-karabarbounis_global_2014}{2014}) {[}p.~99{]} show that
-the observed decline in capital prices explains almost half the decline
-in global labor share, that has been observed in recent decades. This
-might seem problematic as an increasing portion of a firms revenue
-remains as corporate profits and savings (given that the capital
-invested leads to a decrease in marginal costs - through substitution of
-labor and/ or increased production) rather than being redistributed to
-labor. Karabarbounis and Neiman
-(\citeproc{ref-karabarbounis_global_2014}{2014, p. 102}) further show
-that the observed decline in labor share is accompanied by an increase
-in corporate revenue and savings. This is also brought forward from
-Acemoglu and Restrepo (\citeproc{ref-acemoglu_automation_2019}{2019})
-{[}p.~27{]} who conclude that ``{[}\ldots{]} automation always reduces
-the labor share and may reduce labor demand {[}\ldots{]}'' but also
-mention that the creation of new tasks necessarily increases the labor
-share. These results where further solidified by Acemoglu et al.
+(\citeproc{ref-karabarbounis_global_2014}{2014, p. 99}) show that the
+observed decline in capital prices explains almost half the decline in
+global labor share, that has been observed in recent decades. This might
+seem problematic as an increasing portion of a firms revenue remains as
+corporate profits and savings (given that the capital invested leads to
+a decrease in marginal costs - through substitution of labor and/ or
+increased production) rather than being redistributed to labor.
+Karabarbounis and Neiman (\citeproc{ref-karabarbounis_global_2014}{2014,
+p. 102}) further show that the observed decline in labor share is
+accompanied by an increase in corporate revenue and savings. This is
+also brought forward from Acemoglu and Restrepo
+(\citeproc{ref-acemoglu_automation_2019}{2019, p. 27}) who conclude that
+``{[}\ldots{]} automation always reduces the labor share and may reduce
+labor demand {[}\ldots{]}'' but also mention that the creation of new
+tasks necessarily increases the labor share. These results where further
+solidified by Acemoglu et al.
 (\citeproc{ref-acemoglu_competing_2020}{2020b, p. 387}) who investigated
 the French manufacturing market and found firms exposed to automation
 (in this study measured by the introduction of robots) to experience
 significant declines in their labor share.
 
-\subsection{Summary of the different findings -\textgreater{} why
-findings
-differ}\label{summary-of-the-different-findings---why-findings-differ}
+\subsection{Summary}\label{sec-summary-of-effects}
 
-The net impact assessment of automation on socioeconomic factors widely
-differs in the aforementioned literature (see also
+To conclude, the net impact assessment of automation on socioeconomic
+factors widely differs in the aforementioned literature (see also
 \citeproc{ref-frank_toward_2019}{Frank et al., 2019, p. 6532}). Some
 research has focused on local labor markets (commuting zones) (see
 \citeproc{ref-acemoglu_robots_2020}{Acemoglu and Restrepo, 2020a};
 \citeproc{ref-autor_untangling_2015}{Autor et al., 2015};
 \citeproc{ref-autor_growth_2013}{Autor and Dorn, 2013}), while other
-research has researched national effects {[}see xxx{]} and international
+research has focused on national effects {[}TODO{]} and international
 effects (see \citeproc{ref-graetz_robots_2018}{Graetz and Michaels,
 2018}). While one would expect to see the same relationship between the
 chosen variables on all levels and apart from differences in research
@@ -506,34 +552,67 @@ design, it may be difficult to assess effects on a greater aggregate
 level as the number of variables that would need to be included to
 account for differences between and within groups becomes unfeasible.
 
-\subsection{Definitions of AI}\label{definitions-of-ai}
+\subsection{Definitions of AI}\label{sec-definitions-of-ai}
 
-The classification if Artificial Intelligence remains also difficult due
-to the fact that there is yet no widespread agreement on the definition
-of intelligence itself (\citeproc{ref-legg_collection_2007}{Legg and
-Hutter, 2007}).
+Lastly, research on Artificial Intelligence's implication has been
+intrinsically difficult due to the fact that there is no consensus in
+the definition of AI yet (\citeproc{ref-damioli_impact_2021}{Damioli et
+al., 2021, p. 7}; see \citeproc{ref-lu_review_2021}{Lu and Zhou, 2021,
+p. 1063}). The classification of Artificial Intelligence remains also
+difficult due to the fact that there is yet no widespread agreement on
+the definition of intelligence itself (see
+\citeproc{ref-legg_collection_2007}{Legg and Hutter, 2007}). While AI
+and machine learning are sometimes regarded as two different terms, the
+former applying to the industry and the latter applying to the
+technology (\citeproc{ref-crawford_atlas_2021}{Crawford, 2021, p. 9}),
+in this research, the term Artificial Intelligence refers to the
+underlying technologies and its applications.
 
 Given the various contradicting results on the relationship between
 automation and labor effects and the increasing presence of AI, this
 research aims to add to the current corpus of literature by assessing
 the relationship between AI innovation and socioeconomic factors.
 Specifically, the research question is as follows: How does AI
-innovation across industries impact labor?
+innovation across industries impact labor displacement and labor
+conditions?
 
-\#TODO: define that AI and machine learning are sometimes regarded as
-two different things. But that this paper uses the two interchangeably.
-(Crawford)
+\section{Methodology}\label{sec-methodology}
 
-\section{Methodology}\label{methodology}
+The following section introduces the methodology adopted in this
+research along with the data sources used, the data acquisition process,
+the data preprocessing methods as well as an overfiew of the data, the
+chosen model and its hypotheses. Note that the data acquisition,
+preprocessing, as well as the statistical models have been implemented
+in Python and are available in the GitHub repository accompanying this
+research (\citeproc{ref-rieg_socioeconomic_2023}{Rieg, 2023}). The
+repository also contains the source code for this paper as a Quarto
+document (\citeproc{ref-allaire_quarto_2022}{Allaire et al., 2022}) as
+well as seperate source code for most tables and figures provided in
+this paper.
 
-The methodological approach has similarities to Mann and Püttmann
-(\citeproc{ref-mann_benign_2018}{2018, p. 13}) who used patent counts as
-a proxy for estimating the level of automation present within a US
-commuting zone. However, the method of selecting patents differs. While
+A key problem to current AI research is the lack availability on precise
+data about the usage and implementation of AI technologies
+(\citeproc{ref-seamans_ai_2018}{Seamans and Raj, 2018, p. 5f}.).
+Therefore, this research adopts an approach which has similarities to
+Mann and Püttmann (\citeproc{ref-mann_benign_2018}{2018, p. 13}) who
+used patent counts as a proxy for estimating the level of automation
+present within a US commuting zone and Van Roy et al.
+(\citeproc{ref-van_roy_technology_2018}{2018}) who used firm-level
+citation-weighted patent counts to measure effects on employment.
+However, the here presented method of patent selection differs. While
 Mann and Püttmann (\citeproc{ref-mann_benign_2018}{2018}) classified
 texts based on the tasks they may effect within occupations, the
 presented approach here uses API query composition to preselect patents
-whose title or abstract match keywords reserved to an industry.
+whose title or abstract match keywords reserved to an industry. It
+should be noted that there have been other approaches to measure the
+presence of AI, such as using the AI Progress Measurement from the
+Electronic Frontier Foundation (EFF) and job postings
+(\citeproc{ref-acemoglu_ai_2020}{Acemoglu et al., 2020a, p. 12}) and
+surveys (\citeproc{ref-gruetzemacher_forecasting_2020}{Gruetzemacher et
+al., 2020, p. 4}). However, the EFF project, while being a promising
+source of data, has been discontinued in 2017
+(\citeproc{ref-electronic_frontier_foundation_ai_2017}{Electronic
+Frontier Foundation, 2017}).
 
 \subsection{Data Sources}\label{sec-data-sources}
 
@@ -543,7 +622,7 @@ Office's Open Patent Services (OPS) API
 2023}) as well as the Annual Structural Business Statistics (SBS) by
 Eurostat
 (\citeproc{ref-european_commission_eurostat_structural_nodate}{European
-Commission, Eurostat, n.d.a}). Furthermore, Eurostats code lists of
+Commission, Eurostat, n.d.a}). Furthermore, Eurostat's code lists of
 Statistical classification of economic activities in the European
 Community (NACE Revision 2)
 (\citeproc{ref-european_commission_eurostat_statistical_2023}{European
@@ -552,7 +631,7 @@ indicators for Eurostat's SBS
 (\citeproc{ref-european_commission_eurostat_economical_2023}{European
 Commission, Eurostat, 2023b}) are retrieved to map codes to their
 respective definition. Additionally Cooperative Patent Classification
-(CPC) codes are retrieved manually from the European Patent Ofiice's
+(CPC) codes are retrieved manually from the European Patent Office's
 Espacenet website
 (\citeproc{ref-european_patent_office_classification_nodate}{European
 Patent Office, n.d.a}).
@@ -566,19 +645,18 @@ allows for a structural hierarchical classification of patents
 Patent Office, n.d.b}). As seen in Table~\ref{tbl-cpc-codes}, CPC codes
 are composed of a section (alphabetical), class (numerical), subclass
 (alphabetical), and main group (numerical). The CPC codes are used to
-retrieve patents that utilize artificial intelligence technology.
-
-The European Patent Office's OPS API allows for programmatic access to
-the Patent Office's database
+retrieve patents that utilize artificial intelligence technology. The
+European Patent Office's OPS API allows for programmatic access to the
+Patent Office's database
 (\citeproc{ref-european_patent_office_open_2023}{European Patent Office,
 2023}). With it, one can retrieve data on individual patents, such as -
 among others - their title and abstract, date of application, place of
 application, the names of the applicants, the patents classification
 (CPC), and a patent's references to other patents and documents. The OPS
-will is used to systematically retrieve patents with that contain
-specified attributes (see Section~\ref{sec-data-acquisition}). Retrieved
-patents are used as a proxy for the current level of interest and level
-of innovation in AI, which in turn is assumed to be an indicator for the
+is used to systematically retrieve patents with that contain specified
+attributes (see Section~\ref{sec-data-acquisition}). Retrieved patents
+are used as a proxy for the current level of interest and level of
+innovation in AI, which in turn is assumed to be an indicator for the
 extend to which AI is present within an industry.
 
 \subsubsection{Structural Business
@@ -601,14 +679,15 @@ about a variety of indicators, such as the number of enterprises present
 in an industry, the number of employees, and monetary value produced
 (\citeproc{ref-european_commission_commission_2009}{European Commission,
 2009}). While the SBS offers a variety of indicators (see
-\citeproc{ref-european_commission_regulations_2009}{\textbf{european\_commission\_regulations\_2009?}}),
-this research focuses on the following. First, the number of enterprises
-present within an industry. This variable has been chosen to describe a
-possible relationship between the current number of AI patent
+\citeproc{ref-european_commission_commission_2009}{European Commission,
+2009}), this research focuses on the following. First, the number of
+enterprises present within an industry. This variable has been chosen to
+describe a possible relationship between the current number of AI patent
 applications and a possible trend towards a monopolistic market
 structure. The intuition here being that a market trending towards
 monopoly (not actually exhibiting monopoly) gains increasing leverage
-(bargaining power) over labor.\\
+(bargaining power) over labor.
+
 Second, the number of Employees. Given the literature introduced in the
 previous section, one would expect two possible relationships between
 the number of patents retrieved and the number of employees. Either,
@@ -619,7 +698,8 @@ endogenous and exogenous variables. Or, technology acts as a substitute
 for labor, i.e., displacing labor at a rate higher than new occupations
 are introduced into the industry. In this case, one expects a negative
 relationship between the introduction of technology and the number of
-employees.\\
+employees.
+
 Third, the wage adjusted labor productivity. It is expressed as a ration
 of value added over average personnel expenses
 (\citeproc{ref-european_commission_eurostat_wage_2023}{European
@@ -633,12 +713,14 @@ technology always enhances labor productivity (either through
 displacement or complementation). Both ways should exhibit a rise in
 wage adjusted labor productivity as the numerator of the ratio
 increases. Of course, there may be scenarios in which simultaneously the
-denominator - wages - increases, too.\\
+denominator - wages - increases, too.
+
 Fourth, gross value added per employee. This variable was chosen on the
 assumption of increased productivity through the adoption of new
 technology. As capital (in this case AI technology) aids to increase
 output production on a marginal (per employee) basis, one would expect
-the ratio to grow with increased adoption of technology.\\
+the ratio to grow with increased adoption of technology.
+
 Fifth, the percentage of personnel costs in production, which is a
 derived value from production costs and and personnel costs, calculated
 by Eurostat
@@ -649,7 +731,7 @@ decrease with the adoption through technology. Either because capital
 spending is increased, or marginal costs of capital is decreased, or
 production quantity (and value ) is increased by adoption of new
 technology. The SBS data's indicators are used as the endogenous
-variables to by explained by the number of retrieved patent
+variables to be explained by the number of retrieved patent
 applications.
 
 \subsubsection{Definition of AI}\label{definition-of-ai}
@@ -667,8 +749,8 @@ is no legal definition yet - at least in the EU - technologies listed in
 the European Commision's latest proposal for the ``Artificial
 Intelligence Act{[}'s{]}''
 (\citeproc{ref-european_commission_proposal_2021}{European Commission,
-2021}) annex (\citeproc{ref-european_commission_annexes_202}{European
-Commission, 202AD}) will be used.\footnote{The European Commission's
+2021a}) annex (\citeproc{ref-european_commission_annexes_2021}{European
+Commission, 2021b}) will be used.\footnote{The European Commission's
   proposal for the ``Artificial Intelligence Act'' is currently in the
   legislative process. At the time of writing, the European Parliament
   has made amendments to this proposal, one of which - unfortunately -
@@ -678,8 +760,8 @@ Commission, 202AD}) will be used.\footnote{The European Commission's
   2023, p. 326f}.). For the time being, the EU Parliament's new
   definition (amendment 165, p.~111f.) of Artificial Intelligence is
   rather vague, which is why the European Comission's initial proposal's
-  definition will be used.} In its annex \textbackslash rom\{1\}, the
-European Commsission suggests the following definition for AI.
+  definition will be used.} In its annex \Romannum{1}, the European
+Commsission suggests the following definition for AI.
 
 \setstretch{1}
 
@@ -692,8 +774,8 @@ representation, inductive (logic) programming, knowledge bases,
 inference and deductive engines, (symbolic) reasoning and expert
 systems;\\
 (c) Statistical approaches, Bayesian estimation, search and optimization
-methods.'' (\citeproc{ref-european_commission_annexes_202}{European
-Commission, 202AD, p. 2})
+methods.'' (\citeproc{ref-european_commission_annexes_2021}{European
+Commission, 2021b, p. 2})
 \end{quote}
 
 \setstretch{1.5}
@@ -743,48 +825,48 @@ This is done on the division level (the second level of NACE codes). As
 a result, keywords are extracted and grouped by their respective
 division. For example. for NACE industry ``A'', which relates to
 ``agriculture, forestry and fishing''
-(\citeproc{ref-eurostat_economical_2023}{\textbf{eurostat\_economical\_2023?}}),
-keywords are extracted for its three divisions, ``crop and animal
-production, hunting and related service activities'' (A01), ``forestry
-and logging'' (A02), and ``fishing and aquaculture'' (A03). To ensure
-only relevant keywords are used, each description is cleaned of common
-characters and unrelated words (e.g., ``,'', ``and'', ``or'', ``to'') as
-well as duplicate words. Descriptions for each industry are then split
-into lists of single keywords that will be used in the API query. As a
-result, extracted keywords are identifiable by their section as well as
-division.
+(\citeproc{ref-european_commission_eurostat_economical_2023}{European
+Commission, Eurostat, 2023b}), keywords are extracted for its three
+divisions, ``crop and animal production, hunting and related service
+activities'' (A01), ``forestry and logging'' (A02), and ``fishing and
+aquaculture'' (A03). To ensure only relevant keywords are used, each
+description is cleaned of common characters and unrelated words (e.g.,
+``,'', ``and'', ``or'', ``to'') as well as duplicate words. Descriptions
+for each industry are then split into lists of single keywords that will
+be used in the API query. As a result, extracted keywords are
+identifiable by their section as well as division.
 
 Because some industries contain a variety of different activities (e.g.,
 NACE industry (section) ``A'' relates to ``Agriculture, forestry and
 fishing''
-(\citeproc{ref-eurostat_economical_2023}{\textbf{eurostat\_economical\_2023?}})),
-main (industry) keywords that relate to the section as a whole are
-manually selected (see Table~\ref{tbl-nacemainkeywords} in the
-\nameref{sec-appendix}). In other words, while general (division)
-keywords are selected from the descriptions of groups within a division,
-main keywords are extracted from the description of a section. For each
-division within a section (industry), queries are then build using the
-(manually selected) main (industry) keywords, the general (division)
-keywords, as well as the chosen CPC codes. The general structure of a
-query is as follows. Queries are build on the level of divisions. For
-each division, a query is composed that retrieves patents that have at
-least one of the main keywords of the respective section (industry) in
-its title or abstract, at least one keyword of the division's general
-keywords in its title or abstract, at least one of the chosen CPC codes
-in the patent's list of CPC codes, and an application number starting
-with ``EP'', relating to the European Patent Office.\footnote{To be
-  precise, because of the API's restrictions, there can be multiple
-  queries for the same division. The OPS API allows for a maximum number
-  of 20 ``terms'' (keywords, such as a single CPC code or industry
-  keyword) but also only a maximum number of 10 terms per argument (such
-  as keywords that must be contained in the patent's title or abstract;
-  the argument is ``title or abstract''). Given that each query contains
-  seven CPC codes and one application number, if there are together more
-  than 12 main keywords and general keywords, the general keywords are
-  subdivided into smaller chunks across multiple queries. Therefore,
-  each query contains all main keywords, CPC codes and the application
-  number, while the remaining terms are filled with the general
-  keywords.}
+(\citeproc{ref-european_commission_eurostat_economical_2023}{European
+Commission, Eurostat, 2023b})), main (industry) keywords that relate to
+the section as a whole are manually selected (see
+Table~\ref{tbl-nacemainkeywords} in the \nameref{sec-appendix}). In
+other words, while general (division) keywords are selected from the
+descriptions of groups within a division, main keywords are extracted
+from the description of a section. For each division within a section
+(industry), queries are then build using the (manually selected) main
+(industry) keywords, the general (division) keywords, as well as the
+chosen CPC codes. The general structure of a query is as follows.
+Queries are build on the level of divisions. For each division, a query
+is composed that retrieves patents that have at least one of the main
+keywords of the respective section (industry) in its title or abstract,
+at least one keyword of the division's general keywords in its title or
+abstract, at least one of the chosen CPC codes in the patent's list of
+CPC codes, and an application number starting with ``EP'', relating to
+the European Patent Office.\footnote{To be precise, because of the API's
+  restrictions, there can be multiple queries for the same division. The
+  OPS API allows for a maximum number of 20 ``terms'' (keywords, such as
+  a single CPC code or industry keyword) but also only a maximum number
+  of 10 terms per argument (such as keywords that must be contained in
+  the patent's title or abstract; the argument is ``title or
+  abstract''). Given that each query contains seven CPC codes and one
+  application number, if there are together more than 12 main keywords
+  and general keywords, the general keywords are subdivided into smaller
+  chunks across multiple queries. Therefore, each query contains all
+  main keywords, CPC codes and the application number, while the
+  remaining terms are filled with the general keywords.}
 
 The resulting query is then used to retrieve patents from the OPS API.
 Initially, queries were created not only for the European Patent Office
@@ -797,7 +879,7 @@ titles and abstracts in their native language which renders the chosen
 keywords in the query language (English) ineffective. As a result, the
 decision was made to only retrieve patents filed with the European
 Patent Office. This approach disregards patents filed with national
-patent offices. The query is composed of the following elements.
+patent offices. The query is composed of the following elements:
 
 \setstretch{1.0}
 
@@ -807,7 +889,7 @@ CPC Codes) AND (ap = ``EP'')}\\
 \emph{Note: ta = title or abstract; ap = Application Number, referring
 to the Patent Office the patent was filed at. In this case, ``EP''
 refers to the European Patent Office. See Table~\ref{tbl-queryexample}
-for example queries}
+for example queries.}
 \end{quote}
 
 \setstretch{1.5}
@@ -836,15 +918,15 @@ indicators as well as industries, data retrieved from Eurostat (SBS, and
 Code Lists about NACE and SBS codes) is merged. This is done by matching
 the NACE codes and SBS indicator codes to the respective NACE code and
 indicator in the SBS data. The economic indicators ``Enterprises'' and
-``Persons employed'' are reported as totals. ``Wage adjusted labour
-productivity (Apparent labour productivity by average personnel costs)''
+``Persons employed'' are reported as totals. ``Wage adjusted labor
+productivity (Apparent labor productivity by average personnel costs)''
 and ``Share of personnel costs in production'' are reported as
 percentages, and ``Gross value added per employee'' is reported in
 Euros. Because the number of employees is rather large for each
 industry, the number of employees is divided by 1000 to reduce the scale
 of the data. This increases readability of tables in the following
 regression results while also still large enough that it is unlikely for
-coefficients (coeff.) and standard errors (SE) to fall too far into the
+coefficients (coef.) and standard errors (SE) to fall too far into the
 decimals.\footnote{Note that this is done to ensure readability and does
   not affect the regression results. Defactoring data by more than a
   thousand might lead to coefficients and standard errors falling into
@@ -852,25 +934,22 @@ decimals.\footnote{Note that this is done to ensure readability and does
   despite having large scale effects.\label{note3}}
 
 Next, patent data retrieved from the OPS API, which returns data in JSON
-format, is converted into a pandas DataFrame
-(\citeproc{ref-the_pandas_development_team_pandas-devpandas_2023}{The
-pandas development team, 2023}) (i.e., a table). As multiple queries for
-the same industry - but with different keywords - have been posted to
-the API, duplicates in the patent data are removed. Specifically,
-duplicate patent data (indicated by the patent application number) are
-removed in each industry subset of the data. This ensures that each
-industry only contains unique patents while patents can still appear in
-more than one industry (as their applicable usage may not be restricted
-to only one industry). Furthermore, as the SBS data only spans from 2011
-to 2020, patents that have been filed before or after this period are
-removed from the data. As a next step, patents are grouped by their
-respective industry and year of application and the patent count for
-each subgroup is recorded. Furthermore, industries for which patents
-have been retrieved in less than four years within 2011-2020 are removed
-from the data to ensure a minimum sample size for the following
-statistics. The sum of patents for each industry and year composes the
-exogenous variable ``Sum patents'' that will be used in the regression
-analyses.
+format, is converted into a table. As multiple queries for the same
+industry - but with different keywords - have been posted to the API,
+duplicates in the patent data are removed. Specifically, duplicate
+patent data (indicated by the patent application number) are removed in
+each industry subset of the data. This ensures that each industry only
+contains unique patents while patents can still appear in more than one
+industry (as their applicable usage may not be restricted to only one
+industry). Furthermore, as the SBS data only spans from 2011 to 2020,
+patents that have been filed before or after this period are removed
+from the data. As a next step, patents are grouped by their respective
+industry and year of application and the patent count for each subgroup
+is recorded. Furthermore, industries for which patents have been
+retrieved in less than four years within 2011-2020 are removed from the
+data to ensure a minimum sample size for the following statistics. The
+sum of patents for each industry and year composes the exogenous
+variable ``Sum patents'' that will be used in the regression analyses.
 
 Furthermore, the SBS data is merged with the patent data by matching the
 industry and year of application with the industry and year of the SBS
@@ -893,8 +972,8 @@ are available.\footnote{There are valid arguments to be made for and
   the data's integrity, removing the missing values has been chosen over
   the data's precision.} However, in some cases, patents were
 discontinuously retrieved for industries. In other words, if patents are
-retrieved for an industry in 2016, 2018, 2019, and 2020, but not in
-2017, the SBS data for 2017 and the respective do not have a
+retrieved for an industry in 2016, 2018, 2019 and 2020 but not in 2017,
+the SBS data for 2017 with its respective indicators do not have a
 corresponding patent count. In order to account for missing values
 within a series of definite patent retrieval, the patent count for the
 missing year is set to zero. This is done for each industry and year
@@ -907,7 +986,7 @@ removed from the data. This is done to ensure that the regression
 analyses are only conducted for years in which SBS data is available.
 The resulting data is then used for the regression analyses. In summary,
 data for each year and industry will be used further if the following
-conditions are met.
+conditions are met:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -927,15 +1006,15 @@ The resulting data contains 211 data points across six industries, each
 with five economic indicators. However, given the relatively short time
 period in which data could have been collected, paired with the fact
 that the retrieved patents are aggregated for each year, the resulting
-data size for each industry and economic indicator is relative small.
-The average number of years in which patent counts have been recorded
--according to the methods above- is only seven years, ranging from a
-minimum of four years up to ten years. Since each year per industry and
-indicator will be used as a data point in the following regression
-analyses, it is neccesary to note that results may be biased due to the
-small sample size. Furthermore, given the small dataset -which makes
+data size for each industry and economic indicator is relatively small.
+The average number of years in which patent counts have been recorded -
+according to the methods above - is only seven years, ranging from a
+minimum of four years up to ten years. Since each year's industry and
+indicator are be used as a data point in the following regression
+analyses, it is necessary to note that results may be biased due to the
+small sample size. Furthermore, given the small dataset - which may
 diminishes the accuracy with which a regression can be fitted (i.e.,
-fewer ``anchor points''), assumptions about the extend to which patent
+fewer ``anchor points'') - assumptions about the extend to which patent
 counts affect the chosen economic indicators will not be made. Instead,
 the regression analyses will be used to assess whether a relationship
 between the number of patents and the chosen economic indicators exists
@@ -953,21 +1032,21 @@ for each industry and year - log scale}
 
 \end{figure}
 
-Because the collected data comrpises a time-series, as each industry's
+Because the collected data comprises a time-series, as each industry's
 patent application counts as well as the SBS data have been retrieved
 for multiple years. As shown in
 Figure~\ref{fig-untransformed-data-example}, the collected data on SBS
 indicators (blue) as well as the number of patents retrieved each year
 (red) clearly does not exhibit stationarity. In order to account for any
 trends in the data, the collected data is transformed using linear
-detrending method. This is done by utilicing scipy's detrending method
+detrending method. This is done by utilizing scipy's detrending method
 (\citeproc{ref-virtanen_scipy_2020}{Virtanen et al., 2020}), which fits
 a linear least-squares regression to the data and subtracts the
 resulting trend of the regression line from the data
 (\citeproc{ref-the_scipy_community_scipysignaldetrend_2023}{The SciPy
 community, 2023}). Note that other detrending options, such as
 logarithmic transformation or differencing have been considered but
-deemed insifficient. Logarithmic transformation is not applicable as the
+deemed insufficient. Logarithmic transformation is not applicable as the
 data contains zero values. While there are methods to circumvent this,
 for example taking the logarithm \(log(x+1)\), this would lead to
 non-null values where null values are expected to control for variance
@@ -1005,7 +1084,7 @@ years}
 
 \end{figure}
 
-Because data has been linearily detrended, to account for any remaining
+Because data has been linearly detrended, to account for any remaining
 trend left in the data, the control variable ``Year'' is added to the
 regression analyses. This is done to ensure that any remaining trend in
 the data is accounted for and does not bias the regression results.
@@ -1028,13 +1107,13 @@ linear regression model is used. For each industry, the number of
 patents retrieved for each year is used as the exogenous variable to
 explain the endogenous variables, which are the chosen economic
 indicators. Given five economic indicators across 6 industries, 30
-regressions are modelled. The relationship between the number of patents
+regressions are modeled. The relationship between the number of patents
 and the chosen economic indicators are assumed to be linear. While other
 relationships may be plausible too, given the small sample size, the
 assumption of linearity is made to ensure against possible overfitting
 (see Section~\ref{sec-limitations}).
 
-\subsubsection{Hypothesis}\label{sec-hypothesis}
+\subsection{Hypotheses}\label{sec-hypotheses}
 
 Do determine whether a relationship between the number of patents and
 the chosen economic indicators exists, the following hypotheses are
@@ -1056,8 +1135,11 @@ H_{0, i, j}: \beta_1 = 0\text{ for }j=c=\text{personnel costs in production, } i
 
 The following section presents the main findings from the regression
 analyses. Results are summarized by industry, allowing a sectional
-comparrison of patent counts' influence on economic indicators within an
-industry.
+comparison of patent counts' influence on economic indicators within an
+industry. Note that detailed data about regression results as well as
+tests for multiple regression assumptions can be found in the
+\nameref{sec-appendix} in Table~\ref{tbl-summary-reg-results-b} to
+Table~\ref{tbl-summary-reg-results-j}.
 
 \setstretch{1}
 
@@ -1114,8 +1196,7 @@ R-squared & 0.3624 & 0.0017 & 0.0608 & 0.0411 & 0.3024 \\
 R-squared Adj. & -0.2751 & -0.9966 & -0.8784 & -1.8766 & -0.3952 \\
 \end{longtable}
 
-\emph{* p \textless{} 0.1, ** p \textless{} 0.05, *** p \textless{}
-0.01. Standard errors in paranthesis}
+\vspace{-1.5em}\begin{flushleft}\footnotesize\textit{* p < 0.1, ** p < 0.05, *** p < 0.01. Standard errors in parentheses.}\end{flushleft}
 
 \setstretch{1.5}
 
@@ -1124,12 +1205,12 @@ For patents classified as industry ``Mining and Quarrying'' (NACE code
 regression results show no significant relation between the sum of
 patents retrieved for each year and the chosen indicators. Furthermore,
 the control variable ``Year'', too, does not exhibit any significant
-relationships with the economic indicators. It should be noted, howver,
+relationships with the economic indicators. It should be noted, however,
 that the number of patents retrieved for this industry is very low.
-While, as discussed in the \nameref{sec-data-acquisition}, industries
-for which patents were retrieved in fewer than five years were
-eliminated from the data, for Mining and Quarrying only 17 patents in
-five years were retrieved. As a result, the nullhypotheses
+While, as discussed in \nameref{sec-data-acquisition}, industries for
+which patents were retrieved in fewer than five years were eliminated
+from the data, for Mining and Quarrying only 17 patents in five years
+were retrieved. As a result, the nullhypotheses
 \(H_{0, i, j}\text{ for }j\in \{e, L, l, v, c\}, i=B\) are not rejected.
 
 \setstretch{1}
@@ -1187,13 +1268,15 @@ R-squared & 0.0000 & 0.9109 & 0.6839 & 0.9453 & 0.7790 \\
 R-squared Adj. & -0.9999 & 0.8218 & 0.3677 & 0.8907 & 0.5580 \\
 \end{longtable}
 
+\vspace{-1.5em}\begin{flushleft}\footnotesize\textit{* p < 0.1, ** p < 0.05, *** p < 0.01. Standard errors in parentheses.}\end{flushleft}
+
 \setstretch{1.5}
 
 For patents classified as industry ``Manufacturing'' (NACE code ``C''),
 depicted in Table~\ref{tbl-regression-results-ind-c}, the regression
 results show a statistically significant negative relationship between
 the number of retrieved patents and the number of employees within the
-Manufacturing sector (coeff. -82.488.8, SE 18.243`). In particular, the
+Manufacturing sector (coef. -82.488.8, SE 18.243`). In particular, the
 regression result's coefficient estimates a decrease of 82489 employees
 for each additional patent retrieved\footnote{Note that while the
   coefficient's implications are mentioned, this merely refers to the
@@ -1201,7 +1284,7 @@ for each additional patent retrieved\footnote{Note that while the
   result with real-world implications. The regression model is not
   intended to be used for prediction.}. Furthermore, the control
 variable ``Year'' does not exhibit a statistically significant
-relationship with the number of employees (coeff. 0). The adjusted
+relationship with the number of employees (coef. 0). The adjusted
 \(R^2\) of 0.82 indicates a high ratio of explainability for the model.
 
 While there are no statistically significant relations between the
@@ -1209,10 +1292,10 @@ number of patents retrieved and the number of enterprises, wage adjusted
 labor productivity (labor prod.) and the percentage of personnel costs
 in production, the relationship between the number of patents and the
 gross value added per employee is statistically significant and negative
-(coeff. -203.313, SE 34.574) with an adjustes \(R^2\) of 0.89. Lastly,
-it should be noted that the control variable does not exhibit a
+(coef. -203.313, SE 34.574) with an adjusted \(R^2\) of 0.89. Lastly, it
+should be noted that the control variable does not exhibit a
 statistically significant relationship with any of the economic
-indicators. In summary, As a result, the nullhypotheses
+indicators. As a result, the nullhypotheses
 \(H_{0, i, j}\text{ for }j\in \{L, v\}, i=C\) are rejected and
 \(H_{0, i, j}\text{ for }j\in \{e, l, c\}, i=C\) cannot be rejected.
 
@@ -1271,6 +1354,8 @@ R-squared & 0.1983 & 0.0750 & 0.4113 & 0.2902 & 0.8780 \\
 R-squared Adj. & -0.2025 & -0.3875 & 0.1170 & -0.0647 & 0.6341 \\
 \end{longtable}
 
+\vspace{-1.5em}\begin{flushleft}\footnotesize\textit{* p < 0.1, ** p < 0.05, *** p < 0.01. Standard errors in parentheses.}\end{flushleft}
+
 \phantomsection\label{tbl-regression-results-ind-f}
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1404}}
@@ -1323,6 +1408,8 @@ Year & 0.0000 & 0.0000 & 0.0000 & -0.0000 & -0.0000 \\
 R-squared & 0.3740 & 0.3359 & 0.2851 & 0.0037 & 0.0756 \\
 R-squared Adj. & -0.0434 & -0.1068 & -0.1915 & -0.6604 & -0.5407 \\
 \end{longtable}
+
+\vspace{-1.5em}\begin{flushleft}\footnotesize\textit{* p < 0.1, ** p < 0.05, *** p < 0.01. Standard errors in parentheses.}\end{flushleft}
 
 \setstretch{1.5}
 
@@ -1396,6 +1483,8 @@ R-squared & 0.6665 & 0.0111 & 0.6362 & 0.3914 & 0.5673 \\
 R-squared Adj. & 0.5712 & -0.2715 & 0.5322 & 0.2175 & 0.4436 \\
 \end{longtable}
 
+\vspace{-1.5em}\begin{flushleft}\footnotesize\textit{* p < 0.1, ** p < 0.05, *** p < 0.01. Standard errors in parentheses.}\end{flushleft}
+
 \setstretch{1.5}
 
 The regression models between number of patents allocated to the
@@ -1407,7 +1496,7 @@ Enterprises present in any given year. The coefficient of 94.78 (SE
 159.016) implies a positive relationship between the number of AI
 patents and the number of Enterprises. The control variable remains
 statistically insignificant. This holds also true for the remaining
-indicators modelled within the transportation and storage industry. The
+indicators modeled within the transportation and storage industry. The
 adjusted \(R^2\) of 0.57 indicates that over 50\% of the predictors'
 variance is explained by the model. No statistically significant
 relationship can be reported between the industries retrieved annual
@@ -1417,7 +1506,7 @@ statistically negative relationship to increasing patent AI patent
 filings with a coefficient of -0.102 and a standard error of 0.029 (Adj.
 \(R^2\) 0.532). The same relationship occurs for the percentage of
 personnel costs in production is found to be significantly positively
-related to the number of patents filed (coeff. 0.005, SE 0.005). To
+related to the number of patents filed (coef. 0.005, SE 0.005). To
 conclude, hypotheses \(H_{0, i, j}\text{ for }j\in \{e, l, c\}, i=H\)
 are rejected and \(H_{0, i, j}\text{ for }j\in \{L, v\}, i=H\) cannot be
 rejected.
@@ -1477,20 +1566,22 @@ R-squared & 0.0009 & 0.0535 & 0.7242 & 0.8213 & 0.4411 \\
 R-squared Adj. & -0.2846 & -0.2169 & 0.6454 & 0.7703 & 0.2815 \\
 \end{longtable}
 
+\vspace{-1.5em}\begin{flushleft}\footnotesize\textit{* p < 0.1, ** p < 0.05, *** p < 0.01. Standard errors in parentheses.}\end{flushleft}
+
 \setstretch{1.5}
 
 Lastly, the regression models' results, as shown in
-Table~\ref{tbl-regression-results-ind-j}, paint a somewhat similar
-picture for the information and communication industry (NACE code
-``J''). Here no significant relationship was found between the number of
-patents retrieved and the number of enterprises, with a negative
-adjusted \(R^2\), showing independent variables yielding no explanatory
-power over the dependent variable. The same results can be reported for
-the model on the number of employees. However, the number of patents
+Table~\ref{tbl-regression-results-ind-j}, yield similar results for the
+information and communication industry (NACE code ``J''). Here no
+significant relationship was found between the number of patents
+retrieved and the number of enterprises, with a negative adjusted
+\(R^2\), showing independent variables yielding no explanatory power
+over the dependent variable. The same results can be reported for the
+model on the number of employees. However, the number of patents
 retrieved is found to be significantly and positively related to wage
-adjusted labor productivity (coeff. 0.033, SE 0.008) and results show an
+adjusted labor productivity (coef. 0.033, SE 0.008) and results show an
 adjusted \(R^2\) of 0.645. The same relationship can be reported for the
-gross value added per employee (coeff. 22.082, SE 3.893), which yields
+gross value added per employee (coef. 22.082, SE 3.893), which yields
 the highest adjusted \(R^2\) (0.770) of all models in this analysis. The
 number of AI patents does not significantly explain the percentage share
 of personnel costs in production. Therefore,
@@ -1500,10 +1591,10 @@ of personnel costs in production. Therefore,
 In summary, the models' results paint a rather mixed picture with the
 majority of models tested showing statistically insignificant
 relationships between the number of AI patents retrieved for an
-industry, and the the chosen economic indicators reported within each
+industry, and the chosen economic indicators reported within each
 industry. Only seven out of the 30 models tested exhibit statistically
 significant relationships. The results are further exacerbated, when one
-considers the fact that the chance of a rare event occuring increases
+considers the fact that the chance of a rare event occurring increases
 with repeated exposure to that probability.\footnote{A good analogy
   would be that the chance of winning the lottery increases with
   repeated playing. Or that the chance of rolling a six on a die is more
@@ -1511,8 +1602,8 @@ with repeated exposure to that probability.\footnote{A good analogy
 the possibility of false positives is the Bonferroni Correction
 (\citeproc{ref-mittelhammer_econometric_2000}{Mittelhammer et al., 2000,
 p. 73f}.). Given the above chosen \(\alpha\)-level of 0.05, the
-Bonferroni Correction counterbalances the increased likelyhood of rare
-events (in this case, the Type I error) occuring when exposed to a
+Bonferroni Correction counterbalances the increased likelihood of rare
+events (in this case, the Type I error) occurring when exposed to a
 plurality of situations in which they could occur (e.g., running a
 multitude of regressions). The Bonferroni Correction is calculated by
 dividing the chosen \(\alpha\)-level by the number of tests conducted.
@@ -1546,6 +1637,8 @@ Labor prod. (\%) & & & & & 0.01001 & 0.00362 \\
 Personnel costs (\%) & & & & & 0.01913 & \\
 \end{longtable}
 
+\vspace{-1.5em}\begin{flushleft}\hspace{3cm}\footnotesize\textit{Note: p values for regression models smaller than 0.05.}\end{flushleft}
+
 \setstretch{1.5}
 
 Table~\ref{tbl-pvalues}, depicts only the number of patents'
@@ -1561,14 +1654,14 @@ some of the presented results are likely to be false positives.
 
 \section{Discussion}\label{sec-discussion}
 
-\subsection{Implications}\label{implications}
+\subsection{Implications}\label{sec-implications}
 
 This research aims to answer the question of if and how AI innovation
 impacts labor. Given the mixed results presented in
 Section~\ref{sec-results}, it is difficult to deduce clear implications
 of the findings. While there are significant relationships between some
 of the number of AI patent filed and industries and indicators, the vast
-majority depicts -if any- insufficiently strong links between the main
+majority depicts - if any - insufficiently strong links between the main
 predictor and predicted variable. Furthermore, as discussed in
 Section~\ref{sec-results}, when adjusting the p value threshold for the
 number of models fitted, only one model out of 30 fits fulfills this new
@@ -1650,29 +1743,31 @@ Patents (sum) & 17 & 39 & 26 & 21 & 374 & 713 & & \\
 Sample size & 5 & 5 & 7 & 6 & 10 & 10 & & \\
 \end{longtable}
 
+\vspace{-1.5em}\begin{flushleft}\footnotesize\textit{Note: p values for regression models smaller than 0.05. * indicates a positive coefficient.}\end{flushleft}
+
 \setstretch{1.5}
 
 Table~\ref{tbl-pvalues-extended} builds upon Table~\ref{tbl-pvalues} and
 depicts the significant regression results from
-Section~\ref{sec-results} that fall beneath the unadjusted
-\alpha treshold of 005 in conjunction with the sign of the sum of
-patent's coefficients (``*'' for a positive coef.) as well as the number
-of total patents retrieved by industry and indicator (``Patents (sum)'')
-and the sample size by industry and indicator (``Smple size''). The sum
-of patents here is the total sum of individual patents retrievd. The
+Section~\ref{sec-results} that fall beneath the unadjusted \(\alpha\)
+threshold of 005 in conjunction with the sign of the sum of patent's
+coefficients (``*'' for a positive coef.) as well as the number of total
+patents retrieved by industry and indicator (``Patents (sum)'') and the
+sample size by industry and indicator (``Sample size''). The sum of
+patents here is the aggregate sum of individual patents retrieved. The
 sample size denotes the number of aggregates that are contained in each
 group.\footnote{Since patents have been aggregated by industry and year,
   the sample size also depicts the number of years for which patent
   counts have been recorded. Note that this does not mean that patents
   have been retrieved for each year (see
   Section~\ref{sec-preprocessing},
-  p.~\pageref{cleaning-missing-values}).} The first corss-industry
+  p.~\pageref{cleaning-missing-values}).} The first cross-industry
 finding is that significant relationships have only been found in groups
 that lay in the upper half of the total number of patents retrieved.
-While for industries B, D, and F no statistically significant
+While for industries B, D and F no statistically significant
 relationships were found, these industries also had the lowest number of
 total patents retrieved with 17, 26, and 21 respectively. The industries
-with the highest number of patents retrievd, C, H, and J, in turn all
+with the highest number of patents retrieved, C, H and J, in turn all
 exhibit at least two statistically significant relationships.
 Furthermore, besides wage adjusted labor productivity in industry H
 (Transportation and storage), if effects where present in an industry,
@@ -1680,13 +1775,13 @@ they do exhibit the same relationship within one industry. For example,
 in industry C (Manufacturing), the significant effects of AI patent
 applications on the number of employees as well as the gross value added
 per employee are both negative. While, as discussed in
-\nameref{#sec-introduction}, automation tends to always displays labor
+\nameref{sec-introduction}, automation tends to always displays labor
 (whether on a macro or micro level), the displacement of labor, which is
-depicted here on an EU-wide industry level, should inuitively relate to
+depicted here on an EU-wide industry level, should intuitively relate to
 higher marginal productivity per employee and therefore higher gross
 value added. However, the results show that the number of employees as
 well as the amount of gross value added per employee decreases with an
-increasing number of AI patent applications. This does suggest that the
+increasing number of AI patent applications. This suggests that the
 manufacturing industry is contracting with an increase number of AI
 patents filed.\footnote{Note that because the data has been detrended
   (see Section~\ref{sec-preprocessing}), statements about the
@@ -1703,61 +1798,63 @@ The opposite holds true for the information and communication industry
 (J), which exhibits a positive relationship between AI patent filings
 and gross value added per employee as well as wage adjusted labor
 productivity. Regarding the gross value added, the positive relationship
-was anticipated, and it is surpising that only the information and
+was anticipated, and it is surprising that only the information and
 communication industry (J) as well as the manufacturing industry (C)
 exhibit significant relationships. As automation either displaces labor
 or aids labor productivity, one would expect the produced gross value as
 a ratio over the number of employees to increase with increased exposure
-to any type of technology. Hoewver, for the manufacturing industry (C),
+to any type of technology. However, for the manufacturing industry (C),
 this relationship is negative.
 
 To conclude, while there are indications in the results that suggest the
-possible exhistence of a relationship between Ai applications and the
+possible existence of a relationship between AI applications and the
 chosen economic indicators, more research is needed to verify these
-results. For now, the validty of the present results above should be
-taken with caution. There are no clear no clear patterns in the results
-across industries, nor across indicators. One of the few solid
-observations from a cross-result view is the fact that results only
-appear once the number of total patents filed in an industry crosses a
-certain threshold. This does not mean however, that indicators of
-industries, which are not considered in this research, should
-neccesarily hold significant relationships to the number of filed AI
-patents. Rather, it is likely that likely that a higher number of
-patents helps averaging out the disproportional effects between each
-individual patent. This will be discussed further in the
-\nameref{sec-limitations} (Section~\ref{sec-limitations}). For now, the
-results suggest that the relationship between AI patent applications and
-the chosen economic indicators is not as clear as one might expect.
+results. For now, the validity of the present results above should be
+taken with caution. There are no clear patterns in the results across
+industries, nor across indicators. One of the few solid observations
+from a cross-result view is the fact that results only appear once the
+number of total patents filed in an industry crosses a certain
+threshold. This does not mean however, that indicators of industries,
+which are not considered in this research, should necessarily hold
+significant relationships to the number of filed AI patents. Rather, it
+is likely that likely that a higher number of patents helps averaging
+out the disproportional effects between each individual patent. This
+will be discussed further in the \nameref{sec-limitations}
+(Section~\ref{sec-limitations}). For now, the results suggest that the
+relationship between AI patent applications and the chosen economic
+indicators is not as clear as one might expect.
 
 \subsection{Limitations}\label{sec-limitations}
 
 Given the to some degree novel approach in the data collection process
 that this research adopted, a few limitations must be considered to
-assess the validty of the presented results above. First, the data
-quisition process. Since patents have been retrieved from the EPO API
+assess the validity of the presented results above. First, the data
+acquisition process. Since patents have been retrieved from the EPO API
 via keyword search and not - like previous research - via patent text
-classification (see \#TODO) or occupational classification (see \#TODO),
-the retrieved patents may not be representative of the actual number of
-AI patents filed. For once, keywords used to map a patent's title or
-abstract to its industry were only retrieved from the NACE codes'
-description. While kewords have been retrevied not only for the overall
-industry but also for each group within each divison, the keywords
-extracted from these descriptions are likely not fully representative
-for the industry as a whole. Occupations and tasks within each industry
-as well as characteristics of an industry are manyfold. Furthermore, a
-patents applicable use may not be conciled to one specific industry but
-rather to a type of task that occurs accross industries or occupations.
-These patents have likely not been retrieved and therefore lowered the
-data quality and size of the data set. In addition, as discussed in
+classification (see \citeproc{ref-mann_benign_2018}{Mann and Püttmann,
+2018}) or occupational classification (see
+\citeproc{ref-acemoglu_ai_2020}{Acemoglu et al., 2020a}), the retrieved
+patents may not be representative of the actual number of AI patents
+filed. For once, keywords used to map a patent's title or abstract to
+its industry were only retrieved from the NACE codes' description. While
+keywords have been retrieved not only for the overall industry but also
+for each group within each division, the keywords extracted from these
+descriptions are likely not fully representative for the industry as a
+whole. Occupations and tasks within each industry as well as
+characteristics of an industry are manifold. Furthermore, a patents
+applicable use may not be concealed to one specific industry but rather
+to a type of task that occurs across industries or occupations. These
+patents have likely not been retrieved and therefore lowered the data
+quality and size of the data set. In addition, as discussed in
 Section~\ref{sec-data-acquisition}, due to language restrictions, only
 patents with an application number for the European Patent Office have
 been retrieved. While economic data retrieved from Eurostat represents
 aggregate country levels, patent applications filed with the EPO are not
-neccesarily also filed with their respective national patent office and
+necessarily also filed with their respective national patent office and
 vice versa. In other words, the patents filed with the EPO are not
 aggregates of the national patent offices' applications. While the total
 number of retrieved patent applications from the EPO is representative
-for the actual nuber of AI patents filed within the EU, it may also be
+for the actual number of AI patents filed within the EU, it may also be
 the case that some industries tend to file patent applications generally
 with national patent offices rather than the EPO. Assuming that this is
 the case, it would mean that the distribution of retrieved patents
@@ -1778,52 +1875,66 @@ complete set. Even with the same definition of AI, it is likely that the
 mapping from the definition to the CPC codes would differ from person to
 person as many definitions often leave room for interpretation.
 Regarding the CPC codes, it may also be the case that patent
-classification codes do not exhist for certain technologies yet, which
+classification codes do not exist for certain technologies yet, which
 would inhibit the precision with which patents can be retrieved.
 
-A second limitation regards the nature and charactertistics of the
-patent applications themselves. More specifically, the date of patent
+A second limitation regards the nature and characteristics of the patent
+applications themselves. More specifically, the date of patent
 application does not relate to the date that a patent gains economic
-traction. Since patent application is a time consuming process (which
-takes, according to the EPO between 2-5 years \#TODO), the time a patent
-becomes economically applicable is shifted from the time a patent
-application is filed. This, however, is not nessecarily a severe
-limitation as the number of patent applications filed serve merely as a
-proxy for the interest and innovation in AI applications at any given
-time. It can be assumed, that increased inventorship in AI, as
-approximated by AI related patent applications, is accompanied by an
-increased interest in currently available AI technologies. This, of
-course, is merely an assumption and would need to be verified. It would
-be possible to shift the retrieved patent data by any given number of
-years, but as Eurostat's Structural Business Statistic currently only
-captures economic activity until 2020, most retreived patent
-applications would have been pushed out of the data set, making it even
-smaller. It would be interesting to see future research, once additional
-data becomes available, to reproduce a modified version of this research
-with retrieved patent applications' dates being shifted by the average
-time a patent application takes to be granted. Furthermore, as pointed
-out by Trajtenberg (\citeproc{ref-trajtenberg_penny_1990}{1990}), the
-plain number of patent counts disregards the fact that patents do not
-carry equal economical weight. That is, the effect which a patent might
-have on a market or industry cannot be inferred by the presence of a
-patent without incorporating weights. Since this research did not aim to
+traction. Since patent application is a time consuming process (which,
+according to the EPO, takes between three to four years
+(\citeproc{ref-european_patent_office_patenting_nodate}{European Patent
+Office, n.d.d})), the time a patent becomes economically applicable is
+shifted from the time a patent application is filed. Previous research
+has incorporated such shifts, or lags, to account for the time delay
+between patent application and implementation (see
+\citeproc{ref-van_roy_technology_2018}{Van Roy et al., 2018, p. 5}).
+This, however, is not necessarily a severe limitation as the number of
+patent applications filed serve merely as a proxy for the interest and
+innovation in AI applications at any given time. It can be assumed, that
+increased inventorship in AI, as approximated by AI related patent
+applications, is accompanied by an increased interest in currently
+available AI technologies. This, of course, is merely an assumption and
+would need to be verified. It would be possible to shift the retrieved
+patent data by any given number of years, but as Eurostat's Structural
+Business Statistic currently only captures economic activity until 2020,
+most retrieved patent applications would have been pushed out of the
+data set, making it even smaller. It would be interesting to see future
+research, once additional data becomes available, to reproduce a
+modified version of this research with retrieved patent applications'
+dates being shifted by the average time a patent application takes to be
+granted. Furthermore, as pointed out by Trajtenberg
+(\citeproc{ref-trajtenberg_penny_1990}{1990}), the plain number of
+patent counts disregards the fact that patents do not carry equal
+economical weight. That is, the effect which a patent might have on a
+market or industry cannot be inferred by the presence of a patent
+without incorporating weights. Since this research did not aim to
 establish a clear link between patent applications and economic
 indicators, but rather used patent applications as a proxy for the
 interest in AI, this limitation is of lesser severity. Nevertheless,
-weighted patent counts may yield different results as not every patent
+weighted patent counts (see \citeproc{ref-van_roy_technology_2018}{Van
+Roy et al., 2018, p. 5}) may yield different results as not every patent
 application is, first, granted, and second, also of economic value.
-Lastly, the patent data retrieved from the EPO API does not contain any
-information on the patent's country of origin. While the EPO is an
-EU-wide patent office, it is likely that not all patents have been filed
-by EU-based companies or inventors. While some patents carry a company
-as the applicant's name, any inventor may file a patent with the
+There are a variety of weighting methods that may yield better results
+in estimating a patent's economic value and impact, such as
+forward-citation count, backward-citation count, and number of
+non-patent references (\citeproc{ref-bronwyn_h_hall_market_2005}{Bronwyn
+H. Hall et al., 2005}; \citeproc{ref-gambardella_value_2008}{Gambardella
+et al., 2008}; \citeproc{ref-harhoff_citations_2003}{Harhoff et al.,
+2003}; \citeproc{ref-neuhausler_patents_2011}{Neuhäusler et al., 2011};
+see \citeproc{ref-squicciarini_measuring_2013}{Squicciarini et al.,
+2013}). Lastly, the patent data retrieved from the EPO API does not
+contain any information on the patent's country of origin. While the EPO
+is an EU-wide patent office, it is likely that not all patents have been
+filed by EU-based companies or inventors. While some patents carry a
+company as the applicant's name, any inventor may file a patent with the
 European Patent Office, even if the inventor never intends to make
 economic use of the patent in the EPO's jurisdiction. Therefore, it may
 be the case that at least some of the patents filed with the EPO do not
-serve as a proxy for the interest in AI within the EU but rather outside
-it.
+serve as a proxy for the interest and innovation in AI within the EU but
+rather outside it.
 
-A thrid limitation is the number of data points in the final data set on
+A third limitation is the number of data points in the final data set on
 which the overall analysis is build upon. While almost ten thousand
 patents have been retrieved from the API, only 4347 were unique in each
 industry, and only 1190 patents fulfilled the criteria listed in
@@ -1833,8 +1944,8 @@ industries, many retrieved patents could not be used in the analysis.
 Furthermore, the SBS currently carries data until 2020 which excludes
 the last two years in which interest in AI increased significantly.
 Furthermore, given the small subsets of data on which regressions were
-modelled, linearity was assumed. This may not accurately represent the
-actual relationship between the interest in, or implimentation of, AI
+modeled, linearity was assumed. This may not accurately represent the
+actual relationship between the interest in, or implementation of, AI
 technologies. In fact, intuitively it is likely that the relationship
 between AI patent applications and the chosen economic indicators are
 overall better represented by a polynomial regression of second order.
@@ -1863,23 +1974,23 @@ assimilating the polynomial shape of order two, it may actually
 represent a convex shape where the marginal returns increase to
 scale.\footnote{In other words, a quadratic function wit positive first
   and second order derivatives.} Here of course, the question remains
-whether invention is inexhaustable or not. Nevertheless, given the small
+whether invention is inexhaustible or not. Nevertheless, given the small
 size of sampes which are a result of the small time range for which data
 has been collected, it would be difficult to confidently assess such a
 relation without exposing the model to the risk of overfitting. The
-shape of the relationship may only appear clearly once mora data is
+shape of the relationship may only appear clearly once more data is
 present. In other words, once one can ``zoom out'' of the window that
 has been considered in this research, and examine more attributes of the
 relationship, it may be possible to assess the shape of the relationship
 more accurately.
 
-Lastly, as a foruth limitation, the ommited variables. The methodology
+Lastly, as a fourth limitation, the omitted variables. The methodology
 applied in this research did not include any control variables other
 than time, which was chosen to control for any residual trend in the
 detrended data. But as the statistics provided by the SBS are the result
 of a complex web of economic activity, which in turn is influenced by an
 almost incomprehensible number of factors, there is a high probability
-that additonal control variables would yield different results.
+that additional control variables would yield different results.
 Furthermore, it is not unlikely to think that the relationship between
 AI patent applications and the chosen economic indicators may have a
 common factor that explains both. Since research and development is a
@@ -1887,7 +1998,7 @@ costly undertaking for many firms, it may be that other economic factors
 define the chosen dependent variables as well as the number of AI
 applications filed.
 
-\subsection{Further Research}\label{further-research}
+\subsection{Further Research}\label{sec-further-research}
 
 Given the ambiguous results presented in this study, further research is
 needed to confirm or falsify the results presented here. In particular,
@@ -1901,7 +2012,7 @@ weighting factor that accompanies additional sources of data. In
 addition, it would be valuable to define a clear definition of what
 Artificial Intelligence entails in order to build further research in
 this field upon a homogeneous definition that allows for cross-research
-comparrisson of results. Lastly, it would be interesting to see future
+comparison of results. Lastly, it would be interesting to see future
 research that builds upon the here presented approach but extends the
 time range for which data has been collected. This would allow for a
 more accurate assessment of the relationship between AI patent
@@ -1935,6 +2046,15 @@ more difficult to study in isolation. Nevertheless, these questions are
 important to draw a sophisticated conclusion about Artificial
 Intellince's true net impacts.
 
+Lastly, disregarding specific fields or questions, the current
+literature appears to have an unanimous opinion that the impact of AI,
+whether negative or positive, will reach vast effects and that to truly
+assess the benefits and disadvantages of this new type of technology,
+additional and thorough research is needed
+(\citeproc{ref-gruetzemacher_forecasting_2020}{Gruetzemacher et al.,
+2020, p. 13}; see for example \citeproc{ref-seamans_ai_2018}{Seamans and
+Raj, 2018, p. 9}).
+
 \subsection{Final Remarks}\label{final-remarks}
 
 While the here presented approach did not yield clear results, it is
@@ -1950,8 +2070,10 @@ wise to especially focus on the negative effects of AI technologies, a
 perspective also labeled ``Doomsayer''
 (\citeproc{ref-frank_toward_2019}{Frank et al., 2019, p. 6532}). This is
 supported by the notion that the general idea that AI will not destroy
-jobs in aggregate mainly rests on the proof that previous technology has
-not done so either, which is inherently illogical.\footnote{A good
+jobs in aggregate mainly rests on the idea that previous technology has
+not done so either (see
+\citeproc{ref-joint_research_centre_artificial_2018}{Joint Research
+Centre, 2018, p. 77}), which is inherently illogical.\footnote{A good
   analogy would be a skier proudly claiming that he will always reach
   the end of the slope because he has never had an accident. The claim
   rests on mere extrapolation of the past, oblivious to any possible
@@ -1968,16 +2090,24 @@ with the future innovation of new technologies, as a result, one would
 exhibit an ever increasing quantity of produced goods and services. As
 mentioned in the limitations, it is difficult to assess effects when the
 time frame in which observations take place is limited. The
-technological process over the last few decades and its undoubtedly
-positive contribution to overall welfare may signal a false sense of
-stability and endless continuation. On a historical scale, these past
-decades are a minuscule time range and it may be improvident to
-extrapolate this trend indefinitely. Hoewever, this does not imply that
-the ``Doomsayer'''s perspective is right in any way. Rather, it should
-urge research to critically investigate effects taking place in the hope
-to falsify this perspective.
+technological process over the last few decades and its likely positive
+contribution to overall welfare may signal a false sense of stability
+and endless continuation. On a historical scale, these past decades are
+a minuscule time range and it may be improvident to extrapolate this
+trend indefinitely. Furthermore, given the extraordinary amounts of data
+and resources required (see \citeproc{ref-cockburn_impact_2018}{Cockburn
+et al., 2018, p. 127}; \citeproc{ref-dario_amodei_ai_2018}{Dario Amodei
+et al., 2018}; \citeproc{ref-ensmenger_computation_2013}{Ensmenger,
+2013}), it should be of interest whether the development of AI
+technologies results in a ``winner-takes-all-market'', giving
+comparative advantage to those able to afford the resources required,
+leaving the market increasingly monopolized and its customers dependent
+on a single (or few) provider(s). Hoewever, this does not imply that the
+``Doomsayer'''s perspective is right in any way. Rather, it should urge
+research to critically investigate effects taking place in the hope to
+falsify this perspective.
 
-\section{Conclusion}\label{conclusion}
+\section{Conclusion}\label{sec-conclusion}
 
 \newpage{}
 
@@ -2026,21 +2156,26 @@ Acemoglu, D., Restrepo, P., 2019. Automation and {New} {Tasks}: {How}
 Perspectives 33, 3--29. \url{https://doi.org/10.1257/jep.33.2.3}
 
 \bibitem[\citeproctext]{ref-acemoglu_race_2018}
-Acemoglu, D., Restrepo, P., 2018a. The {Race} between {Man} and
+Acemoglu, D., Restrepo, P., 2018b. The {Race} between {Man} and
 {Machine}: {Implications} of {Technology} for {Growth}, {Factor}
 {Shares}, and {Employment}. American Economic Review 108, 1488--1542.
 \url{https://doi.org/10.1257/aer.20160696}
 
 \bibitem[\citeproctext]{ref-acemoglu_artificial_2018}
-Acemoglu, D., Restrepo, P., 2018b.
+Acemoglu, D., Restrepo, P., 2018c.
 \href{https://www.nber.org/books-and-chapters/economics-artificial-intelligence-agenda/artificial-intelligence-automation-and-work}{Artificial
 {Intelligence}, {Automation}, and {Work}}, in: The {Economics} of
 {Artificial} {Intelligence}: {An} {Agenda}. University of Chicago Press,
 pp. 197--236.
 
-\bibitem[\citeproctext]{ref-acemoglu_low-skill_2017}
-Acemoglu, D., Restrepo, P., 2017. Low-{Skill} and {High}-{Skill}
-{Automation}. \url{https://doi.org/10.2139/ssrn.3083552}
+\bibitem[\citeproctext]{ref-acemoglu_low-skill_2018}
+Acemoglu, D., Restrepo, P., 2018a. Low-{Skill} and {High}-{Skill}
+{Automation}. Journal of Human Capital 12, 204--232.
+\url{https://doi.org/10.1086/697242}
+
+\bibitem[\citeproctext]{ref-allaire_quarto_2022}
+Allaire, J.J., Teague, C., Scheidegger, C., Xie, Y., Dervieux, C., 2022.
+Quarto. \url{https://doi.org/10.5281/zenodo.5960048}
 
 \bibitem[\citeproctext]{ref-anderson_automation_2017}
 Anderson, A.S. and M., 2017.
@@ -2074,22 +2209,62 @@ Boustan, L.P., Choi, J., Clingingsmith, D., 2022. Automation {After} the
 {Productivity} in the {United} {States}. Working {Paper} {Series}.
 \url{https://doi.org/10.3386/w30400}
 
+\bibitem[\citeproctext]{ref-bronwyn_h_hall_market_2005}
+Bronwyn H. Hall, Adam Jaffe, Manuel Trajtenberg, 2005.
+\href{https://www.jstor.org/stable/1593752}{Market {Value} and {Patent}
+{Citations}}. The RAND Journal of Economics 36, 16--38.
+
 \bibitem[\citeproctext]{ref-brynjolfsson_what_2017}
 Brynjolfsson, E., Mitchell, T., 2017. What can machine learning do?
 {Workforce} implications. Science 358, 1530--1534.
 \url{https://doi.org/10.1126/science.aap8062}
 
 \bibitem[\citeproctext]{ref-brynjolfsson_what_2018}
-Brynjolfsson, E., Mitchell, T., Rock, D., 2018. What {Can} {Machines}
+Brynjolfsson, E., Mitchell, T., Rock, D., 2018a. What {Can} {Machines}
 {Learn} and {What} {Does} {It} {Mean} for {Occupations} and the
 {Economy}? AEA Papers \& Proceedings 108, 43--47.
 \url{https://doi.org/10.1257/pandp.20181019}
+
+\bibitem[\citeproctext]{ref-brynjolfsson_artificial_2018}
+Brynjolfsson, E., Rock, D., Syverson, C., 2018b.
+\href{https://www.nber.org/books-and-chapters/economics-artificial-intelligence-agenda/artificial-intelligence-and-modern-productivity-paradox-clash-expectations-and-statistics}{Artificial
+{Intelligence} and the {Modern} {Productivity} {Paradox}: {A} {Clash} of
+{Expectations} and {Statistics}}, in: The {Economics} of {Artificial}
+{Intelligence}: {An} {Agenda}. University of Chicago Press, pp. 23--57.
+
+\bibitem[\citeproctext]{ref-catherine_cheung_growth_2022}
+Catherine Cheung, Simon Baker, Tanner Maxwell, Benjamin Plackett, 2022.
+Growth in {AI} and robotics research accelerates. Nature 610, S9--S9.
+\url{https://doi.org/10.1038/d41586-022-03210-9}
 
 \bibitem[\citeproctext]{ref-cirera_effects_2019}
 Cirera, X., Sabetti, L., 2019. The effects of innovation on employment
 in developing countries: Evidence from enterprise surveys. Industrial
 and Corporate Change 28, 161--176.
 \url{https://doi.org/10.1093/icc/dty061}
+
+\bibitem[\citeproctext]{ref-cockburn_impact_2018}
+Cockburn, I.M., Henderson, R., Stern, S., 2018.
+\href{https://www.nber.org/books-and-chapters/economics-artificial-intelligence-agenda/impact-artificial-intelligence-innovation-exploratory-analysis}{The
+{Impact} of {Artificial} {Intelligence} on {Innovation}: {An}
+{Exploratory} {Analysis}}, in: The {Economics} of {Artificial}
+{Intelligence}: {An} {Agenda}. University of Chicago Press, pp.
+115--146.
+
+\bibitem[\citeproctext]{ref-crawford_atlas_2021}
+Crawford, K., 2021. Atlas of {AI}: Power, politics, and the planetary
+costs of artificial intelligence. Yale University Press, New Haven.
+
+\bibitem[\citeproctext]{ref-damioli_impact_2021}
+Damioli, G., Van Roy, V., Vertesy, D., 2021. The impact of artificial
+intelligence on labor productivity. Eurasian Business Review 11, 1--25.
+\url{https://doi.org/10.1007/s40821-020-00172-8}
+
+\bibitem[\citeproctext]{ref-dario_amodei_ai_2018}
+Dario Amodei, Danny Hernandez, Girish Sastry, Jack Clark, Greg Brockman,
+Ilya Sutskever, 2018.
+\href{https://openai.com/research/ai-and-compute}{{AI} and compute}.
+OpenAI.
 
 \bibitem[\citeproctext]{ref-dauth_german_2017}
 Dauth, W., Findeisen, S., Südekum, J., Woessner, N., 2017.
@@ -2103,11 +2278,25 @@ Dauth, W., Findeisen, S., Suedekum, J., Woessner, N., 2021. The
 Economic Association 19, 3104--3153.
 \url{https://doi.org/10.1093/jeea/jvab012}
 
+\bibitem[\citeproctext]{ref-electronic_frontier_foundation_ai_2017}
+Electronic Frontier Foundation, 2017.
+\href{https://www.eff.org/de/ai/metrics}{{AI} {Progress} {Measurement}
+({Archived})}. Electronic Frontier Foundation.
+
+\bibitem[\citeproctext]{ref-ensmenger_computation_2013}
+Ensmenger, N., 2013. Computation, {Materiality}, and the {Global}
+{Environment}. IEEE Annals of the History of Computing 35, 80--80.
+\url{https://doi.org/10.1109/MAHC.2013.33}
+
 \bibitem[\citeproctext]{ref-european_commission_proposal_2021}
-European Commission, 2021.
+European Commission, 2021a.
 \href{https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:52021PC0206}{Proposal
 for a {REGULATION} {OF} {THE} {EUROPEAN} {PARLIAMENT} {AND} {OF} {THE}
 {COUNCIL}}.
+
+\bibitem[\citeproctext]{ref-european_commission_annexes_2021}
+European Commission, 2021b. {ANNEXES} to the {Proposal} for a
+{Regulation} of the {European} {Parliament} and of the {Council}.
 
 \bibitem[\citeproctext]{ref-european_commission_commission_2020}
 European Commission, 2020. Commission {Implementing} {Regulation} ({EU})
@@ -2122,10 +2311,6 @@ European Commission, 2009.
 \href{https://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=OJ:L:2009:086:0001:0169:EN:PDF}{{COMMISSION}
 {REGULATION} ({EC}) {No} 250/2009}. Official Journal of the European
 Union 86.
-
-\bibitem[\citeproctext]{ref-european_commission_annexes_202}
-European Commission, 202AD. {ANNEXES} to the {Proposal} for a
-{Regulation} of the {European} {Parliament} and of the {Council}.
 
 \bibitem[\citeproctext]{ref-european_commission_eurostat_structural_nodate}
 European Commission, Eurostat, n.d.a.
@@ -2179,6 +2364,11 @@ European Patent Office, n.d.a.
 \href{https://worldwide.espacenet.com/patent/cpc-browser}{Classification
 search}. Espacenet.
 
+\bibitem[\citeproctext]{ref-european_patent_office_patenting_nodate}
+European Patent Office, n.d.d.
+\href{https://www.epo.org/en/learning/learning-resources-profile/business-and-ip-managers/inventors-handbook/protecting-your-idea/patenting-process}{The
+patenting process}. EPO.
+
 \bibitem[\citeproctext]{ref-european_patent_office_open_2023}
 European Patent Office, 2023.
 \href{https://developers.epo.org/ops-v3-2/apis}{Open {Patent} {Services}
@@ -2213,9 +2403,46 @@ susceptible are jobs to computerisation? Technological Forecasting and
 Social Change 114, 254--280.
 \url{https://doi.org/10.1016/j.techfore.2016.08.019}
 
+\bibitem[\citeproctext]{ref-gambardella_value_2008}
+Gambardella, A., Harhoff, D., Verspagen, B., 2008. The value of
+{European} patents. European Management Review 5, 69--84.
+\url{https://doi.org/10.1057/emr.2008.10}
+
+\bibitem[\citeproctext]{ref-google_google_2023}
+Google, 2023.
+\href{https://trends.google.com/trends/explore?date=all&q=AI&hl=en}{Google
+{Trends}}. Google Trends.
+
 \bibitem[\citeproctext]{ref-graetz_robots_2018}
 Graetz, G., Michaels, G., 2018. Robots at {Work}. Review of Economics \&
 Statistics 100, 753--768. \url{https://doi.org/10.1162/rest_a_00754}
+
+\bibitem[\citeproctext]{ref-gries_artificial_2018}
+Gries, T., Naudé, W., 2018. Artificial {Intelligence}, {Jobs},
+{Inequality} and {Productivity}: {Does} {Aggregate} {Demand} {Matter}?
+\url{https://doi.org/10.2139/ssrn.3301777}
+
+\bibitem[\citeproctext]{ref-gruetzemacher_forecasting_2020}
+Gruetzemacher, R., Paradice, D., Lee, K.B., 2020. Forecasting extreme
+labor displacement: {A} survey of {AI} practitioners. Technological
+Forecasting and Social Change 161, 120323.
+\url{https://doi.org/10.1016/j.techfore.2020.120323}
+
+\bibitem[\citeproctext]{ref-harhoff_citations_2003}
+Harhoff, D., Scherer, F.M., Vopel, K., 2003. Citations, family size,
+opposition and the value of patent rights. Research Policy 32,
+1343--1363. \url{https://doi.org/10.1016/S0048-7333(02)00124-5}
+
+\bibitem[\citeproctext]{ref-hu_chatgpt_2023}
+Hu, K., 2023.
+\href{https://www.reuters.com/technology/chatgpt-sets-record-fastest-growing-user-base-analyst-note-2023-02-01/}{{ChatGPT}
+sets record for fastest-growing user base - analyst note}. Reuters.
+
+\bibitem[\citeproctext]{ref-joint_research_centre_artificial_2018}
+Joint Research Centre, 2018.
+\href{https://data.europa.eu/doi/10.2760/11251}{Artificial intelligence
+: A {European} perspective}, {EUR} ({Luxembourg}. {Online}).
+Publications Office of the European Union, LU.
 
 \bibitem[\citeproctext]{ref-karabarbounis_global_2014}
 Karabarbounis, L., Neiman, B., 2014. The {Global} {Decline} of the
@@ -2226,16 +2453,37 @@ Karabarbounis, L., Neiman, B., 2014. The {Global} {Decline} of the
 Legg, S., Hutter, M., 2007. \href{http://arxiv.org/abs/0706.3639}{A
 {Collection} of {Definitions} of {Intelligence}}.
 
+\bibitem[\citeproctext]{ref-lu_review_2021}
+Lu, Y., Zhou, Y., 2021. A review on the economics of artificial
+intelligence. Journal of Economic Surveys 35, 1045--1072.
+\url{https://doi.org/10.1111/joes.12422}
+
 \bibitem[\citeproctext]{ref-mann_benign_2018}
 Mann, K., Püttmann, L., 2018. Benign {Effects} of {Automation}: {New}
 {Evidence} from {Patent} {Texts}.
 \url{https://doi.org/10.2139/ssrn.2959584}
+
+\bibitem[\citeproctext]{ref-martens_will_2018}
+Martens, B., Tolan, S., 2018. Will {This} {Time} {Be} {Different}? {A}
+{Review} of the {Literature} on the {Impact} of {Artificial}
+{Intelligence} on {Employment}, {Incomes} and {Growth}. SSRN Electronic
+Journal. \url{https://doi.org/10.2139/ssrn.3290708}
 
 \bibitem[\citeproctext]{ref-max_roser_this_2023}
 Max Roser, 2023.
 \href{https://www.weforum.org/agenda/2023/02/this-timeline-charts-the-fast-pace-of-tech-transformation-across-centuries/}{This
 timeline charts the fast pace of tech transformation across centuries}.
 World Economic Forum.
+
+\bibitem[\citeproctext]{ref-michael_l_littman_gathering_2021}
+Michael L. Littman, Ifeoma Ajunwa, Guy Berger, Craig Boutilier, Morgan
+Currie, Finale Doshi-Velez, Gillian Hadfield, Michael C. Horowitz,
+Charles Isbell, Hiroaki Kitano, Karen Levy, Terah Lyons, Melanie
+Mitchell, Julie Shah, Steven Sloman, Shannon Vallor, Toby Walsh, 2021.
+\href{http://ai100.stanford.edu/2021-report}{Gathering {Strength},
+{Gathering} {Storms}: {The} {One} {Hundred} {Year} {Study} on
+{Artificial} {Intelligence} ({AI100}) 2021 {Study} {Panel} {Report}}.
+Stanford University, Stanford, CA.
 
 \bibitem[\citeproctext]{ref-mittelhammer_econometric_2000}
 Mittelhammer, R.C., Judge, G.G., Miller, D.J., 2000. Econometric
@@ -2247,15 +2495,37 @@ Mokyr, J., Vickers, C., Ziebarth, N.L., 2015. The {History} of
 {This} {Time} {Different}? Journal of Economic Perspectives 29, 31--50.
 \url{https://doi.org/10.1257/jep.29.3.31}
 
+\bibitem[\citeproctext]{ref-neuhausler_patents_2011}
+Neuhäusler, P., Frietsch, R., Schubert, T., Blind, K., 2011.
+\href{https://www.econstor.eu/handle/10419/44995}{Patents and the
+financial performance of firms - {An} analysis based on stock market
+data} (Working \{Paper\} No. 28). Fraunhofer ISI Discussion Papers -
+Innovation Systems; Policy Analysis.
+
 \bibitem[\citeproctext]{ref-pajarinen_computerization_2015}
 Pajarinen, M., Rouvinen, P., Ekeland, A., 2015.
 \href{https://ideas.repec.org//p/rif/briefs/34.html}{Computerization
 {Threatens} {One}-{Third} of {Finnish} and {Norwegian} {Employment}}.
 ETLA Brief.
 
-\bibitem[\citeproctext]{ref-the_pandas_development_team_pandas-devpandas_2023}
-The pandas development team, 2023. Pandas-dev/pandas: {Pandas}.
-\url{https://doi.org/10.5281/ZENODO.3509134}
+\bibitem[\citeproctext]{ref-rieg_socioeconomic_2023}
+Rieg, J., 2023. \href{https://github.com/Jonasrg/BT_AI}{Socioeconomic
+{Disruption} by {Artificial} {Intelligence}}.
+
+\bibitem[\citeproctext]{ref-seamans_ai_2018}
+Seamans, R., Raj, M., 2018. {AI}, {Labor}, {Productivity} and the {Need}
+for {Firm}-{Level} {Data}. Working {Paper} {Series}.
+\url{https://doi.org/10.3386/w24239}
+
+\bibitem[\citeproctext]{ref-squicciarini_measuring_2013}
+Squicciarini, M., Dernis, H., Criscuolo, C., 2013. Measuring {Patent}
+{Quality}: {Indicators} of {Technological} and {Economic} {Value}. OECD,
+Paris. \url{https://doi.org/10.1787/5k4522wkw1r8-en}
+
+\bibitem[\citeproctext]{ref-ted_exciting_2023}
+TED, 2023. \href{https://www.youtube.com/watch?v=SEkGLj0bwAU}{The
+{Exciting}, {Perilous} {Journey} {Toward} {AGI} {\textbar} {Ilya}
+{Sutskever} {\textbar} {TED}}.
 
 \bibitem[\citeproctext]{ref-the_scipy_community_scipysignaldetrend_2023}
 The SciPy community, 2023.
@@ -2266,6 +2536,12 @@ The SciPy community, 2023.
 Trajtenberg, M., 1990. A {Penny} for {Your} {Quotes}: {Patent}
 {Citations} and the {Value} of {Innovations}. The RAND Journal of
 Economics 21, 172. \url{https://doi.org/10.2307/2555502}
+
+\bibitem[\citeproctext]{ref-van_roy_technology_2018}
+Van Roy, V., Vértesy, D., Vivarelli, M., 2018. Technology and
+employment: {Mass} unemployment or job creation? {Empirical} evidence
+from {European} patenting firms. Research Policy 47, 1762--1776.
+\url{https://doi.org/10.1016/j.respol.2018.06.008}
 
 \bibitem[\citeproctext]{ref-virtanen_scipy_2020}
 Virtanen, P., Gommers, R., Oliphant, T.E., Haberland, M., Reddy, T.,
@@ -2423,70 +2699,526 @@ G06N3/08'' AND AP=``EP'' \\
 AND AP=``EP'' \\
 \end{longtable}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{\#|label: fig{-}untransformed{-}data{-}example{-}enterprises(n)}
-\NormalTok{\#|fig{-}cap: \textquotesingle{}Example of untransformed data for all Industries and NACE Enterprises (n) plotted over years\textquotesingle{}}
-\end{Highlighting}
-\end{Shaded}
+\newpage{}
 
-``Image(fig.to\_image(format=`jpeg', engine=`kaleido', scale=3,
-height=500, width=800))''
+\begin{figure}[H]
 
-\begin{verbatim}
-\end{verbatim}
+{\centering \includegraphics{rieg2023_files/figure-pdf/fig-untransformed-data-enterprises-output-1.jpeg}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{\#|label: fig{-}untransformed{-}data{-}example{-}employees(n)}
-\NormalTok{\#|fig{-}cap: \textquotesingle{}Example of untransformed data for all Industries and NACE Employees (n) plotted over years\textquotesingle{}}
-\end{Highlighting}
-\end{Shaded}
+}
 
-``Image(fig.to\_image(format=`jpeg', engine=`kaleido', scale=3,
-height=500, width=800))''
+\caption{\label{fig-untransformed-data-enterprises}Untransformed data
+across all industries and NACE code `Enterprises (n)' plotted over
+years}
 
-\begin{verbatim}
-\end{verbatim}
+\end{figure}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{\#|label: fig{-}untransformed{-}data{-}example{-}laborprod.(\%)}
-\NormalTok{\#|fig{-}cap: \textquotesingle{}Example of untransformed data for all Industries and NACE Labor prod. (\%) plotted over years\textquotesingle{}}
-\end{Highlighting}
-\end{Shaded}
+\begin{figure}[H]
 
-``Image(fig.to\_image(format=`jpeg', engine=`kaleido', scale=3,
-height=500, width=800))''
+{\centering \includegraphics{rieg2023_files/figure-pdf/fig-transformed-data-example-enterprises-output-1.jpeg}
 
-\begin{verbatim}
-\end{verbatim}
+}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{\#|label: fig{-}untransformed{-}data{-}example{-}gva/employee(€)}
-\NormalTok{\#|fig{-}cap: \textquotesingle{}Example of untransformed data for all Industries and NACE GVA/employee (€) plotted over years\textquotesingle{}}
-\end{Highlighting}
-\end{Shaded}
+\caption{\label{fig-transformed-data-example-enterprises}Transformed
+data across all industries and NACE code `Enterprises (n)' plotted over
+years}
 
-``Image(fig.to\_image(format=`jpeg', engine=`kaleido', scale=3,
-height=500, width=800))''
+\end{figure}
 
-\begin{verbatim}
-\end{verbatim}
+\begin{figure}[H]
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{\#|label: fig{-}untransformed{-}data{-}example{-}personnelcosts(\%)}
-\NormalTok{\#|fig{-}cap: \textquotesingle{}Example of untransformed data for all Industries and NACE Personnel costs (\%) plotted over years\textquotesingle{}}
-\end{Highlighting}
-\end{Shaded}
+{\centering \includegraphics{rieg2023_files/figure-pdf/fig-untransformed-data-employees-output-1.jpeg}
 
-``Image(fig.to\_image(format=`jpeg', engine=`kaleido', scale=3,
-height=500, width=800))''
+}
 
-\begin{verbatim}
-\end{verbatim}
+\caption{\label{fig-untransformed-data-employees}Untransformed data
+across all industries and NACE code `Employees (n)' plotted over years}
+
+\end{figure}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{rieg2023_files/figure-pdf/fig-transformed-data-employees-output-1.jpeg}
+
+}
+
+\caption{\label{fig-transformed-data-employees}Transformed data across
+all industries and NACE code `Employees(n)' plotted over years}
+
+\end{figure}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{rieg2023_files/figure-pdf/fig-untransformed-data-labor-prod-output-1.jpeg}
+
+}
+
+\caption{\label{fig-untransformed-data-labor-prod}Untransformed data
+across all industries and NACE code `Wage adjusted labor productivity
+(\%)' plotted over years}
+
+\end{figure}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{rieg2023_files/figure-pdf/fig-transformed-data-labor-prod-output-1.jpeg}
+
+}
+
+\caption{\label{fig-transformed-data-labor-prod}Transformed data across
+all industries and NACE code `Wage adjusted labor productivity (\%)'
+plotted over years}
+
+\end{figure}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{rieg2023_files/figure-pdf/fig-untransformed-data-value-added-output-1.jpeg}
+
+}
+
+\caption{\label{fig-untransformed-data-value-added}Untransformed data
+across all industries and NACE code `Gross value added per employee (€)'
+plotted over years}
+
+\end{figure}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{rieg2023_files/figure-pdf/fig-transformed-data-value-added-output-1.jpeg}
+
+}
+
+\caption{\label{fig-transformed-data-value-added}Transformed data across
+all industries and NACE code `Gross value added per employee (€)'
+plotted over years}
+
+\end{figure}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{rieg2023_files/figure-pdf/fig-untransformed-data-personnel-costs-output-1.jpeg}
+
+}
+
+\caption{\label{fig-untransformed-data-personnel-costs}Untransformed
+data across all industries and NACE code `Personnel costs in production
+(\%)' plotted over years}
+
+\end{figure}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{rieg2023_files/figure-pdf/fig-transformed-data-personnel-costs-output-1.jpeg}
+
+}
+
+\caption{\label{fig-transformed-data-personnel-costs}Transformed data
+across all industries and NACE code `Personnel costs in production (\%)'
+plotted over years}
+
+\end{figure}
+
+\phantomsection\label{tbl-summary-reg-results-b}
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.2033}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1545}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1382}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1545}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1626}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1870}}@{}}
+\caption{\label{tbl-summary-reg-results-b}Summary of key regression
+figures and tests - Mining and Quarrying (B)}\tabularnewline
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Enterprises (n)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Employees (n)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Labor prod. (\%)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+GVA/employee (€)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Personnel costs (\%)
+\end{minipage} \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Enterprises (n)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Employees (n)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Labor prod. (\%)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+GVA/employee (€)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Personnel costs (\%)
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+F-statistic & 0.568 & 0.002 & 0.065 & 0.021 & 0.433 \\
+Prob (F-statistic) & 0.638 & 0.998 & 0.939 & 0.979 & 0.698 \\
+Observations & 5 & 5 & 5 & 4 & 5 \\
+R-squared & 0.362 & 0.002 & 0.061 & 0.041 & 0.302 \\
+Adj. R-squared & -0.275 & -0.997 & -0.878 & -1.877 & -0.395 \\
+Jarque-Bera & 0.778 & 0.786 & 0.754 & 0.768 & 0.73 \\
+Skew & 0.053 & 0.039 & -0.122 & 0.677 & -0.102 \\
+Kurtosis & 1.45 & 1.481 & 1.373 & 1.846 & 1.272 \\
+Durbin-Watson & 1.384 & 1.723 & 1.437 & 2.239 & 2.114 \\
+Breusch-Pagan & 0.1 & 0.11 & 0.093 & 0.399 & 0.181 \\
+Sum patents Coef. & 0.398 & 0.959 & 0.753 & 0.942 & 0.45 \\
+Sum patents p value & 0.398 & 0.959 & 0.753 & 0.942 & 0.45 \\
+Sum patents SE & 83.139 & 6.204 & 22.635 & 14778.9 & 0.693 \\
+Sum patents Conf. lower & -446.364 & -26.329 & -105.535 & -189125 &
+-2.336 \\
+Sum patents Conf. upper & 269.07 & 27.055 & 89.245 & 186443 & 3.626 \\
+Year Coef. & 1 & 1 & 1 & 0.882 & 1 \\
+Year p value & 1 & 1 & 1 & 0.882 & 1 \\
+Year SE & 59.373 & 4.43 & 16.164 & 10239.1 & 0.495 \\
+Year Conf. lower & -255.461 & -19.062 & -69.55 & -128179 & -2.129 \\
+Year Conf. upper & 255.461 & 19.062 & 69.55 & 132022 & 2.129 \\
+\end{longtable}
+
+\vspace{-1.5em}\begin{flushleft}\footnotesize\textit{Jarque-Bera test for normality of residuals, p value < 0.05 indicates non-normality; Durbin-Watson test for autocorrelation, values between 1.5 and 2.5 indicate no autocorrelation; Breusch-Pagan test for heteroskedasticity, p value < 0.05 indicates heteroskedasticity; Coef. = Coefficient; Conf. lower = lower bound of 0.95 confidence interval, conf. upper = upper bound of 0.95 confidence interval; SE = standard error.}\end{flushleft}
+
+\phantomsection\label{tbl-summary-reg-results-c}
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.2033}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1545}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1382}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1545}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1626}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1870}}@{}}
+\caption{\label{tbl-summary-reg-results-c}Summary table of regression
+figures and tests - Manufacturing (C)}\tabularnewline
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Enterprises (n)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Employees (n)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Labor prod. (\%)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+GVA/employee (€)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Personnel costs (\%)
+\end{minipage} \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Enterprises (n)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Employees (n)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Labor prod. (\%)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+GVA/employee (€)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Personnel costs (\%)
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+F-statistic & 0 & 10.222 & 2.163 & 17.29 & 3.525 \\
+Prob (F-statistic) & 1 & 0.089 & 0.316 & 0.055 & 0.221 \\
+Observations & 5 & 5 & 5 & 5 & 5 \\
+R-squared & 0 & 0.911 & 0.684 & 0.945 & 0.779 \\
+Adj. R-squared & -1 & 0.822 & 0.368 & 0.891 & 0.558 \\
+Jarque-Bera & 0.649 & 0.706 & 0.684 & 0.867 & 0.655 \\
+Skew & -0.992 & -0.873 & 0.912 & 0.356 & -0.983 \\
+Kurtosis & 2.538 & 2.456 & 2.443 & 2.069 & 2.555 \\
+Durbin-Watson & 2.816 & 3.173 & 2.738 & 3.42 & 3.065 \\
+Breusch-Pagan & 0.445 & 0.427 & 0.453 & 0.367 & 0.433 \\
+Sum patents Coef. & 0.994 & 0.046 & 0.173 & 0.028 & 0.117 \\
+Sum patents p value & 0.994 & 0.046 & 0.173 & 0.028 & 0.117 \\
+Sum patents SE & 1778.57 & 18.244 & 0.063 & 34.574 & 0.015 \\
+Sum patents Conf. lower & -7667.17 & -160.985 & -0.399 & -352.071 &
+-0.025 \\
+Sum patents Conf. upper & 7637.95 & -3.993 & 0.139 & -54.554 & 0.105 \\
+Year Coef. & 1 & 1 & 1 & 1 & 1 \\
+Year p value & 1 & 1 & 1 & 1 & 1 \\
+Year SE & 7817.61 & 80.189 & 0.275 & 151.967 & 0.066 \\
+Year Conf. lower & -33636.5 & -345.027 & -1.182 & -653.862 & -0.285 \\
+Year Conf. upper & 33636.5 & 345.027 & 1.182 & 653.862 & 0.285 \\
+\end{longtable}
+
+\vspace{-1.5em}\begin{flushleft}\footnotesize\textit{Jarque-Bera test for normality of residuals, p value < 0.05 indicates non-normality; Durbin-Watson test for autocorrelation, values between 1.5 and 2.5 indicate no autocorrelation; Breusch-Pagan test for heteroskedasticity, p value < 0.05 indicates heteroskedasticity; Coef. = Coefficient; Conf. lower = lower bound of 0.95 confidence interval, conf. upper = upper bound of 0.95 confidence interval; SE = standard error.}\end{flushleft}
+
+\phantomsection\label{tbl-summary-reg-results-d}
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.2033}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1545}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1382}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1545}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1626}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1870}}@{}}
+\caption{\label{tbl-summary-reg-results-d}Summary of key regression
+figures and tests - Electricity, gas, steam and air conditioning supply
+(D)}\tabularnewline
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Enterprises (n)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Employees (n)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Labor prod. (\%)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+GVA/employee (€)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Personnel costs (\%)
+\end{minipage} \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Enterprises (n)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Employees (n)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Labor prod. (\%)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+GVA/employee (€)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Personnel costs (\%)
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+F-statistic & 0.495 & 0.162 & 1.398 & 0.818 & 3.6 \\
+Prob (F-statistic) & 0.643 & 0.856 & 0.347 & 0.504 & 0.349 \\
+Observations & 7 & 7 & 7 & 7 & 4 \\
+R-squared & 0.198 & 0.075 & 0.411 & 0.29 & 0.878 \\
+Adj. R-squared & -0.203 & -0.387 & 0.117 & -0.065 & 0.634 \\
+Jarque-Bera & 0.583 & 0.849 & 0.923 & 0.876 & 0.853 \\
+Skew & -0.96 & -0.058 & 0.05 & 0.173 & 0.152 \\
+Kurtosis & 2.895 & 1.946 & 2.268 & 2.11 & 1.651 \\
+Durbin-Watson & 1.688 & 1.506 & 2.748 & 1.571 & 3.394 \\
+Breusch-Pagan & 0.901 & 0.304 & 0.041 & 0.624 & 0.145 \\
+Sum patents Coef. & 0.376 & 0.599 & 0.17 & 0.27 & 0.227 \\
+Sum patents p value & 0.376 & 0.599 & 0.17 & 0.27 & 0.227 \\
+Sum patents SE & 2160.27 & 6.018 & 0.859 & 455.045 & 0.016 \\
+Sum patents Conf. lower & -8146.81 & -20.137 & -0.949 & -681.52 &
+-0.164 \\
+Sum patents Conf. upper & 3848.96 & 13.281 & 3.821 & 1845.3 & 0.252 \\
+Year Coef. & 1 & 1 & 1 & 1 & 1 \\
+Year p value & 1 & 1 & 1 & 1 & 1 \\
+Year SE & 3515.32 & 9.793 & 1.398 & 740.475 & 0.051 \\
+Year Conf. lower & -9760.09 & -27.19 & -3.881 & -2055.89 & -0.652 \\
+Year Conf. upper & 9760.09 & 27.19 & 3.881 & 2055.89 & 0.652 \\
+\end{longtable}
+
+\vspace{-1.5em}\begin{flushleft}\footnotesize\textit{Jarque-Bera test for normality of residuals, p value < 0.05 indicates non-normality; Durbin-Watson test for autocorrelation, values between 1.5 and 2.5 indicate no autocorrelation; Breusch-Pagan test for heteroskedasticity, p value < 0.05 indicates heteroskedasticity; Coef. = Coefficient; Conf. lower = lower bound of 0.95 confidence interval, conf. upper = upper bound of 0.95 confidence interval; SE = standard error.}\end{flushleft}
+
+\phantomsection\label{tbl-summary-reg-results-f}
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.2033}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1545}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1382}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1545}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1626}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1870}}@{}}
+\caption{\label{tbl-summary-reg-results-f}Summary table of regression
+figures and tests - Construction (F)}\tabularnewline
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Enterprises (n)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Employees (n)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Labor prod. (\%)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+GVA/employee (€)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Personnel costs (\%)
+\end{minipage} \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Enterprises (n)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Employees (n)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Labor prod. (\%)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+GVA/employee (€)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Personnel costs (\%)
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+F-statistic & 0.896 & 0.759 & 0.598 & 0.006 & 0.123 \\
+Prob (F-statistic) & 0.495 & 0.541 & 0.604 & 0.994 & 0.889 \\
+Observations & 6 & 6 & 6 & 6 & 6 \\
+R-squared & 0.374 & 0.336 & 0.285 & 0.004 & 0.076 \\
+Adj. R-squared & -0.043 & -0.107 & -0.191 & -0.66 & -0.541 \\
+Jarque-Bera & 0.764 & 0.852 & 0.744 & 0.843 & 0.724 \\
+Skew & -0.066 & -0.289 & -0.019 & -0.157 & 0.239 \\
+Kurtosis & 1.539 & 2.028 & 1.463 & 1.872 & 1.464 \\
+Durbin-Watson & 2.245 & 2.437 & 1.852 & 1.781 & 1.925 \\
+Breusch-Pagan & 0.354 & 0.237 & 0.146 & 0.071 & 0.364 \\
+Sum patents Coef. & 0.273 & 0.306 & 0.354 & 0.922 & 0.654 \\
+Sum patents p value & 0.273 & 0.306 & 0.354 & 0.922 & 0.654 \\
+Sum patents SE & 6911.85 & 19.029 & 0.215 & 155.658 & 0.038 \\
+Sum patents Conf. lower & -12743.9 & -37.117 & -0.921 & -478.871 &
+-0.103 \\
+Sum patents Conf. upper & 31249.3 & 84.004 & 0.45 & 511.874 & 0.141 \\
+Year Coef. & 1 & 1 & 1 & 1 & 1 \\
+Year p value & 1 & 1 & 1 & 1 & 1 \\
+Year SE & 10494.4 & 28.893 & 0.327 & 236.339 & 0.058 \\
+Year Conf. lower & -33397.9 & -91.95 & -1.041 & -752.136 & -0.186 \\
+Year Conf. upper & 33397.9 & 91.95 & 1.041 & 752.136 & 0.186 \\
+\end{longtable}
+
+\vspace{-1.5em}\begin{flushleft}\footnotesize\textit{Jarque-Bera test for normality of residuals, p value < 0.05 indicates non-normality; Durbin-Watson test for autocorrelation, values between 1.5 and 2.5 indicate no autocorrelation; Breusch-Pagan test for heteroskedasticity, p value < 0.05 indicates heteroskedasticity; Coef. = Coefficient; Conf. lower = lower bound of 0.95 confidence interval, conf. upper = upper bound of 0.95 confidence interval; SE = standard error.}\end{flushleft}
+
+\phantomsection\label{tbl-summary-reg-results-h}
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.2033}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1545}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1382}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1545}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1626}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1870}}@{}}
+\caption{\label{tbl-summary-reg-results-h}Summary of key regression
+figures and tests - Transportation and storage (H)}\tabularnewline
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Enterprises (n)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Employees (n)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Labor prod. (\%)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+GVA/employee (€)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Personnel costs (\%)
+\end{minipage} \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Enterprises (n)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Employees (n)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Labor prod. (\%)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+GVA/employee (€)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Personnel costs (\%)
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+F-statistic & 6.995 & 0.039 & 6.12 & 2.251 & 4.588 \\
+Prob (F-statistic) & 0.021 & 0.962 & 0.029 & 0.176 & 0.053 \\
+Observations & 10 & 10 & 10 & 10 & 10 \\
+R-squared & 0.667 & 0.011 & 0.636 & 0.391 & 0.567 \\
+Adj. R-squared & 0.571 & -0.271 & 0.532 & 0.218 & 0.444 \\
+Jarque-Bera & 0.827 & 0.617 & 0.267 & 0.161 & 0.468 \\
+Skew & 0.15 & -0.055 & 1.106 & 1.174 & -0.903 \\
+Kurtosis & 2.093 & 1.483 & 4.204 & 4.807 & 3.619 \\
+Durbin-Watson & 1.188 & 1.019 & 2.689 & 2.667 & 2.31 \\
+Breusch-Pagan & 0.772 & 0.611 & 0.062 & 0.053 & 0.063 \\
+Sum patents Coef. & 0.007 & 0.788 & 0.01 & 0.072 & 0.019 \\
+Sum patents p value & 0.007 & 0.788 & 0.01 & 0.072 & 0.019 \\
+Sum patents SE & 159.016 & 1.622 & 0.029 & 15.583 & 0.005 \\
+Sum patents Conf. lower & 218.767 & -4.29 & -0.171 & -69.913 & 0.003 \\
+Sum patents Conf. upper & 970.791 & 3.382 & -0.033 & 3.784 & 0.028 \\
+Year Coef. & 1 & 1 & 1 & 1 & 1 \\
+Year p value & 1 & 1 & 1 & 1 & 1 \\
+Year SE & 1908.64 & 19.474 & 0.35 & 187.044 & 0.062 \\
+Year Conf. lower & -4513.22 & -46.049 & -0.828 & -442.289 & -0.146 \\
+Year Conf. upper & 4513.22 & 46.049 & 0.828 & 442.289 & 0.146 \\
+\end{longtable}
+
+\vspace{-1.5em}\begin{flushleft}\footnotesize\textit{Jarque-Bera test for normality of residuals, p value < 0.05 indicates non-normality; Durbin-Watson test for autocorrelation, values between 1.5 and 2.5 indicate no autocorrelation; Breusch-Pagan test for heteroskedasticity, p value < 0.05 indicates heteroskedasticity; Coef. = Coefficient; Conf. lower = lower bound of 0.95 confidence interval, conf. upper = upper bound of 0.95 confidence interval; SE = standard error.}\end{flushleft}
+
+\phantomsection\label{tbl-summary-reg-results-j}
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.2033}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1545}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1382}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1545}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1626}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1870}}@{}}
+\caption{\label{tbl-summary-reg-results-j}Summary of key regression
+figures and tests - Information and communication (J)}\tabularnewline
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Enterprises (n)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Employees (n)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Labor prod. (\%)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+GVA/employee (€)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Personnel costs (\%)
+\end{minipage} \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Enterprises (n)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Employees (n)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Labor prod. (\%)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+GVA/employee (€)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Personnel costs (\%)
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+F-statistic & 0.003 & 0.198 & 9.191 & 16.087 & 2.763 \\
+Prob (F-statistic) & 0.997 & 0.825 & 0.011 & 0.002 & 0.13 \\
+Observations & 10 & 10 & 10 & 10 & 10 \\
+R-squared & 0.001 & 0.053 & 0.724 & 0.821 & 0.441 \\
+Adj. R-squared & -0.285 & -0.217 & 0.645 & 0.77 & 0.281 \\
+Jarque-Bera & 0.082 & 0.543 & 0.667 & 0.149 & 0.716 \\
+Skew & 1.513 & 0.434 & 0.184 & 1.448 & -0.339 \\
+Kurtosis & 4.687 & 1.524 & 1.656 & 3.87 & 1.929 \\
+Durbin-Watson & 2.725 & 0.969 & 1.057 & 2.298 & 2.02 \\
+Breusch-Pagan & 0.8 & 0.79 & 0.982 & 0.582 & 0.473 \\
+Sum patents Coef. & 0.94 & 0.549 & 0.004 & 0.001 & 0.051 \\
+Sum patents p value & 0.94 & 0.549 & 0.004 & 0.001 & 0.051 \\
+Sum patents SE & 37.959 & 0.471 & 0.008 & 3.893 & 0.001 \\
+Sum patents Conf. lower & -86.777 & -0.817 & 0.015 & 12.876 & -0.006 \\
+Sum patents Conf. upper & 92.739 & 1.409 & 0.05 & 31.287 & 0 \\
+Year Coef. & 1 & 1 & 1 & 1 & 1 \\
+Year p value & 1 & 1 & 1 & 1 & 1 \\
+Year SE & 1089.43 & 13.513 & 0.218 & 111.729 & 0.035 \\
+Year Conf. lower & -2576.08 & -31.952 & -0.515 & -264.197 & -0.082 \\
+Year Conf. upper & 2576.08 & 31.952 & 0.515 & 264.197 & 0.082 \\
+\end{longtable}
+
+\vspace{-1.5em}\begin{flushleft}\footnotesize\textit{Jarque-Bera test for normality of residuals, p value < 0.05 indicates non-normality; Durbin-Watson test for autocorrelation, values between 1.5 and 2.5 indicate no autocorrelation; Breusch-Pagan test for heteroskedasticity, p value < 0.05 indicates heteroskedasticity; Coef. = Coefficient; Conf. lower = lower bound of 0.95 confidence interval, conf. upper = upper bound of 0.95 confidence interval; SE = standard error.}\end{flushleft}
 
 
 
