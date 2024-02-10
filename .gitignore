@@ -6,3 +6,5 @@ notes.md
 test*
 data/retrieved_data/biblio-search_EP.json
 .jupyter_cache/*
+data/retrieved_data/rieg_prepped_data_untransformed.csv
+data/retrieved_data/rieg_raw_patent_data.csv
