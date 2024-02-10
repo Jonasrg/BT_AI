@@ -8,7 +8,7 @@ import numpy as np
 from statsmodels.stats.stattools import durbin_watson, jarque_bera
 from statsmodels.stats.diagnostic import het_breuschpagan
 
-FLOAT_FORMAT = '%.4f'
+FLOAT_FORMAT = "%.4f"
 
 
 # run regressions and save results in dict
@@ -95,7 +95,11 @@ def extract_pvalues(results, decimals=5, stars=True, threshold=0.05) -> list:
     for industry in results.keys():
         for indicator in results[industry].keys():
             if len(results[industry][indicator]) == 1:
-                pval = results[industry][indicator][0].pvalues["Sum patents"].round(decimals)
+                pval = (
+                    results[industry][indicator][0]
+                    .pvalues["Sum patents"]
+                    .round(decimals)
+                )
                 coef = results[industry][indicator][0].params["Sum patents"]
                 if pval < threshold:
                     if stars is True:
@@ -110,12 +114,26 @@ def extract_pvalues(results, decimals=5, stars=True, threshold=0.05) -> list:
                     }
                 )
             else:
-                pvals = [results[industry][indicator][i].pvalues["Sum patents"].round(decimals) for i in range(0, len(results[industry][indicator]))]
-                coef = [results[industry][indicator][i].params["Sum patents"].round(decimals) for i in range(0, len(results[industry][indicator]))]
+                pvals = [
+                    results[industry][indicator][i]
+                    .pvalues["Sum patents"]
+                    .round(decimals)
+                    for i in range(0, len(results[industry][indicator]))
+                ]
+                coef = [
+                    results[industry][indicator][i]
+                    .params["Sum patents"]
+                    .round(decimals)
+                    for i in range(0, len(results[industry][indicator]))
+                ]
                 for index, value in enumerate(pvals):
                     if pvals[index] < threshold:
                         if stars is True:
-                            pvals[index] = f"{pvals[index]}*" if coef[index] >= 0 else f"{pval[index]}"
+                            pvals[index] = (
+                                f"{pvals[index]}*"
+                                if coef[index] >= 0
+                                else f"{pval[index]}"
+                            )
                     else:
                         pvals[index] = ""
                 pvalues.append(
@@ -130,28 +148,54 @@ def extract_pvalues(results, decimals=5, stars=True, threshold=0.05) -> list:
     return pvalues
 
 
-def sample_size(df:pd.DataFrame, by:str):
+def sample_size(df: pd.DataFrame, by: str):
     samples = dict()
     samples["sum"] = dict()
     samples["count"] = dict()
     if by == "nace":
         for nace in df["NACE"].unique():
-            samples["sum"][nace] = [int(df[df["NACE"] == nace].drop_duplicates(subset="Year")["Sum patents"].sum())]
-            samples["count"][nace] = [int(df[df["NACE"] == nace].drop_duplicates(subset="Year")["Sum patents"].count())]
+            samples["sum"][nace] = [
+                int(
+                    df[df["NACE"] == nace]
+                    .drop_duplicates(subset="Year")["Sum patents"]
+                    .sum()
+                )
+            ]
+            samples["count"][nace] = [
+                int(
+                    df[df["NACE"] == nace]
+                    .drop_duplicates(subset="Year")["Sum patents"]
+                    .count()
+                )
+            ]
     if by == "indicator":
         for indicator in df["Indicator"].unique():
-            samples["sum"][indicator] = [int(df[df["Indicator"] == indicator]["Sum patents"].sum())]
-            samples["count"][indicator] = [int(df[df["Indicator"] == indicator]["Sum patents"].count())]
+            samples["sum"][indicator] = [
+                int(df[df["Indicator"] == indicator]["Sum patents"].sum())
+            ]
+            samples["count"][indicator] = [
+                int(df[df["Indicator"] == indicator]["Sum patents"].count())
+            ]
     return samples
 
 
-def extent_pvalues(pvalues, prepped_df, sum_name="Patents (sum)", count_name="Sample size"):
+def extent_pvalues(
+    pvalues, prepped_df, sum_name="Patents (sum)", count_name="Sample size"
+):
     # create DataFrames holding sum of patents for industries and indicators
-    ss_indic = pd.DataFrame.from_dict(sample_size(prepped_df, by="indicator")["sum"], orient="index").rename(columns={0: sum_name})
-    ss_nace = pd.DataFrame.from_dict(sample_size(prepped_df, by="nace")["sum"], orient="columns").rename(index={0: sum_name})
+    ss_indic = pd.DataFrame.from_dict(
+        sample_size(prepped_df, by="indicator")["sum"], orient="index"
+    ).rename(columns={0: sum_name})
+    ss_nace = pd.DataFrame.from_dict(
+        sample_size(prepped_df, by="nace")["sum"], orient="columns"
+    ).rename(index={0: sum_name})
     # create dataframes holdung sample count for industries and indicators
-    sc_indic = pd.DataFrame.from_dict(sample_size(prepped_df, by="indicator")["count"], orient="index").rename(columns={0: count_name})
-    sc_nace = pd.DataFrame.from_dict(sample_size(prepped_df, by="nace")["count"], orient="columns").rename(index={0: count_name})
+    sc_indic = pd.DataFrame.from_dict(
+        sample_size(prepped_df, by="indicator")["count"], orient="index"
+    ).rename(columns={0: count_name})
+    sc_nace = pd.DataFrame.from_dict(
+        sample_size(prepped_df, by="nace")["count"], orient="columns"
+    ).rename(index={0: count_name})
     # merge dataframes along index and columns
     df = pd.concat([pvalues, ss_nace])
     df = pd.concat([df, sc_nace])
@@ -190,7 +234,9 @@ def create_summary_statistics(results, cols, decimals=3, index=0) -> dict:
                 "Skew": jarque_bera(res.resid)[2],
                 "Kurtosis": jarque_bera(res.resid)[3],
                 "Durbin-Watson": durbin_watson(res.resid),
-                "Breusch-Pagan": het_breuschpagan(resid=res.resid, exog_het=res.model.exog)[1]
+                "Breusch-Pagan": het_breuschpagan(
+                    resid=res.resid, exog_het=res.model.exog
+                )[1],
             }
             for i in cols:
                 data[i + " Coef."] = res.pvalues[i]
@@ -198,12 +244,14 @@ def create_summary_statistics(results, cols, decimals=3, index=0) -> dict:
                 data[i + " SE"] = res.bse[i]
                 data[i + " Conf. lower"] = res.conf_int().at[i, 0]
                 data[i + " Conf. upper"] = res.conf_int().at[i, 1]
-            series = pd.Series(data=data)           
+            series = pd.Series(data=data)
             tmp_df = series.to_frame(name=indicator).round(3)
             if industry_stats is None:
                 industry_stats = tmp_df
             else:
-                industry_stats = industry_stats.merge(tmp_df, left_index=True, right_index=True)
+                industry_stats = industry_stats.merge(
+                    tmp_df, left_index=True, right_index=True
+                )
                 industry_stats = industry_stats.round(decimals)
         summary_statistics[industry] = industry_stats
     return summary_statistics
@@ -320,9 +368,11 @@ def subplots_two_yaxes(
     # hide duplicate legend entries
     names = set()
     fig.for_each_trace(
-        lambda trace: trace.update(showlegend=False)
-        if (trace.name in names)
-        else names.add(trace.name)
+        lambda trace: (
+            trace.update(showlegend=False)
+            if (trace.name in names)
+            else names.add(trace.name)
+        )
     )
     # set legend position
     fig.update_layout(showlegend=True)
